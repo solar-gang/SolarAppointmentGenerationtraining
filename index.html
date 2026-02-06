@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>LOS • Bill Mastery Training</title>
+  <title>LOS • Rep Training Hub</title>
   <meta name="theme-color" content="#0b1017"/>
 
   <!--
-    ✅ This index.html is built to match your CURRENT repo (root files).
-    KEEP THESE FILES IN THE ROOT (same level as index.html):
+    ✅ Built for your CURRENT repo layout (root files).
+    Keep these files in the SAME folder as this index.html:
 
       Logo.png
       Yucaipa.pdf
       Add-on-bill.pdf
       Laminate-1-2.pdf
 
-    No folders required. No more changes needed once this is in place.
+    ✅ Also add this file once to disable Jekyll builds:
+      .nojekyll   (empty file in repo root)
   -->
 
   <style>
     :root{
-      /* LOS logo vibe */
       --ink:#0b1017;
       --muted:#5c6775;
       --bg:#ffffff;
@@ -199,22 +199,41 @@
     .item b{color:var(--ink)}
     .item small{display:block;color:var(--muted);margin-top:6px;line-height:1.35}
 
-    /* Fun / quick script */
-    .script{
-      border:1px dashed rgba(58,173,187,.55);
-      background:rgba(58,173,187,.08);
+    /* Sections content */
+    details.training{
+      border:1px solid var(--line);
       border-radius:14px;
-      padding:12px;
-      margin-top:12px;
-      color:var(--ink);
-      line-height:1.45;
+      background:#fff;
+      overflow:hidden;
     }
-    .script strong{display:block;margin-bottom:6px}
-    .kbd{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      font-size:12px;
-      padding:2px 7px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--muted)
+    details.training + details.training{margin-top:10px}
+    details.training summary{
+      list-style:none;
+      cursor:pointer;
+      padding:12px 12px;
+      display:flex;gap:10px;align-items:flex-start;justify-content:space-between;
+      user-select:none;
+      font-weight:950;
     }
+    details.training summary::-webkit-details-marker{display:none}
+    .left{display:flex;gap:10px;align-items:flex-start}
+    .dot{
+      width:10px;height:10px;border-radius:999px;margin-top:5px;
+      background:linear-gradient(135deg,var(--gold),var(--teal));
+      box-shadow:0 10px 20px rgba(58,173,187,.14);
+      flex:0 0 auto;
+    }
+    .caret{
+      width:10px;height:10px;border-right:2px solid #9aa6b2;border-bottom:2px solid #9aa6b2;
+      transform:rotate(45deg);
+      margin-top:6px;
+      transition:transform .12s ease;
+      flex:0 0 auto;
+    }
+    details[open] .caret{transform:rotate(225deg);margin-top:10px}
+    .body{padding:0 12px 12px 12px;color:var(--muted);line-height:1.45}
+    .body ul{margin:8px 0 0 18px}
+    .body li{margin:7px 0}
 
     /* Calculator */
     .calcGrid{display:grid;gap:10px;margin-top:10px}
@@ -245,6 +264,22 @@
     .result .big{font-size:22px}
     .mini{font-size:12px;color:var(--muted);font-weight:800;margin-top:6px;line-height:1.35}
 
+    .script{
+      border:1px dashed rgba(58,173,187,.55);
+      background:rgba(58,173,187,.08);
+      border-radius:14px;
+      padding:12px;
+      margin-top:12px;
+      color:var(--ink);
+      line-height:1.45;
+    }
+    .script strong{display:block;margin-bottom:6px}
+    .kbd{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      font-size:12px;
+      padding:2px 7px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--muted)
+    }
+
     .footer{
       margin:16px 0 10px;
       color:var(--muted);
@@ -264,18 +299,18 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <!-- Uses your CURRENT filename in repo root -->
       <img src="Logo.png" class="logo" alt="Leverage Our Sun"/>
       <div>
-        <div class="brandTitle">LOS Bill Mastery Training</div>
-        <div class="brandSub">Understand the bill → solve the problem → book the consult</div>
+        <div class="brandTitle">LOS Rep Training Hub</div>
+        <div class="brandSub">Win the day • Own the night</div>
       </div>
     </div>
 
     <nav class="nav" id="nav">
-      <a href="#bill" class="active">Bills</a>
+      <a href="#bill" class="active">Bill Knowledge</a>
+      <a href="#approach">Door Approach</a>
+      <a href="#growth">Self Growth</a>
       <a href="#kwh">$/kWh</a>
-      <a href="#close">Close</a>
     </nav>
   </header>
 
@@ -283,14 +318,13 @@
     <section class="hero">
       <h1>Make the bill simple (and fun).</h1>
       <p>
-        Pick a bill type, flip through pages inside the viewer, and use the callouts to teach homeowners
-        <b>why rates feel crazy</b>—then position the right solution:
-        <b>solar</b> (non-solar homes) or <b>solar + batteries</b> (solar homes that still get hit at peak).
+        Your job isn’t to “sell.” It’s to <b>teach</b> the bill in 60 seconds and earn the sit-down.
+        Use the viewer + callouts below, then move to a <span class="kbd">30–45 min</span> consultation to verify savings.
       </p>
       <div class="pillRow">
-        <span class="pill">Stays in one window</span>
-        <span class="pill">Mobile + iPad + desktop</span>
-        <span class="pill">Callouts per page</span>
+        <span class="pill">Same window viewer</span>
+        <span class="pill">Non-solar + solar bills</span>
+        <span class="pill">Practice scripts</span>
       </div>
     </section>
 
@@ -298,12 +332,12 @@
       <!-- BILL VIEWER -->
       <section class="card" id="bill">
         <div class="cardHeader">
-          <h2 class="cardTitle">Bill Viewer + Training Callouts</h2>
-          <span class="tag">Use at the door</span>
+          <h2 class="cardTitle">Bill Knowledge / Problem</h2>
+          <span class="tag">Teach → Transition → Book</span>
         </div>
         <p class="cardText">
-          This loads your PDFs from the repo root: <b>Yucaipa.pdf</b>, <b>Add-on-bill.pdf</b>, <b>Laminate-1-2.pdf</b>.
-          No folders. No extra setup.
+          Choose a training bill below. The names are rep-friendly (not file names).
+          All PDFs load inside the viewer—no leaving the page.
         </p>
 
         <div class="divider"></div>
@@ -314,11 +348,11 @@
             <div class="viewerHeader">
               <div class="selectRow">
                 <select id="billSelect" aria-label="Choose bill PDF">
-                  <option value="Yucaipa.pdf" data-pages="6" selected>Non-Solar Utility Bill (Yucaipa)</option>
-                  <option value="Add-on-bill.pdf" data-pages="3">Solar / NEM Bill (Add-on)</option>
-                  <option value="Laminate-1-2.pdf" data-pages="2">Cheat Sheet (Laminate)</option>
+                  <option value="Yucaipa.pdf" data-pages="6" selected>Time-of-Use Bill (No Solar)</option>
+                  <option value="Add-on-bill.pdf" data-pages="3">True-Up / Solar (NEM) Bill</option>
+                  <option value="Laminate-1-2.pdf" data-pages="2">Cheat Sheet (Quick Reference)</option>
                 </select>
-                <span class="pagePill" id="hint">Loads below — same window</span>
+                <span class="pagePill">Viewer stays on this page</span>
               </div>
 
               <div class="controls">
@@ -342,11 +376,12 @@
               <iframe id="pdfFrame" title="Bill PDF Viewer"></iframe>
             </div>
 
-            <div class="script" style="margin-top:12px">
-              <strong>Door flow (60 seconds):</strong>
-              “Real quick—your bill is expensive for two reasons: <b>how much</b> you use and <b>when</b> you use it.
-              If you’re open to it, let’s schedule a <span class="kbd">30–45 min</span> consult to verify usage and show
-              whether solar (and possibly batteries) gives you <b>day-one savings</b>. If it doesn’t, we stop there.”
+            <div class="script">
+              <strong>60-second talk track (copy/paste):</strong>
+              “Your bill is expensive for two reasons: <b>how much</b> you use and <b>when</b> you use it.
+              The utility charges more during peak hours. My job is to see if solar (and maybe a battery) gives you
+              <b>day-one savings</b>. If it doesn’t, we stop there. Would you prefer
+              <span class="kbd">today</span> or <span class="kbd">tomorrow</span> for a quick consult?”
             </div>
           </div>
 
@@ -358,28 +393,178 @@
 
             <div class="divider"></div>
 
-            <h3 style="margin:0 0 6px">Quick teaching goal</h3>
+            <h3 style="margin:0 0 6px">Goal by home type</h3>
             <div class="item">
-              <b>Non-solar home</b>
-              <small>Explain usage + TOU + “where charges come from” → position solar (and battery if peak pain is heavy).</small>
+              <b>No solar</b>
+              <small>Teach usage + TOU + where charges come from → schedule consult to verify savings.</small>
             </div>
             <div class="item">
-              <b>Solar home (still paying)</b>
-              <small>Explain TOU + peak buying + true-up → position batteries as “controlled peak buying.”</small>
+              <b>Has solar (still paying)</b>
+              <small>Teach TOU + true-up + peak buying → position batteries as “controlled peak buying.”</small>
             </div>
           </aside>
+        </div>
+      </section>
+
+      <!-- DOOR APPROACH -->
+      <section class="card" id="approach">
+        <div class="cardHeader">
+          <h2 class="cardTitle">Door Approach</h2>
+          <span class="tag">Confidence + pace</span>
+        </div>
+        <p class="cardText">
+          The goal is not to explain everything. The goal is to earn the sit-down.
+        </p>
+
+        <details class="training" open>
+          <summary>
+            <span class="left"><span class="dot"></span>Structure: Intro → Problem → Solution → Takeaways → Transition → Assume sale</span>
+            <span class="caret"></span>
+          </summary>
+          <div class="body">
+            <ul>
+              <li><b>Intro:</b> “Hi, I’m Carlos—my team’s doing the power projects out here.”</li>
+              <li><b>Problem:</b> “Rates are rising and peak hours cost more.”</li>
+              <li><b>Solution:</b> “Solar offsets usage. Batteries protect peak + outages.”</li>
+              <li><b>Takeaways:</b> “If it doesn’t save day one, we stop.”</li>
+              <li><b>Transition:</b> “Let’s verify with your bill + usage.”</li>
+              <li><b>Assume sale:</b> “Today at 6:30 or tomorrow at 4?”</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <span class="left"><span class="dot"></span>Tone + pace (make it easy to say yes)</span>
+            <span class="caret"></span>
+          </summary>
+          <div class="body">
+            <ul>
+              <li>Slow down 10–15% (sounds confident, not pushy).</li>
+              <li>Short sentences. One point at a time.</li>
+              <li>Smile. Calm energy wins more doors.</li>
+              <li>Use <b>downward tone</b> for certainty, <b>upward tone</b> only on questions.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <span class="left"><span class="dot"></span>Appearance + body language</span>
+            <span class="caret"></span>
+          </summary>
+          <div class="body">
+            <ul>
+              <li>Hands visible, relaxed. No fast gestures.</li>
+              <li>Eye contact when asking, softer eyes when listening.</li>
+              <li>Stand at an angle (less aggressive). Give space.</li>
+              <li>Pause after questions—let them answer.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <span class="left"><span class="dot"></span>Prospecting homes (where to spend your steps)</span>
+            <span class="caret"></span>
+          </summary>
+          <div class="body">
+            <ul>
+              <li>Homes with EVs, pools, hot tubs, new HVAC, additions.</li>
+              <li>Look for high usage clues: multiple fridges, shade structures, big families.</li>
+              <li>Solar already installed but still paying? That’s a <b>battery conversation</b>.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <span class="left"><span class="dot"></span>Ideal schedule (simple)</span>
+            <span class="caret"></span>
+          </summary>
+          <div class="body">
+            <ul>
+              <li><b>Morning:</b> warm up + practice talk track (10 min).</li>
+              <li><b>Midday:</b> knock volume (set consults).</li>
+              <li><b>Late afternoon:</b> highest conversion hours.</li>
+              <li><b>Night:</b> follow-ups + confirmations.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="script">
+          <strong>Mini-game (fun):</strong>
+          Get 3 “YES” moments per hour:
+          <span class="kbd">Yes, I pay online</span> • <span class="kbd">Yes, I’ll grab my bill</span> • <span class="kbd">Yes, schedule a consult</span>
+        </div>
+      </section>
+
+      <!-- SELF GROWTH -->
+      <section class="card" id="growth">
+        <div class="cardHeader">
+          <h2 class="cardTitle">Self Growth</h2>
+          <span class="tag">Discipline wins</span>
+        </div>
+        <p class="cardText">
+          Great reps become disciplined people. Use this section to build consistency.
+        </p>
+
+        <details class="training" open>
+          <summary>
+            <span class="left"><span class="dot"></span>Daily habits (15 minutes)</span>
+            <span class="caret"></span>
+          </summary>
+          <div class="body">
+            <ul>
+              <li>5 min: repeat the 60-sec talk track out loud.</li>
+              <li>5 min: read one bill page + explain it in plain English.</li>
+              <li>5 min: plan your top streets / neighborhoods.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <span class="left"><span class="dot"></span>Weekly growth (level up)</span>
+            <span class="caret"></span>
+          </summary>
+          <div class="body">
+            <ul>
+              <li>Record yourself once per week (intro + close).</li>
+              <li>Role-play objections with a partner (10 minutes).</li>
+              <li>Review your best 5 conversations and copy what worked.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <span class="left"><span class="dot"></span>Links (edit later)</span>
+            <span class="caret"></span>
+          </summary>
+          <div class="body">
+            <ul>
+              <li><a href="https://www.youtube.com/results?search_query=active+listening+skills" target="_blank" rel="noopener">Active listening</a></li>
+              <li><a href="https://www.youtube.com/results?search_query=habit+building+system" target="_blank" rel="noopener">Habit building</a></li>
+              <li><a href="https://www.youtube.com/results?search_query=confidence+communication" target="_blank" rel="noopener">Confident communication</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="script">
+          <strong>Rule:</strong>
+          Don’t chase motivation. Build a routine. Routine creates results.
         </div>
       </section>
 
       <!-- $/KWH -->
       <section class="card" id="kwh">
         <div class="cardHeader">
-          <h2 class="cardTitle">$/kWh Calculator</h2>
-          <span class="tag">Fun & simple</span>
+          <h2 class="cardTitle>$/kWh Quick Calculator</h2>
+          <span class="tag">Teach it fast</span>
         </div>
         <p class="cardText">
-          Teach reps to calculate <b>price per kWh</b> fast. This helps them explain the bill in plain language:
-          “You’re paying about <b>$X per kWh</b> right now.”
+          Explain in one line: “You’re paying about <b>$X per kWh</b> right now.”
         </p>
 
         <div class="calcGrid">
@@ -394,88 +579,65 @@
             </div>
           </div>
 
-          <div class="calcRow">
-            <button class="btn btnPrimary" id="calcBtn" style="width:100%">Calculate $/kWh</button>
-            <div class="result" id="calcOut">
-              <div class="big">Enter bill + kWh</div>
-              <div class="mini">Tip: pull the “Total usage (kWh)” number from the usage/details pages.</div>
-            </div>
+          <button class="btn btnPrimary" id="calcBtn" style="width:100%">Calculate $/kWh</button>
+
+          <div class="result" id="calcOut">
+            <div class="big">Enter bill + kWh</div>
+            <div class="mini">Tip: pull the “Total usage (kWh)” number from the bill.</div>
           </div>
 
           <div class="script">
-            <strong>Rep one-liner:</strong>
-            “If your bill is <span class="kbd">$BILL</span> and you used <span class="kbd">KWH</span>,
-            you’re paying about <b>$BILL ÷ KWH</b> per kWh—then TOU makes the peak hours even more expensive.”
+            <strong>One-liner:</strong>
+            “<span class="kbd">$BILL</span> divided by <span class="kbd">KWH</span> equals about your cost per kWh.
+            Peak hours can be higher—batteries help control that.”
           </div>
-        </div>
-      </section>
-
-      <!-- CLOSE -->
-      <section class="card" id="close">
-        <div class="cardHeader">
-          <h2 class="cardTitle">Appointment Close</h2>
-          <span class="tag">Assume sale</span>
-        </div>
-        <p class="cardText">Keep it calm. Give two options. No pressure.</p>
-
-        <div class="script">
-          <strong>Two-option close:</strong>
-          “Do you prefer <span class="kbd">today at 6:30</span> or <span class="kbd">tomorrow at 4:00</span> for the consult?”
-        </div>
-
-        <div class="script">
-          <strong>Safety close (reduces fear):</strong>
-          “If it doesn’t save you day one, we’ll tell you and stop there.”
         </div>
       </section>
     </section>
 
     <div class="footer">
       <div>© Leverage Our Sun • Training Hub</div>
-      <div>Files used: Logo.png • Yucaipa.pdf • Add-on-bill.pdf • Laminate-1-2.pdf</div>
+      <div>Uses: Logo.png • Yucaipa.pdf • Add-on-bill.pdf • Laminate-1-2.pdf</div>
     </div>
   </main>
 
   <script>
-    // ===== Root-file PDF viewer + page callouts =====
-    // Matches your current repo filenames exactly.
-
     const CALLOUTS = {
       "Yucaipa.pdf": {
-        intro: "Non-solar utility bill. Focus: Usage → TOU (when) → Delivery vs Generation (where charges come from).",
+        intro: "Time-of-Use bill (no solar). Focus: Usage → TOU (when) → Delivery vs Generation (where charges come from).",
         pages: {
           1: [
             ["Rate plan / TOU basics", "Find the rate plan and any TOU schedule. Teach: it’s not just how much—it’s WHEN."],
-            ["What changed / messages", "Look for notes about plan, baseline, or billing messages."]
+            ["Messages/notes", "Check for baseline, plan messages, or important notices."]
           ],
           2: [
-            ["Usage trend", "Use charts to connect EV/pool/AC to rising costs."],
-            ["Total kWh", "This number drives design + savings math."]
+            ["Usage trend", "Connect EV/pool/AC to why usage is high."],
+            ["Total kWh", "This drives system size and savings math."]
           ],
           3: [
-            ["Details of new charges", "Teach the split: Delivery charges vs Generation charges."],
-            ["Line items", "Delivery = wires/programs. Generation = energy. Two buckets."]
+            ["Details of new charges", "Teach the split: Delivery vs Generation."],
+            ["Why it’s expensive", "Delivery = programs/wires. Generation = energy. Both rise."]
           ],
           4: [
-            ["TOU kWh breakdown", "On-peak vs off-peak usage. Battery story lives here."],
+            ["TOU breakdown", "On-peak vs off-peak kWh. Battery story lives here."],
             ["Peak pain", "Tie behavior 4–9pm to peak buying."]
           ],
           5: [
-            ["Amount due + due date", "Keep it simple: what they pay today is the pain you solve."],
+            ["Amount due", "Keep it simple: what they pay today is the pain you solve."],
             ["Credits/adjustments", "Mention briefly—don’t overwhelm."]
           ],
           6: [
-            ["Summary / notes", "Check for baseline allowance, service voltage, program notes."]
+            ["Summary notes", "Baseline allowance and service voltage info often live here."]
           ]
         }
       },
 
       "Add-on-bill.pdf": {
-        intro: "Solar / NEM style bill. Focus: credits vs charges + true-up + why batteries stop peak buying.",
+        intro: "True-up / Solar (NEM) bill. Focus: credits vs charges + true-up + why batteries stop peak buying.",
         pages: {
           1: [
-            ["True-up concept", "Teach: solar billing can settle annually—month-to-month can look weird."],
-            ["Minimum charges", "Even with solar, there can be minimum charges."]
+            ["True-up concept", "Solar billing can settle annually—month-to-month can look weird."],
+            ["Minimum charges", "Even with solar, minimum charges may apply."]
           ],
           2: [
             ["Credits vs charges", "Exports create credits, imports create charges. TOU decides value."],
@@ -488,30 +650,30 @@
       },
 
       "Laminate-1-2.pdf": {
-        intro: "Cheat sheet. Use for quick talk tracks and practice.",
+        intro: "Cheat sheet. Use for fast definitions + practice.",
         pages: {
           1: [
             ["Definitions", "TOU, usage, delivery vs generation—simple one-liners."],
             ["Appointment close", "Practice the two-option close."]
           ],
           2: [
-            ["Objections", "Short answers that keep you in control and move to the consult."]
+            ["Objections", "Short answers that lead to the consult."]
           ]
         }
       }
     };
 
-    const billSelect  = document.getElementById("billSelect");
-    const pdfFrame    = document.getElementById("pdfFrame");
-    const pageNumEl   = document.getElementById("pageNum");
-    const pageMaxEl   = document.getElementById("pageMax");
-    const slider      = document.getElementById("pageSlider");
-    const prevBtn     = document.getElementById("prevBtn");
-    const nextBtn     = document.getElementById("nextBtn");
-    const openNew     = document.getElementById("openNew");
-    const fitBtn      = document.getElementById("fitBtn");
-    const calloutIntro= document.getElementById("calloutIntro");
-    const calloutList = document.getElementById("calloutList");
+    const billSelect   = document.getElementById("billSelect");
+    const pdfFrame     = document.getElementById("pdfFrame");
+    const pageNumEl    = document.getElementById("pageNum");
+    const pageMaxEl    = document.getElementById("pageMax");
+    const slider       = document.getElementById("pageSlider");
+    const prevBtn      = document.getElementById("prevBtn");
+    const nextBtn      = document.getElementById("nextBtn");
+    const openNew      = document.getElementById("openNew");
+    const fitBtn       = document.getElementById("fitBtn");
+    const calloutIntro = document.getElementById("calloutIntro");
+    const calloutList  = document.getElementById("calloutList");
 
     let fitMode = true;
 
@@ -611,8 +773,8 @@
 
     calcBtn.addEventListener("click", calcKwh);
 
-    // Nav highlight on scroll
-    const sections = ["bill","kwh","close"].map(id => document.getElementById(id));
+    // Nav highlight
+    const sections = ["bill","approach","growth","kwh"].map(id => document.getElementById(id));
     const links = Array.from(document.querySelectorAll("#nav a"));
     const setActive = (hash)=> links.forEach(a => a.classList.toggle("active", a.getAttribute("href")===hash));
 
