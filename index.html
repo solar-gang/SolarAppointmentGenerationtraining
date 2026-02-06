@@ -3,30 +3,27 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>LOS Training Hub</title>
+  <title>LOS • Bill Mastery Training</title>
   <meta name="theme-color" content="#0b1017"/>
 
   <!--
-    ✅ REQUIRED REPO FILES:
-      /index.html
-      /assets/logo.png
-      /docs/Yucaipa.pdf
-      /docs/Add-on-bill.pdf
-      /docs/Laminate-1-2.pdf
+    ✅ This index.html is built to match your CURRENT repo (root files).
+    KEEP THESE FILES IN THE ROOT (same level as index.html):
 
-    ✅ HOW THE BILL VIEWER WORKS:
-    - The PDFs load INSIDE the same page in an iframe.
-    - A "page slider" changes pages without leaving the window.
-    - We also show "Important details" callouts beside the viewer.
+      Logo.png
+      Yucaipa.pdf
+      Add-on-bill.pdf
+      Laminate-1-2.pdf
+
+    No folders required. No more changes needed once this is in place.
   -->
 
   <style>
     :root{
-      /* ===== LOS logo vibe ===== */
+      /* LOS logo vibe */
       --ink:#0b1017;
       --muted:#5c6775;
       --bg:#ffffff;
-      --card:#ffffff;
       --line:#e7ecf2;
 
       --gold:#FBC909;
@@ -45,9 +42,16 @@
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
     a{color:inherit}
-    .container{max-width:1200px;margin:0 auto;padding:16px;padding-left:calc(16px + var(--safeL));padding-right:calc(16px + var(--safeR));padding-bottom:calc(16px + var(--safeB))}
+    .container{
+      max-width:1220px;margin:0 auto;
+      padding:16px;
+      padding-left:calc(16px + var(--safeL));
+      padding-right:calc(16px + var(--safeR));
+      padding-bottom:calc(16px + var(--safeB));
+    }
 
     /* Topbar */
     .topbar{
@@ -60,17 +64,18 @@
       display:flex;gap:12px;align-items:center;justify-content:space-between;
     }
     .brand{display:flex;gap:10px;align-items:center;min-width:240px}
-    .logo{width:42px;height:42px;object-fit:contain;border-radius:12px;border:1px solid var(--line);background:#fff}
+    .logo{
+      width:44px;height:44px;object-fit:contain;border-radius:12px;
+      border:1px solid var(--line);background:#fff
+    }
     .brandTitle{font-weight:950;letter-spacing:.2px}
     .brandSub{font-size:12px;color:var(--muted);margin-top:2px}
     .nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
     .nav a{
-      text-decoration:none;
-      font-size:14px;color:var(--muted);
+      text-decoration:none;font-size:14px;color:var(--muted);
       padding:9px 12px;border-radius:999px;border:1px solid var(--line);
-      background:#fff;
-      transition:transform .12s ease, border-color .12s ease, color .12s ease;
-      white-space:nowrap;
+      background:#fff;white-space:nowrap;
+      transition:transform .12s ease,border-color .12s ease,color .12s ease;
     }
     .nav a:hover{border-color:#cfd8e3;color:var(--ink);transform:translateY(-1px)}
     .nav a.active{color:var(--ink);border-color:rgba(58,173,187,.55);box-shadow:0 10px 24px rgba(58,173,187,.12)}
@@ -83,7 +88,7 @@
       box-shadow:var(--shadow);
       padding:16px;
       background:
-        radial-gradient(1000px 520px at 12% 0%, rgba(251,201,9,.22), transparent 55%),
+        radial-gradient(1100px 520px at 12% 0%, rgba(251,201,9,.22), transparent 55%),
         radial-gradient(900px 520px at 88% 10%, rgba(58,173,187,.18), transparent 55%),
         linear-gradient(135deg, rgba(251,201,9,.12), rgba(58,173,187,.10));
     }
@@ -92,7 +97,7 @@
     .pillRow{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
     .pill{font-size:12px;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted)}
 
-    /* Layout */
+    /* Cards */
     .grid{
       margin-top:12px;
       display:grid;
@@ -103,7 +108,7 @@
       grid-column:span 12;
       border:1px solid var(--line);
       border-radius:var(--r2);
-      background:var(--card);
+      background:#fff;
       box-shadow:var(--shadow);
       padding:14px;
     }
@@ -112,18 +117,16 @@
     .tag{
       font-size:12px;color:var(--muted);
       border:1px solid var(--line);
-      border-radius:999px;
-      padding:7px 10px;
-      background:#fff;
-      white-space:nowrap;
+      border-radius:999px;padding:7px 10px;background:#fff;white-space:nowrap;
     }
     .cardText{color:var(--muted);line-height:1.45;margin-top:8px}
     .divider{height:1px;background:var(--line);margin:12px 0}
 
-    /* Viewer */
+    /* Viewer + right panel */
     .viewerWrap{display:grid;gap:12px}
     .viewerHeader{
-      display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+      display:flex;flex-wrap:wrap;gap:10px;
+      align-items:center;justify-content:space-between;
     }
     .selectRow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
     select{
@@ -154,17 +157,14 @@
       background:linear-gradient(135deg,var(--gold),var(--teal));
       border-color:transparent;
     }
-    .btnPrimary:hover{border-color:transparent}
     .btnSmall{padding:8px 10px;border-radius:10px;font-weight:900}
+
     .pageRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    input[type="range"]{width:220px}
+    input[type="range"]{width:220px;max-width:70vw}
     .pagePill{
       font-size:12px;color:var(--muted);
       border:1px solid var(--line);
-      border-radius:999px;
-      padding:7px 10px;
-      background:#fff;
-      white-space:nowrap;
+      border-radius:999px;padding:7px 10px;background:#fff;white-space:nowrap;
     }
 
     .pdfShell{
@@ -173,29 +173,21 @@
       overflow:hidden;
       background:#0b1017;
       box-shadow:var(--shadow);
-      height:62vh; /* stays in one window */
-      min-height:420px;
-      position:relative;
+      height:62vh;min-height:420px;
     }
-    .pdfShell iframe{
-      width:100%;
-      height:100%;
-      border:0;
-      background:#0b1017;
-    }
+    .pdfShell iframe{width:100%;height:100%;border:0;background:#0b1017}
 
-    /* Callouts */
-    .callouts{
+    .side{
       border:1px solid var(--line);
       border-radius:var(--r2);
       background:#fff;
       box-shadow:var(--shadow);
       padding:14px;
     }
-    .callouts h3{margin:0 0 8px;font-size:16px}
-    .callouts p{margin:0;color:var(--muted);line-height:1.45}
-    .calloutList{margin:10px 0 0 0;padding:0;list-style:none;display:grid;gap:10px}
-    .calloutItem{
+    .side h3{margin:0 0 6px;font-size:16px}
+    .side p{margin:0;color:var(--muted);line-height:1.45}
+    .list{margin:10px 0 0 0;padding:0;list-style:none;display:grid;gap:10px}
+    .item{
       border:1px solid var(--line);
       border-radius:14px;
       padding:12px;
@@ -204,44 +196,54 @@
         radial-gradient(600px 220px at 100% 0%, rgba(58,173,187,.08), transparent 55%),
         #fff;
     }
-    .calloutItem b{color:var(--ink)}
-    .calloutItem small{display:block;color:var(--muted);margin-top:6px;line-height:1.35}
+    .item b{color:var(--ink)}
+    .item small{display:block;color:var(--muted);margin-top:6px;line-height:1.35}
 
-    /* Training blocks */
-    details.training{
+    /* Fun / quick script */
+    .script{
+      border:1px dashed rgba(58,173,187,.55);
+      background:rgba(58,173,187,.08);
+      border-radius:14px;
+      padding:12px;
+      margin-top:12px;
+      color:var(--ink);
+      line-height:1.45;
+    }
+    .script strong{display:block;margin-bottom:6px}
+    .kbd{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      font-size:12px;
+      padding:2px 7px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--muted)
+    }
+
+    /* Calculator */
+    .calcGrid{display:grid;gap:10px;margin-top:10px}
+    .calcRow{display:grid;gap:10px}
+    .field{
       border:1px solid var(--line);
       border-radius:14px;
+      padding:12px;
       background:#fff;
-      overflow:hidden;
+      box-shadow:0 8px 18px rgba(10,20,40,.06);
     }
-    details.training + details.training{margin-top:10px}
-    details.training summary{
-      list-style:none;
-      cursor:pointer;
+    .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:900;letter-spacing:.02em}
+    .field input{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:12px;
       padding:12px 12px;
-      display:flex;gap:10px;align-items:flex-start;justify-content:space-between;
-      user-select:none;
+      font-size:16px;
+      outline:none;
+    }
+    .result{
+      border:1px solid rgba(155,230,58,.45);
+      background:rgba(155,230,58,.12);
+      border-radius:14px;
+      padding:12px;
       font-weight:950;
     }
-    details.training summary::-webkit-details-marker{display:none}
-    .left{display:flex;gap:10px;align-items:flex-start}
-    .dot{
-      width:10px;height:10px;border-radius:999px;margin-top:5px;
-      background:linear-gradient(135deg,var(--gold),var(--teal));
-      box-shadow:0 10px 20px rgba(58,173,187,.14);
-      flex:0 0 auto;
-    }
-    .caret{
-      width:10px;height:10px;border-right:2px solid #9aa6b2;border-bottom:2px solid #9aa6b2;
-      transform:rotate(45deg);
-      margin-top:6px;
-      transition:transform .12s ease;
-      flex:0 0 auto;
-    }
-    details[open] .caret{transform:rotate(225deg);margin-top:10px}
-    .body{padding:0 12px 12px 12px;color:var(--muted);line-height:1.45}
-    .body ul{margin:8px 0 0 18px}
-    .body li{margin:7px 0}
+    .result .big{font-size:22px}
+    .mini{font-size:12px;color:var(--muted);font-weight:800;margin-top:6px;line-height:1.35}
 
     .footer{
       margin:16px 0 10px;
@@ -250,14 +252,11 @@
       display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
     }
 
-    /* Desktop layout */
     @media (min-width: 980px){
       .hero h1{font-size:30px}
-      .viewerWrap{
-        grid-template-columns: 7fr 5fr; /* viewer + callouts */
-        align-items:start;
-      }
+      .viewerWrap{grid-template-columns: 7fr 5fr;align-items:start}
       .pdfShell{height:70vh;min-height:520px}
+      .calcRow{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
@@ -265,59 +264,61 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <img src="assets/logo.png" class="logo" alt="Leverage Our Sun"/>
+      <!-- Uses your CURRENT filename in repo root -->
+      <img src="Logo.png" class="logo" alt="Leverage Our Sun"/>
       <div>
-        <div class="brandTitle">LOS Training Hub</div>
-        <div class="brandSub">Read the bill → teach the problem → book the consult</div>
+        <div class="brandTitle">LOS Bill Mastery Training</div>
+        <div class="brandSub">Understand the bill → solve the problem → book the consult</div>
       </div>
     </div>
 
     <nav class="nav" id="nav">
-      <a href="#bill" class="active">Bill Knowledge</a>
-      <a href="#approach">Approach</a>
-      <a href="#self">Self Improvement</a>
+      <a href="#bill" class="active">Bills</a>
+      <a href="#kwh">$/kWh</a>
+      <a href="#close">Close</a>
     </nav>
   </header>
 
   <main class="container">
     <section class="hero">
-      <h1>Everything stays in one window.</h1>
+      <h1>Make the bill simple (and fun).</h1>
       <p>
-        Select a bill type, then use the page controls to move through the PDF inside the viewer.
-        The right side shows the key callouts for what matters on that bill.
+        Pick a bill type, flip through pages inside the viewer, and use the callouts to teach homeowners
+        <b>why rates feel crazy</b>—then position the right solution:
+        <b>solar</b> (non-solar homes) or <b>solar + batteries</b> (solar homes that still get hit at peak).
       </p>
       <div class="pillRow">
-        <span class="pill">PDF viewer (same page)</span>
-        <span class="pill">Page controls</span>
-        <span class="pill">Mobile + desktop</span>
+        <span class="pill">Stays in one window</span>
+        <span class="pill">Mobile + iPad + desktop</span>
+        <span class="pill">Callouts per page</span>
       </div>
     </section>
 
-    <!-- BILL KNOWLEDGE -->
     <section class="grid">
+      <!-- BILL VIEWER -->
       <section class="card" id="bill">
         <div class="cardHeader">
-          <h2 class="cardTitle">Bill Knowledge / Problem</h2>
-          <span class="tag">Use this at the door</span>
+          <h2 class="cardTitle">Bill Viewer + Training Callouts</h2>
+          <span class="tag">Use at the door</span>
         </div>
         <p class="cardText">
-          Teach the homeowner the bill: usage, TOU, tiers, and where charges come from.
-          Then transition: “Let’s schedule a 30–45 minute consult to verify savings.”
+          This loads your PDFs from the repo root: <b>Yucaipa.pdf</b>, <b>Add-on-bill.pdf</b>, <b>Laminate-1-2.pdf</b>.
+          No folders. No extra setup.
         </p>
 
         <div class="divider"></div>
 
         <div class="viewerWrap">
-          <!-- LEFT: PDF viewer + controls -->
+          <!-- LEFT -->
           <div>
             <div class="viewerHeader">
               <div class="selectRow">
-                <select id="billSelect" aria-label="Choose a bill PDF">
-                  <option value="docs/Yucaipa.pdf" data-pages="6" selected>Yucaipa – Standard SCE bill (example)</option>
-                  <option value="docs/Add-on-bill.pdf" data-pages="3">Add-on / Solar (NEM) bill (example)</option>
-                  <option value="docs/Laminate-1-2.pdf" data-pages="2">Laminate quick reference</option>
+                <select id="billSelect" aria-label="Choose bill PDF">
+                  <option value="Yucaipa.pdf" data-pages="6" selected>Non-Solar Utility Bill (Yucaipa)</option>
+                  <option value="Add-on-bill.pdf" data-pages="3">Solar / NEM Bill (Add-on)</option>
+                  <option value="Laminate-1-2.pdf" data-pages="2">Cheat Sheet (Laminate)</option>
                 </select>
-                <span class="pagePill" id="fileHint">Loads in viewer below</span>
+                <span class="pagePill" id="hint">Loads below — same window</span>
               </div>
 
               <div class="controls">
@@ -331,7 +332,7 @@
 
             <div class="pageRow">
               <span class="pagePill">Page <b id="pageNum">1</b> / <b id="pageMax">6</b></span>
-              <input type="range" id="pageSlider" min="1" max="6" value="1" />
+              <input type="range" id="pageSlider" min="1" max="6" value="1"/>
               <button class="btn btnSmall" id="fitBtn" title="Toggle zoom mode">Fit</button>
             </div>
 
@@ -340,256 +341,210 @@
             <div class="pdfShell">
               <iframe id="pdfFrame" title="Bill PDF Viewer"></iframe>
             </div>
+
+            <div class="script" style="margin-top:12px">
+              <strong>Door flow (60 seconds):</strong>
+              “Real quick—your bill is expensive for two reasons: <b>how much</b> you use and <b>when</b> you use it.
+              If you’re open to it, let’s schedule a <span class="kbd">30–45 min</span> consult to verify usage and show
+              whether solar (and possibly batteries) gives you <b>day-one savings</b>. If it doesn’t, we stop there.”
+            </div>
           </div>
 
-          <!-- RIGHT: Callouts -->
-          <aside class="callouts">
-            <h3>Important details (what to point at)</h3>
-            <p id="calloutIntro">Select a bill + page. The highlights below update automatically.</p>
-            <ul class="calloutList" id="calloutList"></ul>
+          <!-- RIGHT -->
+          <aside class="side">
+            <h3>What to point at (changes by page)</h3>
+            <p id="calloutIntro">Select a bill + page. The callouts below update automatically.</p>
+            <ul class="list" id="calloutList"></ul>
+
+            <div class="divider"></div>
+
+            <h3 style="margin:0 0 6px">Quick teaching goal</h3>
+            <div class="item">
+              <b>Non-solar home</b>
+              <small>Explain usage + TOU + “where charges come from” → position solar (and battery if peak pain is heavy).</small>
+            </div>
+            <div class="item">
+              <b>Solar home (still paying)</b>
+              <small>Explain TOU + peak buying + true-up → position batteries as “controlled peak buying.”</small>
+            </div>
           </aside>
         </div>
-
-        <div class="divider"></div>
-
-        <details class="training" open>
-          <summary>
-            <span class="left"><span class="dot"></span>How to run this at the door (60 seconds)</span>
-            <span class="caret"></span>
-          </summary>
-          <div class="body">
-            <ul>
-              <li>Ask: “Do you pay online?” If yes, have them pull the bill.</li>
-              <li>Show: <b>Usage</b> first (kWh) → then TOU → then where charges come from.</li>
-              <li>Close: “If the numbers don’t save you day one, we’ll stop there.”</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="training">
-          <summary>
-            <span class="left"><span class="dot"></span>Non-negotiable: what to collect every time</span>
-            <span class="caret"></span>
-          </summary>
-          <div class="body">
-            <ul>
-              <li>Most recent <b>usage (kWh)</b> + trend (if shown)</li>
-              <li><b>Rate plan</b> / TOU schedule</li>
-              <li><b>Delivery vs Generation</b> charges</li>
-              <li>Any <b>Tier/Baseline</b> info</li>
-              <li>Solar/NEM status if they already have solar</li>
-            </ul>
-          </div>
-        </details>
       </section>
 
-      <!-- APPROACH -->
-      <section class="card" id="approach">
+      <!-- $/KWH -->
+      <section class="card" id="kwh">
         <div class="cardHeader">
-          <h2 class="cardTitle">Approach</h2>
-          <span class="tag">Trust + pace</span>
+          <h2 class="cardTitle">$/kWh Calculator</h2>
+          <span class="tag">Fun & simple</span>
         </div>
         <p class="cardText">
-          Short + calm. You’re not there to explain everything—just earn the sit-down.
+          Teach reps to calculate <b>price per kWh</b> fast. This helps them explain the bill in plain language:
+          “You’re paying about <b>$X per kWh</b> right now.”
         </p>
 
-        <details class="training" open>
-          <summary>
-            <span class="left"><span class="dot"></span>Structure: Intro → Problem → Solution → Transition → Assume sale</span>
-            <span class="caret"></span>
-          </summary>
-          <div class="body">
-            <ul>
-              <li><b>Intro:</b> who you are + why you’re here</li>
-              <li><b>Problem:</b> TOU peak pricing + rising rates</li>
-              <li><b>Solution:</b> solar + battery = store + avoid peak</li>
-              <li><b>Transition:</b> “Let’s verify savings with your bill.”</li>
-              <li><b>Assume sale:</b> give 2 time options</li>
-            </ul>
+        <div class="calcGrid">
+          <div class="calcRow">
+            <div class="field">
+              <label>Monthly bill amount ($)</label>
+              <input id="billAmount" inputmode="decimal" placeholder="Example: 333.92"/>
+            </div>
+            <div class="field">
+              <label>Monthly usage (kWh)</label>
+              <input id="kwhUsage" inputmode="decimal" placeholder="Example: 1258"/>
+            </div>
           </div>
-        </details>
 
-        <details class="training">
-          <summary>
-            <span class="left"><span class="dot"></span>Tone + eye contact + hand motions</span>
-            <span class="caret"></span>
-          </summary>
-          <div class="body">
-            <ul>
-              <li>Speak slightly slower than normal (sounds confident).</li>
-              <li>Hands visible, relaxed, slow movements.</li>
-              <li>Eye contact on questions, softer while listening.</li>
-            </ul>
+          <div class="calcRow">
+            <button class="btn btnPrimary" id="calcBtn" style="width:100%">Calculate $/kWh</button>
+            <div class="result" id="calcOut">
+              <div class="big">Enter bill + kWh</div>
+              <div class="mini">Tip: pull the “Total usage (kWh)” number from the usage/details pages.</div>
+            </div>
           </div>
-        </details>
+
+          <div class="script">
+            <strong>Rep one-liner:</strong>
+            “If your bill is <span class="kbd">$BILL</span> and you used <span class="kbd">KWH</span>,
+            you’re paying about <b>$BILL ÷ KWH</b> per kWh—then TOU makes the peak hours even more expensive.”
+          </div>
+        </div>
       </section>
 
-      <!-- SELF IMPROVEMENT -->
-      <section class="card" id="self">
+      <!-- CLOSE -->
+      <section class="card" id="close">
         <div class="cardHeader">
-          <h2 class="cardTitle">Self Improvement</h2>
-          <span class="tag">Weekly habits</span>
+          <h2 class="cardTitle">Appointment Close</h2>
+          <span class="tag">Assume sale</span>
         </div>
-        <p class="cardText">
-          Great reps become disciplined people. Add your favorite links here.
-        </p>
+        <p class="cardText">Keep it calm. Give two options. No pressure.</p>
 
-        <details class="training" open>
-          <summary>
-            <span class="left"><span class="dot"></span>Weekly rep challenge</span>
-            <span class="caret"></span>
-          </summary>
-          <div class="body">
-            <ul>
-              <li>10 minutes/day: practice the intro + close out loud.</li>
-              <li>Every session: collect usage/bill on every strong lead.</li>
-              <li>Weekly: review 3 bills line-by-line until it’s automatic.</li>
-            </ul>
-          </div>
-        </details>
+        <div class="script">
+          <strong>Two-option close:</strong>
+          “Do you prefer <span class="kbd">today at 6:30</span> or <span class="kbd">tomorrow at 4:00</span> for the consult?”
+        </div>
 
-        <details class="training">
-          <summary>
-            <span class="left"><span class="dot"></span>Links (examples)</span>
-            <span class="caret"></span>
-          </summary>
-          <div class="body">
-            <ul>
-              <li><a href="https://www.youtube.com/results?search_query=active+listening+skills" target="_blank" rel="noopener">Active listening</a></li>
-              <li><a href="https://www.youtube.com/results?search_query=habit+building+system" target="_blank" rel="noopener">Habit building</a></li>
-              <li><a href="https://www.youtube.com/results?search_query=sleep+habits+for+performance" target="_blank" rel="noopener">Sleep + performance</a></li>
-            </ul>
-          </div>
-        </details>
+        <div class="script">
+          <strong>Safety close (reduces fear):</strong>
+          “If it doesn’t save you day one, we’ll tell you and stop there.”
+        </div>
       </section>
     </section>
 
     <div class="footer">
-      <div>© LOS Training Hub</div>
-      <div>
-        Put PDFs in <b>/docs</b> and your logo in <b>/assets/logo.png</b>.
-      </div>
+      <div>© Leverage Our Sun • Training Hub</div>
+      <div>Files used: Logo.png • Yucaipa.pdf • Add-on-bill.pdf • Laminate-1-2.pdf</div>
     </div>
   </main>
 
   <script>
-    // ===== Bills + Callouts (per file + per page) =====
-    // NOTE: Page counts are set in the <option data-pages="..."> values.
+    // ===== Root-file PDF viewer + page callouts =====
+    // Matches your current repo filenames exactly.
 
     const CALLOUTS = {
-      "docs/Yucaipa.pdf": {
-        intro: "Standard SCE bill example. Focus: TOU schedule, usage, and Delivery vs Generation.",
+      "Yucaipa.pdf": {
+        intro: "Non-solar utility bill. Focus: Usage → TOU (when) → Delivery vs Generation (where charges come from).",
         pages: {
           1: [
-            ["TOU schedule / peak window", "Find the TOU period box (peak vs off-peak). Explain: it’s not just how much, it’s WHEN."],
-            ["Rate plan name", "Point out the current rate plan so you can talk TOU properly."]
+            ["Rate plan / TOU basics", "Find the rate plan and any TOU schedule. Teach: it’s not just how much—it’s WHEN."],
+            ["What changed / messages", "Look for notes about plan, baseline, or billing messages."]
           ],
           2: [
-            ["Usage trend", "Use the trend chart to connect lifestyle (EV/pool/AC) to rising costs."],
-            ["Total kWh", "This number drives system sizing and savings math."]
+            ["Usage trend", "Use charts to connect EV/pool/AC to rising costs."],
+            ["Total kWh", "This number drives design + savings math."]
           ],
           3: [
             ["Details of new charges", "Teach the split: Delivery charges vs Generation charges."],
-            ["Line items", "Explain: delivery = wires/programs; generation = energy. Two buckets."]
+            ["Line items", "Delivery = wires/programs. Generation = energy. Two buckets."]
           ],
           4: [
             ["TOU kWh breakdown", "On-peak vs off-peak usage. Battery story lives here."],
-            ["Peak price pain", "Reps: tie the highest price period to 4–9pm behavior."]
+            ["Peak pain", "Tie behavior 4–9pm to peak buying."]
           ],
           5: [
-            ["Payment + due date", "Keep it simple: what they pay today is the problem you solve."],
-            ["Any credits/adjustments", "Briefly mention but don’t drown them in details."]
+            ["Amount due + due date", "Keep it simple: what they pay today is the pain you solve."],
+            ["Credits/adjustments", "Mention briefly—don’t overwhelm."]
           ],
           6: [
-            ["Messages / notes", "Look for plan changes, baseline notes, or special program info."]
+            ["Summary / notes", "Check for baseline allowance, service voltage, program notes."]
           ]
         }
       },
 
-      "docs/Add-on-bill.pdf": {
-        intro: "Solar / NEM style bill example. Focus: annual billing/true-up concept + running balance.",
+      "Add-on-bill.pdf": {
+        intro: "Solar / NEM style bill. Focus: credits vs charges + true-up + why batteries stop peak buying.",
         pages: {
           1: [
-            ["Solar billing / true-up", "Explain: credits & charges can settle annually (true-up)."],
-            ["Month count", "Point out billing month count if shown (ex: month X of 12)."]
-          ],
-          2: [
-            ["Credits vs charges", "Show how exports/credits can offset charges over time."],
+            ["True-up concept", "Teach: solar billing can settle annually—month-to-month can look weird."],
             ["Minimum charges", "Even with solar, there can be minimum charges."]
           ],
+          2: [
+            ["Credits vs charges", "Exports create credits, imports create charges. TOU decides value."],
+            ["Peak buying problem", "If they buy during peak, solar alone may not protect them."]
+          ],
           3: [
-            ["Summary", "Keep the takeaway simple: year-long picture matters more than one month."]
+            ["Big takeaway", "Batteries = controlled peak buying + outage protection."]
           ]
         }
       },
 
-      "docs/Laminate-1-2.pdf": {
-        intro: "Quick reference / laminate. Use this for fast talking points with reps.",
+      "Laminate-1-2.pdf": {
+        intro: "Cheat sheet. Use for quick talk tracks and practice.",
         pages: {
           1: [
-            ["Fast definitions", "TOU, usage, delivery vs generation — one-liners."],
-            ["Appointment close", "Practice the 2-option close and keep it calm."]
+            ["Definitions", "TOU, usage, delivery vs generation—simple one-liners."],
+            ["Appointment close", "Practice the two-option close."]
           ],
           2: [
-            ["Objections", "Short answers: 'Is this a scam?' 'What about roof?' 'What if I move?'"]
+            ["Objections", "Short answers that keep you in control and move to the consult."]
           ]
         }
       }
     };
 
-    // ===== Viewer wiring =====
-    const billSelect = document.getElementById("billSelect");
-    const pdfFrame   = document.getElementById("pdfFrame");
-    const pageNumEl  = document.getElementById("pageNum");
-    const pageMaxEl  = document.getElementById("pageMax");
-    const slider     = document.getElementById("pageSlider");
-    const prevBtn    = document.getElementById("prevBtn");
-    const nextBtn    = document.getElementById("nextBtn");
-    const openNew    = document.getElementById("openNew");
-    const fitBtn     = document.getElementById("fitBtn");
-    const calloutIntro = document.getElementById("calloutIntro");
-    const calloutList  = document.getElementById("calloutList");
+    const billSelect  = document.getElementById("billSelect");
+    const pdfFrame    = document.getElementById("pdfFrame");
+    const pageNumEl   = document.getElementById("pageNum");
+    const pageMaxEl   = document.getElementById("pageMax");
+    const slider      = document.getElementById("pageSlider");
+    const prevBtn     = document.getElementById("prevBtn");
+    const nextBtn     = document.getElementById("nextBtn");
+    const openNew     = document.getElementById("openNew");
+    const fitBtn      = document.getElementById("fitBtn");
+    const calloutIntro= document.getElementById("calloutIntro");
+    const calloutList = document.getElementById("calloutList");
 
-    // Zoom mode toggles (PDF viewer params)
-    // "Fit" uses page width. "Scroll" uses default (lets user pinch zoom if supported).
     let fitMode = true;
 
-    function getSelectedPages(){
+    function getMaxPages(){
       const opt = billSelect.options[billSelect.selectedIndex];
-      const max = parseInt(opt.getAttribute("data-pages") || "1", 10);
-      return isNaN(max) ? 1 : max;
+      const n = parseInt(opt.getAttribute("data-pages") || "1", 10);
+      return isNaN(n) ? 1 : n;
     }
 
     function buildPdfUrl(file, page){
-      // GitHub pages PDF rendering typically supports #page= + zoom/view params in the built-in viewer
-      // We'll keep it simple and reliable.
       const zoom = fitMode ? "&zoom=page-width" : "";
       return `${file}#page=${page}${zoom}`;
     }
 
     function setCallouts(file, page){
-      const data = CALLOUTS[file];
       calloutList.innerHTML = "";
-
+      const data = CALLOUTS[file];
       if(!data){
         calloutIntro.textContent = "No callouts configured for this file yet.";
         return;
       }
-
       calloutIntro.textContent = data.intro || "Use the callouts to teach the bill.";
-
       const list = (data.pages && data.pages[page]) ? data.pages[page] : [];
       if(list.length === 0){
         const li = document.createElement("li");
-        li.className = "calloutItem";
-        li.innerHTML = `<b>No specific callouts for this page</b><small>Use the bill viewer to point out usage, TOU, tiers, and where charges come from.</small>`;
+        li.className = "item";
+        li.innerHTML = `<b>No specific callouts for this page</b><small>Point out usage, TOU, tiers, and where charges come from.</small>`;
         calloutList.appendChild(li);
         return;
       }
-
       list.forEach(([title, desc])=>{
         const li = document.createElement("li");
-        li.className = "calloutItem";
+        li.className = "item";
         li.innerHTML = `<b>${title}</b><small>${desc}</small>`;
         calloutList.appendChild(li);
       });
@@ -597,71 +552,79 @@
 
     function loadPdf(){
       const file = billSelect.value;
-      const max = getSelectedPages();
+      const max = getMaxPages();
       const page = Math.min(parseInt(slider.value,10) || 1, max);
 
       pageNumEl.textContent = String(page);
       pageMaxEl.textContent = String(max);
-
       slider.max = String(max);
       slider.value = String(page);
 
       pdfFrame.src = buildPdfUrl(file, page);
       setCallouts(file, page);
 
-      // keep "Open" button accurate
       openNew.onclick = () => window.open(buildPdfUrl(file, page), "_blank", "noopener");
     }
 
     function setPage(p){
-      const max = getSelectedPages();
+      const max = getMaxPages();
       const page = Math.max(1, Math.min(max, p));
       slider.value = String(page);
       loadPdf();
     }
 
-    billSelect.addEventListener("change", ()=>{
-      slider.value = "1";
-      loadPdf();
-    });
-
-    slider.addEventListener("input", ()=>{
-      loadPdf();
-    });
-
-    prevBtn.addEventListener("click", ()=>{
-      setPage((parseInt(slider.value,10) || 1) - 1);
-    });
-
-    nextBtn.addEventListener("click", ()=>{
-      setPage((parseInt(slider.value,10) || 1) + 1);
-    });
-
+    billSelect.addEventListener("change", ()=>{ slider.value="1"; loadPdf(); });
+    slider.addEventListener("input", loadPdf);
+    prevBtn.addEventListener("click", ()=> setPage((parseInt(slider.value,10)||1)-1));
+    nextBtn.addEventListener("click", ()=> setPage((parseInt(slider.value,10)||1)+1));
     fitBtn.addEventListener("click", ()=>{
       fitMode = !fitMode;
       fitBtn.textContent = fitMode ? "Fit" : "Zoom";
       loadPdf();
     });
 
-    // ===== Nav active on scroll =====
-    const sections = ["bill","approach","self"].map(id => document.getElementById(id));
+    // $/kWh calculator
+    const billAmount = document.getElementById("billAmount");
+    const kwhUsage   = document.getElementById("kwhUsage");
+    const calcBtn    = document.getElementById("calcBtn");
+    const calcOut    = document.getElementById("calcOut");
+
+    function calcKwh(){
+      const b = parseFloat((billAmount.value || "").replace(/[^0-9.]/g,""));
+      const k = parseFloat((kwhUsage.value || "").replace(/[^0-9.]/g,""));
+      if(!isFinite(b) || !isFinite(k) || b<=0 || k<=0){
+        calcOut.innerHTML = `<div class="big">Enter valid numbers</div><div class="mini">Example: $333.92 and 1258 kWh</div>`;
+        return;
+      }
+      const p = b / k;
+      const nice = p.toFixed(2);
+
+      let vibe = "Solid.";
+      if(p >= 0.40) vibe = "🔥 High. Peak hours are crushing them.";
+      else if(p >= 0.30) vibe = "⚡ Elevated. TOU + delivery charges add up.";
+      else vibe = "✅ Manageable, but rates usually rise.";
+
+      calcOut.innerHTML =
+        `<div class="big">$${nice} <span style="font-weight:950">per kWh</span></div>
+         <div class="mini">${vibe} Teach: “You’re paying about <b>$${nice}</b> for every kWh you use.”</div>`;
+    }
+
+    calcBtn.addEventListener("click", calcKwh);
+
+    // Nav highlight on scroll
+    const sections = ["bill","kwh","close"].map(id => document.getElementById(id));
     const links = Array.from(document.querySelectorAll("#nav a"));
+    const setActive = (hash)=> links.forEach(a => a.classList.toggle("active", a.getAttribute("href")===hash));
 
-    const setActive = (hash) => {
-      links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === hash));
-    };
-
-    const obs = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const obs = new IntersectionObserver((entries)=>{
+      const visible = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
       if(!visible) return;
-      setActive("#" + visible.target.id);
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: [0.1,0.2,0.3,0.4,0.5] });
+      setActive("#"+visible.target.id);
+    }, { rootMargin: "-45% 0px -50% 0px", threshold:[0.1,0.2,0.3,0.4,0.5] });
 
     sections.forEach(s => s && obs.observe(s));
 
-    // ===== Init =====
+    // Init
     loadPdf();
   </script>
 </body>
