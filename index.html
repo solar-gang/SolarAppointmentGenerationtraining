@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>LOS Training Hub</title>
+  <meta name="theme-color" content="#0b1017"/>
+
+  <style>
+    :root{
+      /* Update these to your logo colors if you want */
+      --ink:#0b1017;
+      --muted:#5c6775;
+      --bg:#ffffff;
+      --card:#ffffff;
+      --line:#e7ecf2;
+
+      --brand1:#FBC909; /* gold */
+      --brand2:#3AADBB; /* teal */
+      --danger:#ff3b30;
+      --success:#34c759;
+
+      --shadow: 0 14px 44px rgba(10,20,40,.12);
+      --r:16px;
+      --r2:22px;
+
+      --safeT: env(safe-area-inset-top);
+      --safeB: env(safe-area-inset-bottom);
+      --safeL: env(safe-area-inset-left);
+      --safeR: env(safe-area-inset-right);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    a{color:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:18px;padding-left:calc(18px + var(--safeL));padding-right:calc(18px + var(--safeR));padding-bottom:calc(18px + var(--safeB))}
+
+    /* Topbar */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:12px 14px;
+      padding-top:calc(12px + var(--safeT));
+      display:flex;gap:12px;align-items:center;justify-content:space-between;
+    }
+    .brand{display:flex;gap:10px;align-items:center;min-width:240px}
+    .logo{width:42px;height:42px;object-fit:contain;border-radius:12px;border:1px solid var(--line);background:#fff}
+    .brandTitle{font-weight:900;letter-spacing:.2px}
+    .brandSub{font-size:12px;color:var(--muted);margin-top:2px}
+
+    .nav{
+      display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center
+    }
+    .nav a{
+      text-decoration:none;
+      font-size:14px;color:var(--muted);
+      padding:9px 12px;border-radius:999px;border:1px solid var(--line);
+      background:#fff;
+      transition:transform .12s ease, border-color .12s ease, color .12s ease;
+      white-space:nowrap;
+    }
+    .nav a:hover{border-color:#cfd8e3;color:var(--ink);transform:translateY(-1px)}
+    .nav a.active{
+      color:var(--ink);
+      border-color:rgba(58,173,187,.55);
+      box-shadow:0 10px 24px rgba(58,173,187,.12);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius:var(--r2);
+      box-shadow:var(--shadow);
+      padding:18px;
+      background:
+        radial-gradient(1200px 500px at 10% 0%, rgba(251,201,9,.22), transparent 55%),
+        radial-gradient(1000px 500px at 90% 10%, rgba(58,173,187,.18), transparent 55%),
+        linear-gradient(135deg, rgba(251,201,9,.12), rgba(58,173,187,.10));
+    }
+    .hero h1{margin:0 0 8px;font-size:28px}
+    .hero p{margin:0;color:var(--muted);line-height:1.45}
+    .pillRow{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .pill{
+      font-size:12px;padding:7px 10px;border-radius:999px;border:1px solid var(--line);
+      background:#fff;color:var(--muted)
+    }
+
+    /* Layout */
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:12px;
+    }
+    .card{
+      grid-column:span 12;
+      border:1px solid var(--line);
+      border-radius:var(--r2);
+      background:var(--card);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .cardHeader{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px
+    }
+    .cardTitle{font-weight:950;margin:0;font-size:18px;letter-spacing:.1px}
+    .cardTag{
+      font-size:12px;color:var(--muted);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .cardText{color:var(--muted);line-height:1.45;margin-top:8px}
+    .divider{height:1px;background:var(--line);margin:14px 0}
+
+    /* Training sections */
+    .sectionTitle{
+      font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;
+      margin:0 0 10px;font-weight:900;
+    }
+
+    details.training{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:#fff;
+      padding:0;
+      overflow:hidden;
+    }
+    details.training + details.training{margin-top:10px}
+    details.training summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px 14px;
+      display:flex;gap:10px;align-items:flex-start;justify-content:space-between;
+      user-select:none;
+      font-weight:900;
+    }
+    details.training summary::-webkit-details-marker{display:none}
+    .summaryLeft{display:flex;gap:10px;align-items:flex-start}
+    .dot{
+      width:10px;height:10px;border-radius:999px;margin-top:5px;
+      background:linear-gradient(135deg,var(--brand1),var(--brand2));
+      flex:0 0 auto;
+      box-shadow:0 8px 18px rgba(58,173,187,.15);
+    }
+    .summaryMeta{display:flex;gap:8px;align-items:center}
+    .chip{
+      font-size:12px;color:var(--muted);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 9px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .caret{
+      width:10px;height:10px;border-right:2px solid #9aa6b2;border-bottom:2px solid #9aa6b2;
+      transform:rotate(45deg);
+      margin-top:6px;
+      transition:transform .12s ease;
+      flex:0 0 auto;
+    }
+    details[open] .caret{transform:rotate(225deg);margin-top:10px}
+    .trainingBody{
+      padding:0 14px 14px 14px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+    .trainingBody ul{margin:10px 0 0 18px}
+    .trainingBody li{margin:7px 0}
+    .calloutRow{
+      display:grid;gap:10px;margin-top:12px;
+      grid-template-columns:1fr;
+    }
+    .callout{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:
+        linear-gradient(0deg, rgba(0,0,0,.02), rgba(0,0,0,0)),
+        #fff;
+    }
+    .callout b{color:var(--ink)}
+    .callout small{display:block;margin-top:6px;color:var(--muted)}
+
+    /* Quick scripts */
+    .script{
+      border:1px dashed rgba(58,173,187,.5);
+      background:rgba(58,173,187,.08);
+      border-radius:14px;
+      padding:12px;
+      margin-top:12px;
+      color:var(--ink);
+      line-height:1.45;
+    }
+    .script strong{display:block;margin-bottom:6px}
+    .kbd{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      font-size:12px;
+      padding:2px 7px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--muted)
+    }
+
+    /* Footer */
+    .footer{
+      margin:18px 0 10px;
+      color:var(--muted);
+      font-size:12px;
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    }
+    .footer a{color:inherit}
+
+    /* Desktop */
+    @media (min-width: 900px){
+      .hero h1{font-size:34px}
+      .grid .card:nth-child(1){grid-column:span 12}
+      .grid .card:nth-child(2){grid-column:span 7}
+      .grid .card:nth-child(3){grid-column:span 5}
+      .calloutRow{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    ✅ LOGO INSTRUCTIONS:
+    Put your logo file in the SAME folder as this index.html and name it:  logo.png
+    (or change src="logo.png" below to your filename)
+  -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="logo.png" class="logo" alt="Leverage Our Sun"/>
+      <div>
+        <div class="brandTitle">LOS Training Hub</div>
+        <div class="brandSub">Field-ready training for solar + battery reps</div>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="#bill" class="active">Bill Knowledge</a>
+      <a href="#approach">Approach</a>
+      <a href="#self">Self Improvement</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Win the appointment by teaching the bill.</h1>
+      <p>
+        This hub is built for mobile door-to-door reps: quick sections, clear talking points,
+        and the exact parts of the bill that help a homeowner understand <b>why rates are the way they are</b>.
+      </p>
+      <div class="pillRow">
+        <span class="pill">Mobile-first</span>
+        <span class="pill">Tap-to-expand</span>
+        <span class="pill">Simple scripts</span>
+        <span class="pill">Enterprise look</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <!-- BILL KNOWLEDGE / PROBLEM -->
+      <section class="card" id="bill">
+        <div class="cardHeader">
+          <h2 class="cardTitle">Bill Knowledge / Problem</h2>
+          <div class="cardTag">Most important</div>
+        </div>
+        <p class="cardText">
+          Your goal: explain where charges come from, how TOU drives pain, how tiers punish heavy users,
+          and why solar billing (NEM) can look confusing. If a rep can teach this clearly, the consult books itself.
+        </p>
+
+        <div class="divider"></div>
+        <div class="sectionTitle">Tap to learn</div>
+
+        <details class="training" open>
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>1) Usage page: the “truth” of the home</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Find kWh</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li>Always find the page that shows <b>monthly usage (kWh)</b> and trends.</li>
+              <li>Use the daily average to frame lifestyle: EVs, pool pumps, AC, electrification.</li>
+              <li><b>Non-negotiable:</b> screenshot or collect usage every time. No usage = no responsible design.</li>
+            </ul>
+            <div class="script">
+              <strong>Quick line (1 sentence):</strong>
+              “Before we talk solar, we need your <b>usage</b>—that’s the only way to design something that saves you day one.”
+            </div>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>2) Tiers + baseline: why heavy users pay more per kWh</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Tier 1 vs Tier 2</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li><b>Tier 1</b> = within baseline allowance (cheaper).</li>
+              <li><b>Tier 2</b> = over baseline (more expensive).</li>
+              <li>Simple teaching: “The more you use, the higher the price per kWh.”</li>
+            </ul>
+
+            <div class="calloutRow">
+              <div class="callout">
+                <b>Rep move:</b> connect tiers to growth
+                <small>EV + pool + kids + AC → usage grows → you live in Tier 2.</small>
+              </div>
+              <div class="callout">
+                <b>Close the gap:</b> why consult matters
+                <small>“Let’s design around your real usage so you stop paying premium rates.”</small>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>3) Time-of-Use (TOU): peak window is where the bill gets expensive</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">4–9pm story</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li>Show that <b>price varies by time</b> (peak vs off-peak).</li>
+              <li>Explain demand drivers: EV charging, electrification, high grid load.</li>
+              <li>Battery explanation: store energy (or solar) and use it during peak instead of buying peak power.</li>
+            </ul>
+            <div class="script">
+              <strong>Quick line:</strong>
+              “TOU means it’s not just <i>how much</i> you use—it’s <b>when</b> you use it, and 4–9pm is the expensive window.”
+            </div>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>4) Delivery vs Generation: where charges are coming from</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Two buckets</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li><b>Delivery</b> = poles/wires, transmission, distribution, public programs, etc.</li>
+              <li><b>Generation</b> = cost to produce/purchase electricity.</li>
+              <li>Teaching point: even if one bucket changes, the other can rise—why bills still climb.</li>
+            </ul>
+
+            <div class="calloutRow">
+              <div class="callout">
+                <b>Make it simple:</b>
+                <small>“Delivery is the highway. Generation is the gas. You get charged for both.”</small>
+              </div>
+              <div class="callout">
+                <b>Appointment angle:</b>
+                <small>“We’ll review your bill line by line and show the cleanest path to day-one savings.”</small>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>5) Solar billing / NEM: why bills can look confusing</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">True-up</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li>Many solar customers have an annual settlement (often called a <b>true-up</b>).</li>
+              <li>The bill can show small monthly amounts while credits/debits track across the year.</li>
+              <li>Key message: “We design to keep you protected during peak and reduce your net cost.”</li>
+            </ul>
+            <div class="script">
+              <strong>Quick line:</strong>
+              “Solar billing can look weird month to month—what matters is the full picture across the year and the true-up.”
+            </div>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>6) Rep checklist: what to collect every time</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Non-negotiable</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li><b>Usage (kWh)</b> for the most recent month + trend if available</li>
+              <li><b>Rate plan</b> (TOU plan name)</li>
+              <li><b>Peak window</b> (when it’s expensive)</li>
+              <li><b>Any tiers/baseline info</b></li>
+              <li><b>Delivery vs Generation</b> summary</li>
+              <li><b>Solar/NEM</b> status if they already have solar</li>
+            </ul>
+            <div class="callout">
+              <b>Field habit:</b>
+              <small>Ask: “Do you pay online?” If yes, they can pull the bill instantly and you can screenshot the key pages.</small>
+            </div>
+          </div>
+        </details>
+
+        <div class="divider"></div>
+        <div class="script">
+          <strong>Appointment close (30 seconds):</strong>
+          “If you’re open to it, we can do a quick <b>30–45 minute consult</b> where we review your bill,
+          confirm your usage, and show whether solar + batteries gives you <b>day-one savings</b>.
+          If it doesn’t save you immediately, we’ll tell you and stop there.”
+        </div>
+      </section>
+
+      <!-- APPROACH -->
+      <section class="card" id="approach">
+        <div class="cardHeader">
+          <h2 class="cardTitle">Approach</h2>
+          <div class="cardTag">Trust + control</div>
+        </div>
+        <p class="cardText">
+          The goal at the door is not to explain everything. The goal is to earn the right to sit down.
+          Your delivery (tone, pace, eye contact) is more important than your words.
+        </p>
+
+        <div class="divider"></div>
+        <div class="sectionTitle">Door approach</div>
+
+        <details class="training" open>
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>Door Approach Structure (Enzy style)</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Intro → Problem → Solution</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li><b>Intro:</b> who you are + why you’re here (short)</li>
+              <li><b>Problem:</b> TOU/peak + rising rates + lack of control</li>
+              <li><b>Solution:</b> solar + battery = store energy + avoid peak</li>
+              <li><b>Takeaways:</b> day-one savings (if qualified) + outage protection + control</li>
+              <li><b>Transition:</b> “Let’s schedule the consult so we can verify savings.”</li>
+              <li><b>Assume sale:</b> offer two time options</li>
+            </ul>
+            <div class="script">
+              <strong>Two-option close:</strong>
+              “Would today around <span class="kbd">6:30</span> work, or is tomorrow better—like <span class="kbd">4:00</span>?”
+            </div>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>Tone + pace (slow down to sound expensive)</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Control</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li>Start calm and slightly slower than normal.</li>
+              <li>Use <b>pauses</b> after key points (peak window, bill pain, consult ask).</li>
+              <li>Ups/downs matter when you ask questions; steady confidence for statements.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>Appearance + body language</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Trust signals</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li>Clean, simple, professional. Don’t look “salesy.”</li>
+              <li>Hands visible, relaxed. Don’t point aggressively.</li>
+              <li>Eye contact: hold during questions, soften during listening.</li>
+              <li>Hand motions: slow and intentional, not fast and nervous.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>Prospecting homes + ideal schedule</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Consistency</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li>Target: EVs, pools, older AC, larger homes, high usage neighborhoods.</li>
+              <li>Knock consistent time blocks (same days, same hours) to build rhythm.</li>
+              <li>Track doors → track contacts → track set appointments (simple KPI flow).</li>
+            </ul>
+            <div class="callout">
+              <b>Reminder:</b>
+              <small>As soon as someone shows interest, transition to collecting usage/bill and booking the consult.</small>
+            </div>
+          </div>
+        </details>
+
+        <div class="divider"></div>
+        <div class="script">
+          <strong>Approach rule:</strong>
+          “You’re not there to convince. You’re there to <b>educate</b> enough to earn the sit-down.”
+        </div>
+      </section>
+
+      <!-- SELF IMPROVEMENT -->
+      <section class="card" id="self">
+        <div class="cardHeader">
+          <h2 class="cardTitle">Self Improvement</h2>
+          <div class="cardTag">Level up</div>
+        </div>
+        <p class="cardText">
+          Great reps become great people. The best closers are disciplined, calm, and consistent.
+          Use these links and weekly challenges to build the habits that show up at the door.
+        </p>
+
+        <div class="divider"></div>
+        <div class="sectionTitle">Links (replace with your favorites)</div>
+
+        <details class="training" open>
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>Communication</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Listen better</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li><a href="https://www.youtube.com/results?search_query=active+listening+skills" target="_blank" rel="noopener">Active listening (YouTube search)</a></li>
+              <li><a href="https://www.youtube.com/results?search_query=how+to+handle+objections+sales" target="_blank" rel="noopener">Objection handling basics (YouTube search)</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>Discipline + routine</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">Consistency</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li><a href="https://www.youtube.com/results?search_query=habit+building+system" target="_blank" rel="noopener">Habit building (YouTube search)</a></li>
+              <li><a href="https://www.youtube.com/results?search_query=morning+routine+for+sales" target="_blank" rel="noopener">Morning routine for sales (YouTube search)</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="training">
+          <summary>
+            <div class="summaryLeft">
+              <span class="dot"></span>
+              <span>Health + energy</span>
+            </div>
+            <span class="summaryMeta">
+              <span class="chip">More stamina</span>
+              <span class="caret"></span>
+            </span>
+          </summary>
+          <div class="trainingBody">
+            <ul>
+              <li><a href="https://www.youtube.com/results?search_query=zone+2+cardio+benefits" target="_blank" rel="noopener">Zone 2 cardio basics (YouTube search)</a></li>
+              <li><a href="https://www.youtube.com/results?search_query=sleep+habits+for+performance" target="_blank" rel="noopener">Sleep habits (YouTube search)</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="divider"></div>
+        <div class="sectionTitle">Weekly rep challenge</div>
+        <div class="calloutRow">
+          <div class="callout">
+            <b>Daily</b>
+            <small>10 min practice: intro + problem + consult close (out loud).</small>
+          </div>
+          <div class="callout">
+            <b>Every knock session</b>
+            <small>Collect usage/bill on every strong lead (no exceptions).</small>
+          </div>
+          <div class="callout">
+            <b>Weekly</b>
+            <small>Review 3 bills line-by-line until you can teach Delivery vs Generation clearly.</small>
+          </div>
+          <div class="callout">
+            <b>Mindset</b>
+            <small>One hour of learning per week: communication, habits, or sales psychology.</small>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <div class="footer">
+      <div>© LOS Training Hub</div>
+      <div>
+        Tip: Put your logo in the repo as <b>logo.png</b> (same folder as this index.html).
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Highlight active nav item as you scroll (mobile-friendly)
+    const sections = ["bill","approach","self"].map(id => document.getElementById(id));
+    const links = Array.from(document.querySelectorAll("#nav a"));
+
+    const setActive = (hash) => {
+      links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === hash));
+    };
+
+    const obs = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if(!visible) return;
+      setActive("#" + visible.target.id);
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: [0.1,0.2,0.3,0.4,0.5] });
+
+    sections.forEach(s => s && obs.observe(s));
+
+    // Open external links in new tab already handled via target=_blank on those links
+  </script>
+</body>
+</html>
