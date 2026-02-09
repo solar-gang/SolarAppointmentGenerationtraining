@@ -1,50 +1,42 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>LOS • SCE Bill Reading Training</title>
-  <meta name="theme-color" content="#0b1017"/>
+  <meta name="theme-color" content="#0b1017" />
 
   <style>
     :root{
-      /* LOS brand colors (from your logo) */
+      /* LOS */
       --navy:#0b1017;
-      --navy2:#081a33;
+      --navy2:#06122a;
+      --gold:#FBC909;
+      --lime:#B7F40B;
+      --cyan:#00C2FF;
+      --teal:#3AADBB;
 
-      --gold:#FBC909;     /* sun */
-      --orange:#F59E0B;   /* warm glow */
-      --lime:#B7F40B;     /* lightning lime */
-      --cyan:#00C2FF;     /* sky */
-      --teal:#3AADBB;     /* blend */
-
-      /* Dark theme surfaces */
+      /* Dark UI */
       --bg:#070b12;
       --bg2:#0a101a;
-      --card: rgba(12,18,30,.78);
-      --card2: rgba(10,16,26,.70);
-
-      --text: rgba(255,255,255,.92);
+      --card: rgba(15,23,42,.62);
+      --card2: rgba(2,8,23,.55);
+      --ink: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.66);
-      --muted2: rgba(255,255,255,.50);
-
       --line: rgba(255,255,255,.10);
-      --line2: rgba(255,255,255,.14);
 
-      --shadow: 0 22px 70px rgba(0,0,0,.55);
-      --shadow2: 0 14px 34px rgba(0,0,0,.45);
+      --grad: linear-gradient(135deg,var(--gold), var(--lime) 35%, var(--cyan) 70%, var(--teal));
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --shadow2: 0 10px 26px rgba(0,0,0,.45);
+      --ring: 0 0 0 4px rgba(0,194,255,.22);
 
       --r:18px;
-      --r2:24px;
+      --r2:22px;
 
       --safeT: env(safe-area-inset-top);
       --safeB: env(safe-area-inset-bottom);
       --safeL: env(safe-area-inset-left);
       --safeR: env(safe-area-inset-right);
-
-      --accent: linear-gradient(135deg, var(--gold), var(--lime) 35%, var(--cyan) 70%, var(--teal));
-      --accentSoft: linear-gradient(90deg, rgba(251,201,9,.14), rgba(183,244,11,.10), rgba(0,194,255,.12), rgba(58,173,187,.10));
-      --ring: 0 0 0 4px rgba(0,194,255,.22);
     }
 
     *{box-sizing:border-box}
@@ -52,855 +44,1032 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--text);
+      color:var(--ink);
       background:
-        radial-gradient(1200px 700px at 20% -10%, rgba(251,201,9,.16), transparent 60%),
-        radial-gradient(900px 600px at 95% 5%, rgba(0,194,255,.14), transparent 55%),
+        radial-gradient(1200px 650px at 20% -10%, rgba(251,201,9,.16), transparent 60%),
+        radial-gradient(900px 560px at 95% 10%, rgba(0,194,255,.14), transparent 55%),
         radial-gradient(900px 650px at 60% 120%, rgba(58,173,187,.12), transparent 55%),
         radial-gradient(900px 700px at 10% 120%, rgba(183,244,11,.10), transparent 55%),
         var(--bg);
-      overflow-x:hidden;
+      padding: calc(14px + var(--safeT)) calc(14px + var(--safeR)) calc(14px + var(--safeB)) calc(14px + var(--safeL));
     }
 
-    button{font:inherit}
-
-    /* Top bar */
-    .top{
-      position:sticky; top:0; z-index:50;
-      padding: calc(12px + var(--safeT)) calc(14px + var(--safeR)) 12px calc(14px + var(--safeL));
-      background: rgba(7,11,18,.72);
+    /* Topbar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      background: rgba(11,16,23,.62);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .topInner{
-      max-width:1200px; margin:0 auto;
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
-    }
-    .brand{
-      display:flex; gap:10px; align-items:center; min-width:0;
-    }
-    .brand img{
-      width:46px; height:46px; object-fit:contain;
-      filter: drop-shadow(0 14px 26px rgba(0,0,0,.55));
-    }
-    .brandTitle{min-width:0}
-    .brandTitle .h{
-      font-weight:950; letter-spacing:.2px; line-height:1.05;
-      font-size:16px;
-      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
-    }
-    .pill{
-      font-size:12px;
-      padding:4px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      white-space:nowrap;
-    }
-    .brandTitle .s{
-      font-size:12px; color:var(--muted); line-height:1.2;
-      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-      max-width: 52vw;
-    }
-
-    .topRight{
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;
-    }
-    .progressWrap{
-      display:flex; gap:10px; align-items:center;
-      padding:8px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--line);
       box-shadow: var(--shadow2);
     }
-    .progressBar{
-      width:160px; max-width:30vw;
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width: 220px;
+    }
+    .brand img{
+      width:42px; height:42px; object-fit:contain;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      padding:6px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+    }
+    .brand .t1{font-weight:950; letter-spacing:.2px; line-height:1.1}
+    .brand .t2{font-size:12px; color:var(--muted); margin-top:2px}
+
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 22px rgba(0,0,0,.30);
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--grad);
+    }
+
+    .progressWrap{
+      flex:1;
+      display:flex; align-items:center; gap:10px;
+      min-width: 220px;
+    }
+    .bar{
       height:10px;
       border-radius:999px;
       background: rgba(255,255,255,.10);
       overflow:hidden;
-      position:relative;
+      flex:1;
+      border:1px solid rgba(255,255,255,.12);
     }
-    .progressBar > i{
+    .bar > i{
       display:block; height:100%;
       width:0%;
-      background: var(--accent);
+      background: var(--grad);
       border-radius:999px;
       transition: width .35s ease;
     }
-    .progressPct{
-      font-size:12px; font-weight:900; color:rgba(255,255,255,.86);
-      min-width:40px; text-align:right;
-    }
-
-    .btn{
-      appearance:none;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      padding:10px 12px;
-      border-radius: 12px;
-      display:inline-flex; align-items:center; gap:8px;
-      box-shadow: var(--shadow2);
-      cursor:pointer;
-      transition: transform .08s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.16);
-    }
-    .btn:active{transform: translateY(1px)}
-    .btn:focus{outline:none; box-shadow: var(--ring), var(--shadow2)}
-    .btnPrimary{
-      border:none;
-      background: var(--accent);
-      color: rgba(11,16,23,.96);
-      font-weight:950;
-    }
-    .btnPrimary:hover{filter: brightness(1.02)}
-    .btnSmall{padding:9px 10px; border-radius:12px; font-size:13px}
-
-    /* Main layout */
-    .wrap{
-      max-width:1200px; margin:0 auto;
-      padding: 18px calc(14px + var(--safeR)) calc(18px + var(--safeB)) calc(14px + var(--safeL));
-    }
-
-    .panel{
-      background: rgba(255,255,255,.05);
-      border: 1px solid var(--line);
-      border-radius: var(--r2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .controls{
-      display:flex; gap:10px; align-items:center; justify-content:space-between;
-      padding: 12px 12px;
-      background:
-        radial-gradient(700px 220px at 20% 0%, rgba(251,201,9,.10), transparent 60%),
-        radial-gradient(700px 220px at 90% 0%, rgba(0,194,255,.10), transparent 60%),
-        rgba(255,255,255,.03);
-      border-bottom: 1px solid var(--line);
-      flex-wrap:wrap;
-    }
-
-    .lessonTabs{
-      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
-    }
-    .tab{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      color: var(--muted);
-      padding:10px 12px;
-      border-radius: 999px;
-      cursor:pointer;
+    .pct{
       font-weight:900;
-      font-size:13px;
-      display:inline-flex; gap:8px; align-items:center;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
-      user-select:none;
-    }
-    .tab:hover{background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.16)}
-    .tab:active{transform: translateY(1px)}
-    .tab.active{
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.09);
       color: rgba(255,255,255,.92);
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
-    }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: rgba(255,255,255,.16);
-    }
-    .tab.active .dot{
-      background: var(--accent);
+      font-size:12px;
+      min-width: 92px;
+      text-align:right;
     }
 
-    .navButtons{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-
-    .content{
+    /* Layout */
+    .grid{
+      margin-top:12px;
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 14px;
-      padding: 14px;
-      align-items:start;
+      grid-template-columns: 320px 1fr;
+      gap:12px;
+      height: calc(100% - 86px);
+      min-height: 640px;
     }
 
-    .billCard, .notesCard{
-      background: rgba(255,255,255,.05);
-      border: 1px solid var(--line);
+    /* Sidebar */
+    .side{
+      border:1px solid var(--line);
       border-radius: var(--r);
-      box-shadow: 0 16px 40px rgba(0,0,0,.34);
+      background: rgba(11,16,23,.58);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow2);
       overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 0;
     }
-
-    .billHead{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      padding: 12px 12px;
-      border-bottom: 1px solid var(--line);
+    .sideHeader{
+      padding:14px 14px 10px 14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
     }
-    .billHead .title{
-      font-weight:950; letter-spacing:.2px;
+    .sideHeader h3{margin:0; font-size:14px; letter-spacing:.2px}
+    .sideHeader p{margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.3}
+
+    .lessonList{
+      padding:10px;
+      overflow:auto;
+      min-height: 0;
     }
-    .billHead .sub{
-      font-size:12px; color:var(--muted); font-weight:750;
+    .lessonBtn{
+      width:100%;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      text-align:left;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid transparent;
+      background: transparent;
+      cursor:pointer;
+      transition: background .15s ease, border .15s ease, transform .05s ease;
+      color: var(--ink);
+    }
+    .lessonBtn:active{transform: translateY(1px)}
+    .lessonBtn:hover{
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.10);
+    }
+    .lessonBtn.active{
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.14);
+      box-shadow: 0 14px 30px rgba(0,0,0,.30);
+    }
+    .badge{
+      width:28px; height:28px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: var(--grad);
+      display:grid; place-items:center;
+      color:#0b1017;
+      font-weight:950;
+      font-size:12px;
+      flex:0 0 auto;
+    }
+    .lessonMeta{flex:1}
+    .lessonTitle{font-weight:950; font-size:13px; line-height:1.2}
+    .lessonSub{margin-top:3px; font-size:12px; color:var(--muted); line-height:1.25}
+
+    .lessonFoot{
+      margin-top:auto;
+      padding:12px;
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .mini{
+      flex:1;
+      min-width: 140px;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 12px 24px rgba(0,0,0,.28);
+    }
+    .mini .k{font-size:11px; color:var(--muted)}
+    .mini .v{margin-top:4px; font-weight:950}
+
+    /* Main */
+    .main{
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      background: rgba(11,16,23,.58);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 0;
+    }
+    .mainHeader{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background: rgba(255,255,255,.03);
+    }
+    .titleBlock{min-width:0}
+    .h1{
+      margin:0;
+      font-size:15px;
+      font-weight:980;
+      letter-spacing:.2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      font-size:11px;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-weight:850;
+    }
+    .desc{
+      margin:6px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.25;
+    }
+    .controls{
+      display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      border-radius: 14px;
+      padding:10px 12px;
+      font-weight:950;
+      font-size:12px;
+      color: var(--ink);
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 12px 24px rgba(0,0,0,.28);
+      display:inline-flex; align-items:center; gap:8px;
+      transition: transform .05s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16)}
+    .btn:active{transform: translateY(1px)}
+    .btn:focus{outline:none; box-shadow: var(--ring), 0 12px 24px rgba(0,0,0,.28)}
+    .btn.primary{
+      background: var(--grad);
+      border-color: rgba(255,255,255,.10);
+      color: #0b1017;
+    }
+    .btn.primary:hover{filter: brightness(1.02)}
+    .btn.ghost{
+      background: transparent;
+      box-shadow:none;
     }
 
-    .pager{
-      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
-      justify-content:flex-end;
+    .stage{
+      padding:12px;
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap:12px;
+      min-height:0;
+      flex:1;
     }
 
-    .imgWrap{
-      padding: 12px;
-      background: rgba(0,0,0,.12);
+    .billCard, .noteCard{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--r);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 16px 40px rgba(0,0,0,.34);
+      min-height:0;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .cardHead{
+      padding:10px 12px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between;
+      background: rgba(255,255,255,.03);
+    }
+    .cardHead .left{
+      display:flex; align-items:center; gap:10px;
+      min-width:0;
+    }
+    .tag{
+      font-size:11px;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      color: var(--muted);
+      background: rgba(255,255,255,.05);
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .cardHead h4{
+      margin:0;
+      font-size:12px;
+      font-weight:980;
+      letter-spacing:.2px;
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .hint{
+      font-size:11px;
+      color: var(--muted);
+      white-space:nowrap;
+    }
+
+    .billFrame{
+      padding:10px;
+      overflow:auto;
+      min-height:0;
+      background: rgba(0,0,0,.10);
     }
     .billImg{
       width:100%;
       height:auto;
       display:block;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: 0 20px 55px rgba(0,0,0,.45);
-      background:#0b1017;
+      border:1px solid rgba(255,255,255,.14);
+      background: #0b1017;
+      box-shadow: 0 22px 70px rgba(0,0,0,.45);
     }
 
-    .thumbs{
-      display:flex; gap:8px; flex-wrap:wrap;
-      padding: 0 12px 12px;
+    .notes{
+      padding:12px;
+      overflow:auto;
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
-    .thumb{
-      width:64px; height:64px;
-      border-radius: 14px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.12);
-      background:#0b1017;
-      box-shadow: 0 10px 22px rgba(0,0,0,.35);
-      cursor:pointer;
-      position:relative;
-    }
-    .thumb img{width:100%; height:100%; object-fit:cover}
-    .thumb.active{outline:none; box-shadow: var(--ring), 0 10px 22px rgba(0,0,0,.45)}
-    .thumb .n{
-      position:absolute; left:7px; top:7px;
-      font-size:11px; font-weight:950;
-      padding:3px 7px;
-      border-radius:999px;
-      color:rgba(255,255,255,.96);
-      background: rgba(11,16,23,.82);
-      border: 1px solid rgba(255,255,255,.16);
-    }
-
-    .notesHead{
-      padding: 14px 14px 12px;
-      border-bottom: 1px solid var(--line);
+    .startHere{
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
       background:
-        radial-gradient(700px 280px at 10% 0%, rgba(251,201,9,.10), transparent 55%),
-        radial-gradient(650px 260px at 95% 0%, rgba(0,194,255,.10), transparent 55%),
+        radial-gradient(600px 240px at 20% 0%, rgba(251,201,9,.14), transparent 55%),
+        radial-gradient(520px 240px at 100% 0%, rgba(0,194,255,.10), transparent 55%),
         rgba(255,255,255,.04);
+      padding:10px 12px;
+      box-shadow: 0 12px 24px rgba(0,0,0,.28);
     }
-    .notesHead .kicker{
-      font-size:12px; font-weight:950; letter-spacing:.22px;
-      color: rgba(255,255,255,.66);
-      text-transform:uppercase;
+    .startHere .sh{
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
     }
-    .notesHead .h{
-      margin-top:4px;
-      font-size:16px; font-weight:980;
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
-    }
-    .badge{
+    .startHere .sh strong{
       font-size:12px;
-      font-weight:950;
-      padding:4px 10px;
+      letter-spacing:.2px;
+      font-weight:980;
+    }
+    .startHere .sh .mark{
+      font-size:11px;
+      padding:5px 8px;
       border-radius:999px;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.78);
-      white-space:nowrap;
+      color: var(--muted);
+      font-weight:900;
     }
-    .notesHead .s{
-      margin-top:6px;
-      font-size:12px; color:var(--muted); font-weight:700;
+    .startHere p{
+      margin:8px 0 0;
+      font-size:12px;
+      color: var(--muted);
       line-height:1.35;
+      font-weight:650;
     }
 
-    .steps{
-      padding: 12px 12px 14px;
-      display:flex; flex-direction:column; gap:10px;
-    }
-    .step{
-      display:flex; gap:10px; align-items:flex-start;
-      padding: 10px 10px;
+    .callout{
       border-radius: 16px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
       box-shadow: 0 12px 24px rgba(0,0,0,.28);
+      padding:10px 12px;
+    }
+    .calloutHead{
+      display:flex; align-items:flex-start; gap:10px;
     }
     .num{
-      min-width:34px; height:34px;
+      width:28px; height:28px;
+      border-radius: 11px;
+      background: var(--grad);
+      border:1px solid rgba(255,255,255,.10);
       display:grid; place-items:center;
-      border-radius: 12px;
       font-weight:980;
-      color: rgba(11,16,23,.96);
-      background: var(--accent);
-      box-shadow: 0 14px 26px rgba(0,0,0,.45);
+      color:#0b1017;
+      flex:0 0 auto;
+      box-shadow: 0 12px 22px rgba(0,0,0,.35);
     }
-    .step .t{
-      font-weight:980;
-      line-height:1.15;
-      margin-top:2px;
-      color: rgba(255,255,255,.92);
+    .calloutHead .txt{flex:1; min-width:0}
+    .calloutHead .txt .k{
+      font-weight:980; font-size:12px; letter-spacing:.2px;
     }
-    .step .d{
+    .calloutHead .txt .v{
       margin-top:4px;
       font-size:12px;
-      color: rgba(255,255,255,.70);
+      color: var(--muted);
       line-height:1.35;
-      font-weight:700;
+      font-weight:650;
     }
-
-    .cta{
-      margin-top: 4px;
-      padding: 12px;
-      border-top: 1px solid var(--line);
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      background: rgba(255,255,255,.03);
+    .calloutFoot{
+      margin-top:10px;
+      display:flex; gap:8px; flex-wrap:wrap;
     }
-    .cta .left{
-      display:flex; flex-direction:column; gap:4px;
+    .chip2{
+      font-size:11px;
+      padding:6px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-weight:850;
     }
-    .cta .left .t{font-weight:980}
-    .cta .left .s{font-size:12px; color:var(--muted); font-weight:700}
 
     /* Quiz */
-    .quiz{
-      margin-top: 14px;
-      padding: 14px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: var(--r2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+    .quizWrap{
+      display:none;
+      padding:12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
     }
-    .quizHead{
-      display:flex; gap:10px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
-      padding: 6px 2px 12px;
+    .quizTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-bottom: 10px;
     }
-    .quizHead .h{
-      font-weight:980; font-size:16px;
+    .quizTop h3{margin:0; font-size:14px; font-weight:980}
+    .quizTop p{margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.35; max-width: 820px}
+    .qGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
     }
-    .quizHead .s{
-      font-size:12px; color:var(--muted); font-weight:700; margin-top:4px; line-height:1.35;
-      max-width: 720px;
-    }
-    .qList{display:flex; flex-direction:column; gap:10px}
     .q{
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
       border-radius: 16px;
-      padding: 12px;
-      box-shadow: 0 12px 24px rgba(0,0,0,.28);
-    }
-    .q .qt{font-weight:980; line-height:1.2}
-    .opts{margin-top:10px; display:grid; gap:8px}
-    .opt{
-      display:flex; gap:10px; align-items:flex-start;
-      padding: 10px 10px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
+      box-shadow: 0 12px 24px rgba(0,0,0,.28);
+      padding:10px 12px;
+    }
+    .q .qt{
+      font-weight:980;
+      font-size:12px;
+      letter-spacing:.2px;
+      margin:0 0 8px 0;
+    }
+    .opt{
+      display:flex; gap:8px; align-items:flex-start;
+      padding:8px 8px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      margin-bottom:8px;
       cursor:pointer;
       user-select:none;
-      transition: transform .08s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
     }
-    .opt:hover{
-      background: rgba(255,255,255,.06);
+    .opt:hover{background: rgba(255,255,255,.05)}
+    .opt input{margin-top:2px}
+    .quizActions{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .scoreChip{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-weight:980;
+      box-shadow: 0 12px 24px rgba(0,0,0,.28);
+    }
+    .ok{
+      background: linear-gradient(135deg, rgba(183,244,11,.22), rgba(0,194,255,.16));
       border-color: rgba(255,255,255,.14);
     }
-    .opt:active{transform: translateY(1px)}
-    .opt input{margin-top:2px}
-    .quizFoot{
-      margin-top: 12px;
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,.10);
-    }
-    .score{
-      font-weight:980;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-      display:inline-flex; gap:10px; align-items:center; flex-wrap:wrap;
-    }
-    .score strong{
-      font-size:14px;
-      padding:4px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(255,255,255,.92);
+    .bad{
+      background: linear-gradient(135deg, rgba(251,201,9,.20), rgba(255,59,48,.10));
+      border-color: rgba(255,255,255,.14);
     }
 
     /* Responsive */
     @media (max-width: 980px){
-      .content{grid-template-columns: 1fr;}
-      .brandTitle .s{max-width: 72vw}
-      .progressBar{width:140px}
+      .grid{grid-template-columns: 1fr; height:auto; min-height: unset;}
+      .side{order:2}
+      .main{order:1; min-height: 740px;}
+    }
+    @media (max-width: 860px){
+      .stage{grid-template-columns: 1fr; }
+      .billFrame{max-height: 48vh;}
+      .qGrid{grid-template-columns: 1fr;}
     }
     @media (max-width: 520px){
-      .progressWrap{display:none}
-      .thumb{width:58px; height:58px}
-      .tab{padding:10px 11px}
-      .btn{padding:10px 11px}
-      .content{padding: 12px}
-      .imgWrap{padding: 10px}
+      .progressWrap{display:none;}
+      .pct{min-width:auto;}
     }
   </style>
 </head>
 
 <body>
-  <header class="top">
-    <div class="topInner">
-      <div class="brand">
-        <img id="logoImg" src="Logo.png" alt="LOS logo" onerror="this.style.display='none'">
-        <div class="brandTitle">
-          <div class="h">
-            LOS • SCE Bill Reading
-            <span class="pill" id="lessonPill">Lesson 1 of 4</span>
-          </div>
-          <div class="s" id="lessonSubtitle">Learn what matters on the bill — top to bottom — so you can book a consult.</div>
-        </div>
-      </div>
-
-      <div class="topRight">
-        <div class="progressWrap" title="Completion progress">
-          <div class="progressBar"><i id="progressFill"></i></div>
-          <div class="progressPct" id="progressPct">0%</div>
-        </div>
-        <button class="btn btnSmall" id="resetBtn" title="Reset progress">↺ Reset</button>
-        <button class="btn btnPrimary btnSmall" id="quizJumpBtn" title="Jump to quiz">✓ Quiz</button>
+  <div class="topbar">
+    <div class="brand">
+      <img src="Logo.png" alt="LOS logo" onerror="this.style.display='none'">
+      <div>
+        <div class="t1">LOS • SCE Bill Reading Training</div>
+        <div class="t2">Bill on left • Callouts on right • Slide-by-slide</div>
       </div>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="panel">
-      <div class="controls">
-        <div class="lessonTabs" id="lessonTabs"></div>
+    <div class="progressWrap">
+      <span class="chip"><span class="dot"></span> Completion</span>
+      <div class="bar"><i id="progressBar"></i></div>
+      <div class="pct" id="progressPct">0% Complete</div>
+    </div>
 
-        <div class="navButtons">
-          <button class="btn btnSmall" id="prevLessonBtn">← Prev lesson</button>
-          <button class="btn btnSmall" id="nextLessonBtn">Next lesson →</button>
+    <div class="chip" id="statusChip">
+      <span class="dot"></span>
+      <span id="statusText">Slides: 0/8 • Quiz: Not started</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <aside class="side">
+      <div class="sideHeader">
+        <h3>Lessons</h3>
+        <p>Each bill image is its own slide so the callouts match that exact page.</p>
+      </div>
+
+      <div class="lessonList" id="lessonList"></div>
+
+      <div class="lessonFoot">
+        <div class="mini">
+          <div class="k">Current slide</div>
+          <div class="v" id="miniSlide">—</div>
+        </div>
+        <div class="mini">
+          <div class="k">Rep goal</div>
+          <div class="v">Book consult</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="mainHeader">
+        <div class="titleBlock">
+          <div class="h1" id="slideTitle">
+            <span>—</span>
+            <span class="pill" id="slidePill">—</span>
+          </div>
+          <div class="desc" id="slideDesc">—</div>
+        </div>
+        <div class="controls">
+          <button class="btn ghost" id="btnQuiz" title="Jump to quiz">Quiz</button>
+          <button class="btn" id="btnPrev" title="Previous slide">← Prev</button>
+          <button class="btn primary" id="btnNext" title="Next slide">Next →</button>
         </div>
       </div>
 
-      <div class="content">
-        <!-- BILL -->
-        <div class="billCard">
-          <div class="billHead">
-            <div>
-              <div class="title" id="billTitle">Bill</div>
-              <div class="sub" id="billSub">Page 1</div>
-            </div>
-
-            <div class="pager">
-              <button class="btn btnSmall" id="prevPageBtn">← Page</button>
-              <button class="btn btnSmall" id="nextPageBtn">Page →</button>
-            </div>
-          </div>
-
-          <div class="imgWrap">
-            <img class="billImg" id="billImg" alt="Bill image">
-          </div>
-
-          <div class="thumbs" id="thumbs"></div>
-        </div>
-
-        <!-- NOTES -->
-        <div class="notesCard">
-          <div class="notesHead">
-            <div class="kicker">What to explain (top → bottom)</div>
-            <div class="h">
-              <span id="notesTitle">Lesson Notes</span>
-              <span class="badge" id="lessonTypeBadge">SCE</span>
-            </div>
-            <div class="s" id="notesIntro">
-              Hit the “pain” points that create extra bills, then bridge to a consult: “Let’s review your bill + usage pattern and confirm the fix.”
-            </div>
-          </div>
-
-          <div class="steps" id="steps"></div>
-
-          <div class="cta">
+      <div class="stage">
+        <section class="billCard">
+          <div class="cardHead">
             <div class="left">
-              <div class="t">Appointment close line</div>
-              <div class="s" id="closeLine">“If we can show why this bill happened and what fixes it, would a 15–20 min consult tomorrow work?”</div>
+              <span class="tag" id="billTag">Bill</span>
+              <h4 id="billHead">—</h4>
             </div>
-            <button class="btn btnPrimary" id="markDoneBtn">Mark lesson complete ✓</button>
+            <div class="hint">Pinch/zoom if needed</div>
+          </div>
+          <div class="billFrame" id="billFrame">
+            <img class="billImg" id="billImg" alt="Bill page" />
+          </div>
+        </section>
+
+        <section class="noteCard">
+          <div class="cardHead">
+            <div class="left">
+              <span class="tag">Notes</span>
+              <h4>What to say (top → bottom)</h4>
+            </div>
+            <div class="hint" id="noteHint">Numbered callouts</div>
+          </div>
+          <div class="notes" id="notes"></div>
+        </section>
+      </div>
+
+      <div class="quizWrap" id="quizWrap">
+        <div class="quizTop">
+          <div>
+            <h3>Quick Knowledge Check</h3>
+            <p>Score <b>100%</b> to show “Complete.”</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <span class="scoreChip" id="quizScoreChip">Score: —</span>
+            <span class="scoreChip" id="quizResultChip">Result: —</span>
+          </div>
+        </div>
+
+        <div class="qGrid" id="qGrid"></div>
+
+        <div class="quizActions">
+          <button class="btn" id="btnBackToSlides">← Back to slides</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="btn" id="btnResetQuiz">Reset</button>
+            <button class="btn primary" id="btnGrade">Grade Quiz</button>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- QUIZ -->
-    <section class="quiz" id="quiz">
-      <div class="quizHead">
-        <div>
-          <div class="h">Quick Knowledge Check</div>
-          <div class="s">
-            Answer these based on what you learned. When all answers are correct, you’ll see <b>100% complete</b>.
-          </div>
-        </div>
-        <div class="score">
-          Score: <strong id="scorePct">0%</strong>
-          <span id="scoreMsg" style="font-size:12px;color:var(--muted);font-weight:700;">Finish the quiz to complete training.</span>
-        </div>
-      </div>
-
-      <div class="qList" id="qList"></div>
-
-      <div class="quizFoot">
-        <button class="btn" id="checkQuizBtn">Check answers</button>
-        <button class="btn btnPrimary" id="finishBtn">Finish / Save progress</button>
-      </div>
-    </section>
-  </main>
+    </main>
+  </div>
 
   <script>
-    /* =========================
-       LESSON DATA
-       ========================= */
-    const lessons = [
-      {
-        id: "addon",
-        name: "Add-on (Solar + bill)",
-        type: "Solar add-on • NEM-style annual / true-up risk",
-        badge: "ADD-ON",
-        pages: ["Add-on-page1.jpeg","Addonpage2.jpeg","Add-on-bill3.jpg"],
-        notesTitle: "Add-on Solar Bill (Victor Barba) — What creates extra bills?",
-        intro: "This is the “I have solar… why did I get billed?” lesson. Identify true-up, TOU timing, minimum/NBCs, or usage changes — then book a consult.",
-        closeLine: "“This looks like an annual / TOU timing issue more than ‘solar not working.’ Let’s do a quick consult to confirm the fix and protect you from a big true-up.”",
-        steps: [
-          {t:"Billing period + where they are in the annual cycle", d:"Find settlement messaging (billing month X of 12). Customers think solar means $0 monthly—set expectations."},
-          {t:"Account summary: credit vs new charges", d:"Credits can exist while new charges still apply (minimums / delivery / NBCs)."},
-          {t:"Annual bill / true-up box", d:"Highlight year-to-date charges + settlement timing. That’s the pain driver."},
-          {t:"TOU schedule", d:"Expensive hours can still drive cost if usage is heavy when solar isn’t producing."},
-          {t:"Usage section: total kWh + trend", d:"If usage is up (EV/pool/AC), system may be undersized vs lifestyle changes."},
-          {t:"Details of new charges: delivery + NBCs", d:"Show why some charges remain. Keep it simple."},
-          {t:"Consult bridge", d:"Book consult to map usage timing + credits + system design and show the best fix (add panels vs battery)."}
-        ]
-      },
-      {
-        id: "yucaipa",
-        name: "Yucaipa (No solar • TOU)",
-        type: "No solar • High bill • TOU pain",
-        badge: "YUCAIPA",
-        pages: ["Yucaipapage1.jpeg","Yucaipa2.jpg","Yucaipa3.jpg"],
-        notesTitle: "No Solar Bill (Yucaipa) — Perfect ‘pain’ consult setup",
-        intro: "Anchor on amount due and TOU peak. Then explain usage buckets, trends, and charge categories to justify the consult.",
-        closeLine: "“This is exactly what we solve — let’s do a 15–20 minute consult to confirm your TOU exposure and show day-one savings options.”",
-        steps: [
-          {t:"Amount due (start here)", d:"Start with the big number and due date. That’s the emotional hook."},
-          {t:"Account summary", d:"Separate past due vs new charges so the customer understands the story."},
-          {t:"TOU schedule (peak window)", d:"Explain that peak hours cost more; timing matters."},
-          {t:"Usage buckets (kWh)", d:"Identify which bucket drives cost (often peak)."},
-          {t:"Total usage + trend graph", d:"If usage climbs, bills will keep rising. Tie to lifestyle/season."},
-          {t:"Details of new charges", d:"Delivery vs generation + adders. Rates increase outside the customer’s control."},
-          {t:"Consult bridge", d:"Book consult to size solar + storage to reduce peak pain."}
-        ]
-      },
-      {
-        id: "dcare",
-        name: "Tiered (D-CARE)",
-        type: "Tiered bill • Baseline/Tier 1/2 pricing",
-        badge: "D-CARE",
-        pages: ["Dcaretiersbill.jpeg"],
-        notesTitle: "Tiered D-CARE Bill — Why it spikes when usage climbs",
-        intro: "Tier bills punish over-baseline usage. Show Tier 2 kWh and Tier 2 price to create the ‘aha’.",
-        closeLine: "“Once you cross baseline, every extra kWh costs more. Let’s do a quick consult to size solar to keep you out of Tier 2.”",
-        steps: [
-          {t:"Rate name + billing period", d:"Confirm it’s tiered (baseline + over-baseline)."},
-          {t:"Tier 1 vs Tier 2 kWh", d:"Point out the split and where most kWh land."},
-          {t:"Tier 2 $/kWh (pain)", d:"Show the price jump. That’s why the bill feels unfair."},
-          {t:"Delivery + generation can both tier", d:"High usage impacts multiple sections."},
-          {t:"Consult bridge", d:"Find what’s driving Tier 2 and size solar to reduce that exposure."}
-        ]
-      },
-      {
-        id: "nem3",
-        name: "NEM 3.0 (Solar + battery)",
-        type: "NEM 3.0 • Timing matters • exports worth less",
-        badge: "NEM 3.0",
-        pages: ["Nem3bill.jpg"],
-        notesTitle: "NEM 3.0 — Why the total can be low (and what to watch)",
-        intro: "NEM 3.0 is about timing: batteries help reduce peak imports. Even ‘good’ months can have minimum/delivery charges.",
-        closeLine: "“This is a good result — but timing is everything on NEM 3.0. Let’s confirm peak imports and make sure you stay protected year-round.”",
-        steps: [
-          {t:"Total + charges vs credits", d:"Explain that credits offset charges; read net result."},
-          {t:"TOU buckets (peak)", d:"Even small peak imports can create bills over time."},
-          {t:"Usage trend", d:"Lifestyle changes can break the model (EV/pool)."},
-          {t:"Delivery/program fees", d:"Set expectation: some charges remain even with solar+battery."},
-          {t:"Consult bridge", d:"Confirm battery schedule, TOU plan, and peak avoidance strategy."}
-        ]
-      }
-    ];
-
-    /* =========================
-       QUIZ
-       ========================= */
-    const quizQuestions = [
-      { q:"On solar bills, what often explains why you may still get billed?", a:1,
-        opts:["Mailing address","Annual bill / settlement (billing month X of 12)","QR code","Font size"] },
-      { q:"For TOU, what drives appointments most?", a:2,
-        opts:["All kWh cost the same","Solar covers all hours equally","Peak hours cost more; timing creates big charges","Tiers are the same as TOU"] },
-      { q:"On tiered (D-CARE), what causes the bill to jump?", a:1,
-        opts:["QR code","Crossing baseline into Tier 2 ($/kWh higher)","Different paper","Only base charge"] },
-      { q:"On NEM 3.0, what’s the key risk even if total looks small?", a:3,
-        opts:["TOU removed","Credits always increase","Exports always worth more","Peak imports + timing can still create bills"] }
-    ];
-
-    /* =========================
-       STATE
-       ========================= */
-    const $ = (sel)=>document.querySelector(sel);
-    const storageKey = "los_bill_training_dark_v1";
-    let state = { lessonIndex:0, pageIndex:0, completed:{}, quiz:{} };
-
-    function loadState(){
-      try{
-        const raw = localStorage.getItem(storageKey);
-        if(raw) state = { ...state, ...JSON.parse(raw) };
-      }catch(e){}
-    }
-    function saveState(){
-      try{ localStorage.setItem(storageKey, JSON.stringify(state)); }catch(e){}
-    }
-
-    function calcQuizScorePct(){
-      const total = quizQuestions.length;
-      let correct = 0;
-      for(let i=0;i<total;i++){
-        const sel = state.quiz?.[i];
-        if(typeof sel === "number" && sel === quizQuestions[i].a) correct++;
-      }
-      return correct/total; // 0..1
-    }
-    function calcCompletionPct(){
-      const doneLessons = Object.values(state.completed||{}).filter(Boolean).length;
-      const lessonPct = (doneLessons/lessons.length)*70;
-      const quizPct = calcQuizScorePct()*30*100; // percent points
-      return Math.round(lessonPct + quizPct);
-    }
-
-    function updateProgressUI(){
-      const pct = calcCompletionPct();
-      $("#progressFill").style.width = pct + "%";
-      $("#progressPct").textContent = pct + "%";
-    }
-
-    function setLesson(i){
-      state.lessonIndex = Math.max(0, Math.min(lessons.length-1, i));
-      state.pageIndex = 0;
-      saveState();
-      render();
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-    function setPage(i){
-      const lesson = lessons[state.lessonIndex];
-      state.pageIndex = Math.max(0, Math.min(lesson.pages.length-1, i));
-      saveState();
-      renderBill();
-      renderThumbs();
-    }
-
-    function render(){
-      renderTabs();
-      renderHeader();
-      renderBill();
-      renderThumbs();
-      renderNotes();
-      renderQuiz();
-      updateProgressUI();
-    }
-
-    function renderHeader(){
-      const lesson = lessons[state.lessonIndex];
-      $("#lessonPill").textContent = `Lesson ${state.lessonIndex+1} of ${lessons.length}`;
-      $("#lessonSubtitle").textContent = lesson.type;
-    }
-
-    function renderTabs(){
-      const tabs = $("#lessonTabs");
-      tabs.innerHTML = "";
-      lessons.forEach((l, i)=>{
-        const b = document.createElement("button");
-        b.className = "tab" + (i===state.lessonIndex ? " active":"");
-        b.innerHTML = `<span class="dot"></span>${l.name}`;
-        b.onclick = ()=>setLesson(i);
-        tabs.appendChild(b);
-      });
-    }
-
-    function renderBill(){
-      const lesson = lessons[state.lessonIndex];
-      const src = lesson.pages[state.pageIndex];
-
-      $("#billTitle").textContent = lesson.name;
-      $("#billSub").textContent = `Page ${state.pageIndex+1} of ${lesson.pages.length}`;
-
-      const img = $("#billImg");
-      img.style.borderColor = "rgba(255,255,255,.12)";
-      img.style.boxShadow = "0 20px 55px rgba(0,0,0,.45)";
-      img.style.opacity = "1";
-      img.style.filter = "none";
-      img.src = src;
-
-      img.onerror = () => {
-        img.alt = "Image not found. Check filename + path.";
-        img.style.borderColor = "rgba(239,68,68,.55)";
-        img.style.boxShadow = "0 20px 55px rgba(239,68,68,.18)";
-        img.style.opacity = ".85";
+    /* image fallback helper */
+    function setImgWithFallback(imgEl, candidates){
+      let i = 0;
+      const tryNext = () => {
+        if(i >= candidates.length){
+          imgEl.alt = "Image not found. Check filename in repo.";
+          imgEl.style.opacity = .60;
+          imgEl.style.filter = "grayscale(1)";
+          return;
+        }
+        imgEl.style.opacity = "1";
+        imgEl.style.filter = "none";
+        imgEl.src = candidates[i++];
       };
-
-      $("#prevPageBtn").disabled = state.pageIndex === 0;
-      $("#nextPageBtn").disabled = state.pageIndex === (lesson.pages.length-1);
-      $("#prevPageBtn").onclick = ()=>setPage(state.pageIndex-1);
-      $("#nextPageBtn").onclick = ()=>setPage(state.pageIndex+1);
-
-      $("#prevLessonBtn").disabled = state.lessonIndex === 0;
-      $("#nextLessonBtn").disabled = state.lessonIndex === (lessons.length-1);
-      $("#prevLessonBtn").onclick = ()=>setLesson(state.lessonIndex-1);
-      $("#nextLessonBtn").onclick = ()=>setLesson(state.lessonIndex+1);
+      imgEl.onerror = tryNext;
+      tryNext();
     }
 
-    function renderThumbs(){
-      const lesson = lessons[state.lessonIndex];
-      const thumbs = $("#thumbs");
-      thumbs.innerHTML = "";
-      if(lesson.pages.length <= 1) return;
+    /* SLIDES — 1 slide per bill image (8 total) */
+    const slides = [
+      /* Lesson 1: Add-on (Victor) page 1 */
+      {
+        lessonId:"addon", lessonName:"Add-On Bill (Solar / NEM)", pill:"Lesson 1 • Add-On (Solar)",
+        title:"Add-On Solar Bill — Page 1 (Annual bill / true-up context)",
+        desc:"Explain why solar customers can still owe money at the end of the 12-month cycle (true-up).",
+        billHead:"Account Summary + Annual Bill / True-Up",
+        billTag:"Add-On • Pg 1",
+        img:["Add-on-page1.jpeg","Add-on-page1.jpg","Addonpage1.jpeg"],
+        startHere:{ title:"Start here", mark:"Set expectations",
+          body:"Confirm they have solar + net billing. This is a running tally that settles at the end of the 12-month period (true-up)."},
+        callouts:[
+          {k:"12-month cycle / true-up timing", v:"Point out where the bill references the settlement period. If they’re late in the cycle, a true-up can be coming soon.", tags:["Pain driver","Timing"]},
+          {k:"Year-to-date charges (running total)", v:"This is the real story for the year. If credits don’t cover it by month 12, the true-up bill hits.", tags:["True-up","Big bill"]},
+          {k:"Monthly amount due ≠ annual settlement", v:"A small monthly due can still lead to a large true-up. This is the #1 confusion for solar customers.", tags:["Objection handler"]},
+          {k:"Rep close", v:"“Let’s do a quick bill audit so you know exactly why this is happening and how to stop the next true-up.”", tags:["Appointment"]}
+        ]
+      },
 
-      for(let i=0;i<lesson.pages.length;i++){
-        const t = document.createElement("div");
-        t.className = "thumb" + (i===state.pageIndex ? " active":"");
-        t.innerHTML = `<span class="n">${i+1}</span><img alt="thumb ${i+1}" src="${lesson.pages[i]}">`;
-        t.onclick = ()=>setPage(i);
-        thumbs.appendChild(t);
+      /* Lesson 1: Add-on page 2 */
+      {
+        lessonId:"addon", lessonName:"Add-On Bill (Solar / NEM)", pill:"Lesson 1 • Add-On (Solar)",
+        title:"Add-On Solar Bill — Page 2 (TOU + usage buckets)",
+        desc:"Teach timing mismatch: solar produces midday; the home often uses power during expensive evening peak.",
+        billHead:"TOU Periods + Usage Breakdown + Charges",
+        billTag:"Add-On • Pg 2",
+        img:["Addonpage2.jpeg","Addonpage2.jpg","Add-on-bill2.jpeg","Add-on-bill2.jpg"],
+        startHere:{ title:"Start here", mark:"TOU pricing",
+          body:"Show the TOU periods first. Expensive peak hours are usually when customers import from the grid."},
+        callouts:[
+          {k:"TOU periods (peak vs off-peak)", v:"Simple explanation: power costs more when everyone is home (often evenings). Solar produces earlier.", tags:["Pain driver","TOU"]},
+          {k:"Usage by time period", v:"If peak usage is high, they’ll pay even with solar unless they shift usage or store energy.", tags:["Peak imports"]},
+          {k:"Total kWh this month", v:"If this jumped (EV/pool/AC), the original system may not cover the new lifestyle.", tags:["Lifestyle change"]},
+          {k:"Rep close", v:"“Let’s map your usage to these TOU hours and show the fastest fix (shift / add panels / add battery).”", tags:["Appointment"]}
+        ]
+      },
+
+      /* Lesson 1: Add-on page 3 */
+      {
+        lessonId:"addon", lessonName:"Add-On Bill (Solar / NEM)", pill:"Lesson 1 • Add-On (Solar)",
+        title:"Add-On Solar Bill — Page 3 (tracked charges / net summary)",
+        desc:"Where hidden stacking happens: delivery/generation categories and net consumption/generation.",
+        billHead:"Tracked Charges + Net Summary",
+        billTag:"Add-On • Pg 3",
+        img:["Add-on-bill3.jpg","Add-on-bill3.jpeg","Add-on-bill3.png"],
+        startHere:{ title:"Start here", mark:"The ‘why’ box",
+          body:"Use the net summary/tracked charge sections to show what is accumulating across the year."},
+        callouts:[
+          {k:"Net consumption vs generation", v:"If imports beat exports (especially during peak), year-to-date charges climb.", tags:["True-up risk"]},
+          {k:"Delivery vs generation sections", v:"Explain categories stack up. Some charges don’t offset the way customers expect.", tags:["Structure"]},
+          {k:"Non-bypassable / fixed program charges", v:"Even with solar, some line items can remain. Set expectation to prevent confusion.", tags:["Expectation"]},
+          {k:"Rep close", v:"“We’ll confirm if it’s timing or size and show the best add-on solution.”", tags:["Appointment"]}
+        ]
+      },
+
+      /* Lesson 2: Yucaipa page 1 */
+      {
+        lessonId:"yucaipa", lessonName:"Yucaipa (No Solar • TOU)", pill:"Lesson 2 • Yucaipa (No Solar)",
+        title:"Yucaipa Bill — Page 1 (Amount due / urgency)",
+        desc:"High urgency: anchor on the amount due, then explain why TOU makes bills spike.",
+        billHead:"Amount Due + Account Summary",
+        billTag:"Yucaipa • Pg 1",
+        img:["Yucaipapage1.jpeg","Yucaipapage1.jpg","Yucaipapage1.png"],
+        startHere:{ title:"Start here", mark:"Pain number",
+          body:"Start with the amount due and due date. That’s what the customer feels right now."},
+        callouts:[
+          {k:"Amount due (top)", v:"Anchor the conversation on the real pain: ‘this is what’s hitting your bank account.’", tags:["Pain driver","Urgency"]},
+          {k:"Past due / risk messaging (if shown)", v:"If there’s past due, it’s a high-intent consult opportunity.", tags:["High intent"]},
+          {k:"TOU framing", v:"Explain peak is expensive and happens when people are home (evening).", tags:["TOU"]},
+          {k:"Rep close", v:"“Let’s do a quick consult and build a plan to replace this with predictable energy costs.”", tags:["Appointment"]}
+        ]
+      },
+
+      /* Lesson 2: Yucaipa page 2 */
+      {
+        lessonId:"yucaipa", lessonName:"Yucaipa (No Solar • TOU)", pill:"Lesson 2 • Yucaipa (No Solar)",
+        title:"Yucaipa Bill — Page 2 (Usage buckets + trend)",
+        desc:"This is the ‘why’: which TOU buckets + total kWh are driving the bill.",
+        billHead:"Usage Bars + Daily Avg + Total Cost",
+        billTag:"Yucaipa • Pg 2",
+        img:["Yucaipa2.jpg","Yucaipa2.jpeg","Yucaipapage2.jpeg","Yucaipapage2.jpg"],
+        startHere:{ title:"Start here", mark:"Explain the math",
+          body:"More usage in expensive periods = higher total. Show buckets first, then totals."},
+        callouts:[
+          {k:"On-peak vs off-peak usage", v:"Ask what they run during peak (AC, cooking, laundry, EV). Peak kWh is expensive.", tags:["Discovery"]},
+          {k:"Total kWh for the month", v:"High kWh means system needs to cover a lot—set up solar sizing.", tags:["Sizing"]},
+          {k:"Trend chart / daily average", v:"If trend is up, bills will keep rising. Perfect consult setup.", tags:["Trend"]},
+          {k:"Rep close", v:"“We’ll show how to attack peak hours first—solar + storage strategy.”", tags:["Appointment"]}
+        ]
+      },
+
+      /* Lesson 2: Yucaipa page 3 */
+      {
+        lessonId:"yucaipa", lessonName:"Yucaipa (No Solar • TOU)", pill:"Lesson 2 • Yucaipa (No Solar)",
+        title:"Yucaipa Bill — Page 3 (continued charges / what to ignore)",
+        desc:"Teach reps to not read every line. Focus on totals and categories.",
+        billHead:"Continued Charges + Subtotals",
+        billTag:"Yucaipa • Pg 3",
+        img:["Yucaipa3.jpg","Yucaipa3.jpeg","Yucaipa3.png"],
+        startHere:{ title:"Start here", mark:"Don’t get lost",
+          body:"Reps shouldn’t read every line item—identify sections, then bring it back to the total and TOU/usage drivers."},
+        callouts:[
+          {k:"Charge categories continue", v:"This page stacks into the total. Keep it simple: delivery + generation + adders.", tags:["Clarity"]},
+          {k:"Fixed / program fees", v:"Some fees remain even if usage drops—why customers want predictability.", tags:["Pain driver"]},
+          {k:"Rep discipline", v:"Ignore QR codes and fluff—focus on totals, usage, TOU timing.", tags:["Skill"]},
+        ]
+      },
+
+      /* Lesson 3: D-CARE tiered */
+      {
+        lessonId:"tiers", lessonName:"Tiered D-CARE (No Solar)", pill:"Lesson 3 • Tiered (D-CARE)",
+        title:"Tiered Bill — D-CARE (Tier 1 vs Tier 2 pricing)",
+        desc:"Easiest ‘aha’: the more they use, the higher the marginal $/kWh (Tier 2).",
+        billHead:"Tiered Pricing Summary",
+        billTag:"Tiered • Pg 1",
+        img:["Dcaretiersbill.jpeg","Dcaretiersbill_.jpeg","Dcaretiersbill.jpg","Dcaretiersbill.png"],
+        startHere:{ title:"Start here", mark:"Simple story",
+          body:"Show Tier 1 vs Tier 2. Once they cross baseline, each extra kWh costs more."},
+        callouts:[
+          {k:"Baseline / Tier threshold", v:"Explain baseline: cheap Tier 1 allowance, then Tier 2 is the penalty zone.", tags:["Pain driver"]},
+          {k:"Tier 2 kWh portion", v:"Point out how much usage is billed at Tier 2 (expensive).", tags:["Aha moment"]},
+          {k:"Tier price difference ($/kWh)", v:"Use the Tier price boxes to show why bills spike with higher usage.", tags:["Education"]},
+          {k:"Rep close", v:"“We size solar to pull you out of Tier 2 and stabilize your cost.”", tags:["Appointment"]}
+        ]
+      },
+
+      /* Lesson 4: NEM 3.0 */
+      {
+        lessonId:"nem3", lessonName:"NEM 3.0 (Solar + Battery)", pill:"Lesson 4 • NEM 3.0",
+        title:"NEM 3.0 — Solar + Battery (low bill example)",
+        desc:"Explain the success case: avoid peak imports, use storage, still expect some remaining charges.",
+        billHead:"Credits/Charges + Usage Trend",
+        billTag:"NEM 3.0 • Pg 1",
+        img:["Nem3bill.jpg","Nem3bill.jpeg","Nem3bill.png"],
+        startHere:{ title:"Start here", mark:"Proof it works",
+          body:"Use the total as a win, then explain WHY: timing + storage reduces expensive peak imports."},
+        callouts:[
+          {k:"Energy charges vs credits", v:"Teach reps to show energy charges exist, but credits offset them—net result matters.", tags:["NEM concept"]},
+          {k:"Peak import avoidance", v:"Battery helps cover peak usage so they don’t buy expensive kWh from SCE.", tags:["Battery"]},
+          {k:"Usage trend", v:"If usage rises later (EV/pool), even a good setup can change—why we audit.", tags:["Control"]},
+          {k:"Expectation: some fees remain", v:"Even great systems can have small bills due to minimum/delivery/program charges.", tags:["Expectation"]},
+        ]
       }
-    }
+    ];
 
-    function renderNotes(){
-      const lesson = lessons[state.lessonIndex];
+    /* build 4 lesson buttons (not changing slide-per-image) */
+    const lessons = (() => {
+      const map = new Map();
+      slides.forEach((s, idx) => {
+        if(!map.has(s.lessonId)) map.set(s.lessonId, { id:s.lessonId, name:s.lessonName, slideIdxs:[] });
+        map.get(s.lessonId).slideIdxs.push(idx);
+      });
+      return Array.from(map.values());
+    })();
 
-      $("#notesTitle").textContent = lesson.notesTitle;
-      $("#lessonTypeBadge").textContent = lesson.badge;
-      $("#notesIntro").textContent = lesson.intro;
-      $("#closeLine").textContent = lesson.closeLine;
+    const lessonListEl = document.getElementById("lessonList");
+    const billImg = document.getElementById("billImg");
+    const billHead = document.getElementById("billHead");
+    const billTag = document.getElementById("billTag");
+    const slideTitle = document.getElementById("slideTitle");
+    const slidePill = document.getElementById("slidePill");
+    const slideDesc = document.getElementById("slideDesc");
+    const notesEl = document.getElementById("notes");
+    const noteHint = document.getElementById("noteHint");
+    const miniSlide = document.getElementById("miniSlide");
+    const progressBar = document.getElementById("progressBar");
+    const progressPct = document.getElementById("progressPct");
+    const statusText = document.getElementById("statusText");
 
-      const steps = $("#steps");
-      steps.innerHTML = "";
-      lesson.steps.forEach((s, idx)=>{
-        const row = document.createElement("div");
-        row.className = "step";
-        row.innerHTML = `
-          <div class="num">${idx+1}</div>
-          <div>
-            <div class="t">${s.t}</div>
-            <div class="d">${s.d}</div>
+    const quizWrap = document.getElementById("quizWrap");
+    const qGrid = document.getElementById("qGrid");
+    const quizScoreChip = document.getElementById("quizScoreChip");
+    const quizResultChip = document.getElementById("quizResultChip");
+
+    const btnPrev = document.getElementById("btnPrev");
+    const btnNext = document.getElementById("btnNext");
+    const btnQuiz = document.getElementById("btnQuiz");
+    const btnBackToSlides = document.getElementById("btnBackToSlides");
+    const btnGrade = document.getElementById("btnGrade");
+    const btnResetQuiz = document.getElementById("btnResetQuiz");
+
+    let currentSlide = 0;
+    let visited = new Set();
+    let quizScore = null;
+
+    function renderLessons(){
+      lessonListEl.innerHTML = "";
+      lessons.forEach((L, i) => {
+        const count = L.slideIdxs.length;
+        const btn = document.createElement("button");
+        btn.className = "lessonBtn";
+        btn.type = "button";
+        btn.dataset.lessonId = L.id;
+        btn.innerHTML = `
+          <div class="badge">${i+1}</div>
+          <div class="lessonMeta">
+            <div class="lessonTitle">${L.name}</div>
+            <div class="lessonSub">${count} slide${count>1?"s":""}</div>
           </div>
         `;
-        steps.appendChild(row);
+        btn.addEventListener("click", () => showSlide(L.slideIdxs[0], true));
+        lessonListEl.appendChild(btn);
+      });
+    }
+
+    function setActiveLesson(){
+      const s = slides[currentSlide];
+      document.querySelectorAll(".lessonBtn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lessonId === s.lessonId);
+      });
+    }
+
+    function renderNotes(s){
+      notesEl.innerHTML = "";
+
+      const start = document.createElement("div");
+      start.className = "startHere";
+      start.innerHTML = `
+        <div class="sh">
+          <strong>${s.startHere?.title || "Start here"}</strong>
+          <span class="mark">${s.startHere?.mark || "Guide"}</span>
+        </div>
+        <p>${s.startHere?.body || ""}</p>
+      `;
+      notesEl.appendChild(start);
+
+      s.callouts.forEach((c, idx) => {
+        const card = document.createElement("div");
+        card.className = "callout";
+        card.innerHTML = `
+          <div class="calloutHead">
+            <div class="num">${idx+1}</div>
+            <div class="txt">
+              <div class="k">${c.k}</div>
+              <div class="v">${c.v}</div>
+            </div>
+          </div>
+          <div class="calloutFoot">
+            ${(c.tags||[]).map(t => `<span class="chip2">${t}</span>`).join("")}
+          </div>
+        `;
+        notesEl.appendChild(card);
       });
 
-      const done = !!state.completed?.[lesson.id];
-      $("#markDoneBtn").textContent = done ? "Lesson completed ✓" : "Mark lesson complete ✓";
-      $("#markDoneBtn").onclick = ()=>{
-        state.completed = state.completed || {};
-        state.completed[lesson.id] = true;
-        saveState();
-        updateProgressUI();
-        $("#markDoneBtn").textContent = "Lesson completed ✓";
-      };
+      noteHint.textContent = `${s.callouts.length} callouts`;
+    }
+
+    function showSlide(index, scrollTop){
+      currentSlide = Math.max(0, Math.min(slides.length-1, index));
+      const s = slides[currentSlide];
+
+      visited.add(currentSlide);
+
+      slideTitle.querySelector("span").textContent = s.title;
+      slidePill.textContent = s.pill;
+      slideDesc.textContent = s.desc;
+
+      billHead.textContent = s.billHead;
+      billTag.textContent = s.billTag;
+
+      setImgWithFallback(billImg, s.img);
+
+      renderNotes(s);
+      setActiveLesson();
+
+      miniSlide.textContent = `${currentSlide+1} / ${slides.length}`;
+
+      btnPrev.disabled = (currentSlide === 0);
+      btnNext.textContent = (currentSlide === slides.length-1) ? "Finish → Quiz" : "Next →";
+
+      if(scrollTop){
+        document.getElementById("billFrame").scrollTop = 0;
+        notesEl.scrollTop = 0;
+      }
+
+      if(quizWrap.style.display === "block"){
+        quizWrap.style.display = "none";
+      }
+
+      updateProgress();
+    }
+
+    function computeCompletion(){
+      const slidesPct = Math.round((visited.size / slides.length) * 60);
+      const quizPct = (quizScore == null) ? 0 : Math.round((quizScore/100) * 40);
+      let total = slidesPct + quizPct;
+
+      const perfect = (quizScore === 100) && (visited.size === slides.length);
+      if(perfect) total = 100;
+
+      return Math.max(0, Math.min(100, total));
+    }
+
+    function updateProgress(){
+      const pct = computeCompletion();
+      progressBar.style.width = pct + "%";
+      progressPct.textContent = pct + "% Complete";
+      const quizLabel = (quizScore == null) ? "Not started" : (quizScore + "%");
+      statusText.textContent = `Slides: ${visited.size}/${slides.length} • Quiz: ${quizLabel}`;
+    }
+
+    btnPrev.addEventListener("click", () => showSlide(currentSlide - 1, true));
+    btnNext.addEventListener("click", () => {
+      if(currentSlide === slides.length - 1) openQuiz();
+      else showSlide(currentSlide + 1, true);
+    });
+    btnQuiz.addEventListener("click", openQuiz);
+    btnBackToSlides.addEventListener("click", () => {
+      quizWrap.style.display = "none";
+      updateProgress();
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if(quizWrap.style.display === "block") return;
+      if(e.key === "ArrowLeft") btnPrev.click();
+      if(e.key === "ArrowRight") btnNext.click();
+    });
+
+    /* QUIZ */
+    const quiz = [
+      { q:"Most common reason a solar customer still gets a bill near year end?", a:["Solar stops working in winter","True-up: YTD charges weren’t fully offset by credits","SCE bills twice","They must pay the whole year no matter what"], correct:1 },
+      { q:"TOU plans mean:", a:["All kWh cost same 24/7","Peak is cheaper","Using during peak is more expensive and drives bills up","TOU only matters with battery"], correct:2 },
+      { q:"“Amount due” best means:", a:["Annual true-up total","Due now for this statement (may not equal annual settlement)","Same as YTD charges","Always zero with solar"], correct:1 },
+      { q:"Tiered rates primarily mean:", a:["kWh price increases as you move into Tier 2","More only on weekends","Credits disappear after 30 days","Customer picks price"], correct:0 },
+      { q:"Solar but still imports during peak because:", a:["Solar produces most at night","Usage happens when solar isn’t producing (timing mismatch)","SCE blocks solar","Credits only work Sundays"], correct:1 },
+      { q:"Rep should focus on:", a:["Totals, usage, TOU windows, and category split","Only QR code","Only address","Only font"], correct:0 },
+      { q:"Battery helps most because it:", a:["Prints bill faster","Shifts solar to cover peak usage","Raises Tier 2 prices","Eliminates all fixed fees forever"], correct:1 },
+      { q:"Strongest consult transition:", a:["Good luck","Let’s audit timing, credits, and rate plan so you know exactly why this is happening","Ignore it","Buy today"], correct:1 }
+    ];
+
+    function openQuiz(){
+      quizWrap.style.display = "block";
+      window.scrollTo({top: document.body.scrollHeight, behavior:"smooth"});
+      renderQuiz();
+      updateProgress();
     }
 
     function renderQuiz(){
-      const list = $("#qList");
-      list.innerHTML = "";
-
-      quizQuestions.forEach((q, qi)=>{
-        const wrap = document.createElement("div");
-        wrap.className = "q";
-        wrap.innerHTML = `<div class="qt">${qi+1}. ${q.q}</div>`;
-        const opts = document.createElement("div");
-        opts.className = "opts";
-
-        q.opts.forEach((txt, oi)=>{
-          const id = `q${qi}_o${oi}`;
-          const row = document.createElement("label");
-          row.className = "opt";
-          row.htmlFor = id;
-          row.innerHTML = `
-            <input type="radio" name="q${qi}" id="${id}" ${state.quiz?.[qi]===oi ? "checked":""}>
-            <div style="font-weight:800;color:rgba(255,255,255,.86);line-height:1.25">${txt}</div>
-          `;
-          row.querySelector("input").addEventListener("change", ()=>{
-            state.quiz = state.quiz || {};
-            state.quiz[qi] = oi;
-            saveState();
-          });
-          opts.appendChild(row);
-        });
-
-        wrap.appendChild(opts);
-        list.appendChild(wrap);
+      qGrid.innerHTML = "";
+      quiz.forEach((item, i) => {
+        const card = document.createElement("div");
+        card.className = "q";
+        card.innerHTML = `
+          <p class="qt">${i+1}. ${item.q}</p>
+          ${item.a.map((opt, j) => `
+            <label class="opt">
+              <input type="radio" name="q${i}" value="${j}">
+              <span>${opt}</span>
+            </label>
+          `).join("")}
+        `;
+        qGrid.appendChild(card);
       });
 
-      $("#checkQuizBtn").onclick = ()=>{
-        const pct = Math.round(calcQuizScorePct()*100);
-        $("#scorePct").textContent = pct + "%";
-        $("#scoreMsg").textContent = (pct===100)
-          ? "Perfect — training complete."
-          : "Close — fix the missed ones and re-check.";
-        updateProgressUI();
-        $("#quiz").scrollIntoView({behavior:"smooth", block:"start"});
-      };
-
-      $("#finishBtn").onclick = ()=>{
-        const pct = Math.round(calcQuizScorePct()*100);
-        if(pct===100){
-          state.completed = state.completed || {};
-          lessons.forEach(l=>state.completed[l.id]=true);
-        }
-        saveState();
-        updateProgressUI();
-        const total = calcCompletionPct();
-        alert(total===100 ? "100% COMPLETE ✅" : `Progress saved: ${total}%`);
-      };
-
-      $("#quizJumpBtn").onclick = ()=>$("#quiz").scrollIntoView({behavior:"smooth", block:"start"});
+      quizScoreChip.textContent = "Score: —";
+      quizResultChip.textContent = "Result: —";
+      quizResultChip.classList.remove("ok","bad");
     }
 
-    $("#resetBtn").onclick = ()=>{
-      if(!confirm("Reset progress + quiz answers?")) return;
-      state.completed = {};
-      state.quiz = {};
-      saveState();
-      render();
-    };
+    function gradeQuiz(){
+      let correct = 0;
+      let answered = 0;
 
-    (function init(){
-      loadState();
-      if(state.lessonIndex<0 || state.lessonIndex>=lessons.length) state.lessonIndex=0;
-      if(!Number.isFinite(state.pageIndex)) state.pageIndex=0;
-      render();
-    })();
+      quiz.forEach((item, i) => {
+        const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+        if(chosen){
+          answered++;
+          if(Number(chosen.value) === item.correct) correct++;
+        }
+      });
+
+      const pct = Math.round((correct / quiz.length) * 100);
+      quizScore = pct;
+
+      quizScoreChip.textContent = `Score: ${correct}/${quiz.length} (${pct}%)`;
+
+      if(answered < quiz.length){
+        quizResultChip.textContent = `Result: Answer all questions (${answered}/${quiz.length})`;
+        quizResultChip.classList.remove("ok");
+        quizResultChip.classList.add("bad");
+      } else if(pct === 100){
+        quizResultChip.textContent = "Result: ✅ Certified (100% Complete)";
+        quizResultChip.classList.remove("bad");
+        quizResultChip.classList.add("ok");
+      } else {
+        quizResultChip.textContent = `Result: Needs review (goal: 100%)`;
+        quizResultChip.classList.remove("ok");
+        quizResultChip.classList.add("bad");
+      }
+
+      updateProgress();
+    }
+
+    function resetQuiz(){
+      quizScore = null;
+      renderQuiz();
+      updateProgress();
+    }
+
+    btnGrade.addEventListener("click", gradeQuiz);
+    btnResetQuiz.addEventListener("click", resetQuiz);
+
+    /* INIT */
+    renderLessons();
+    showSlide(0, true);
   </script>
 </body>
 </html>
