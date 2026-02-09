@@ -1,53 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>LOS • Bill Training (Slide Show)</title>
-  <meta name="theme-color" content="#0B1C2D"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>LOS • SCE Bill Reading Training</title>
+  <meta name="theme-color" content="#0b1017" />
 
   <style>
     :root{
-      --navy:#0B1C2D;
-      --navy2:#102C46;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --ink:#0b1017;
+      --muted:#5b6678;
+      --line:rgba(15,23,42,.10);
+
+      /* LOS */
+      --navy:#0b1017;
       --gold:#FBC909;
       --teal:#3AADBB;
+      --cyan:#00c2ff;
+      --lime:#9BEA3B;
 
-      --bg:#F6F8FB;
-      --card:#FFFFFF;
-      --text:#0C1220;
-      --muted:#5B667A;
-      --line:rgba(16,24,40,.10);
-
-      --shadow: 0 18px 55px rgba(11, 28, 45, .14);
-      --shadow2: 0 10px 26px rgba(11,28,45,.10);
-
-      --r:16px;
-      --r2:22px;
+      --shadow: 0 18px 60px rgba(2,8,23,.10);
+      --shadow2: 0 10px 22px rgba(2,8,23,.10);
+      --r:18px;
+      --r2:14px;
 
       --safeT: env(safe-area-inset-top);
       --safeB: env(safe-area-inset-bottom);
       --safeL: env(safe-area-inset-left);
       --safeR: env(safe-area-inset-right);
 
-      --max: 1320px;
-      --g: 16px;
+      --accent: linear-gradient(135deg, var(--gold), var(--lime) 35%, var(--cyan) 70%, var(--teal));
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
       background:
-        radial-gradient(1200px 800px at 15% 0%, rgba(58,173,187,.12), transparent 60%),
-        radial-gradient(1200px 800px at 90% 10%, rgba(251,201,9,.12), transparent 60%),
+        radial-gradient(1200px 600px at 20% -10%, rgba(251,201,9,.18), transparent 60%),
+        radial-gradient(900px 500px at 95% 10%, rgba(0,194,255,.16), transparent 55%),
+        radial-gradient(800px 600px at 70% 120%, rgba(58,173,187,.14), transparent 55%),
         var(--bg);
-      color:var(--text);
       padding: calc(14px + var(--safeT)) calc(14px + var(--safeR)) calc(14px + var(--safeB)) calc(14px + var(--safeL));
     }
-
-    .wrap{max-width:var(--max); margin:0 auto}
 
     /* Top bar */
     .topbar{
@@ -55,951 +54,1321 @@
       gap:12px;
       padding:12px 14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.84);
+      border-radius: var(--r);
+      background: rgba(255,255,255,.78);
       backdrop-filter: blur(10px);
-      border-radius: var(--r2);
       box-shadow: var(--shadow2);
-      position: sticky;
-      top: calc(10px + var(--safeT));
-      z-index: 50;
     }
-    .brand{display:flex; align-items:center; gap:12px; min-width: 0;}
-    .brand img{height:34px; width:auto; display:block}
-    .brand .t{min-width:0}
-    .brand .t b{display:block; font-size:14px; letter-spacing:.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    .brand .t span{display:block; font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-
-    .btn{
-      appearance:none; border:1px solid var(--line);
-      background: #fff;
-      padding:10px 12px;
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width: 220px;
+    }
+    .brand img{
+      width:40px; height:40px; object-fit:contain;
+      border-radius: 12px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:6px;
+    }
+    .brand .t1{font-weight:900; letter-spacing:.2px; line-height:1.1}
+    .brand .t2{font-size:12px; color:var(--muted); margin-top:2px}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
       border-radius: 999px;
-      font-weight: 900;
-      font-size: 13px;
-      cursor:pointer;
-      box-shadow: 0 6px 14px rgba(11,28,45,.06);
-      display:inline-flex; gap:8px; align-items:center;
-      user-select:none;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow: 0 8px 20px rgba(2,8,23,.06);
+      font-size:12px;
+      color:var(--muted);
       white-space:nowrap;
     }
-    .btn.primary{
-      background: linear-gradient(135deg, var(--gold), #ffe37a);
-      border-color: rgba(251,201,9,.35);
-      color: var(--navy);
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--accent);
     }
-    .btn.ghost{
-      background: rgba(255,255,255,.65);
-    }
-    .btn:active{transform: translateY(1px)}
-    .btn:disabled{opacity:.5; cursor:not-allowed; transform:none}
 
-    .progress{
+    .progressWrap{
+      flex:1;
       display:flex; align-items:center; gap:10px;
       min-width: 220px;
-      justify-content:flex-end;
     }
     .bar{
-      height:10px; width:140px;
-      border-radius: 999px;
-      background: rgba(11,28,45,.10);
+      height:10px;
+      border-radius:999px;
+      background: rgba(15,23,42,.08);
       overflow:hidden;
-      border:1px solid rgba(16,24,40,.08);
+      flex:1;
+      border:1px solid var(--line);
     }
-    .bar > div{
-      height:100%;
+    .bar > i{
+      display:block; height:100%;
       width:0%;
-      background: linear-gradient(90deg, var(--teal), var(--gold));
-      border-radius: 999px;
-      transition: width .25s ease;
+      background: var(--accent);
+      border-radius:999px;
+      transition: width .35s ease;
     }
     .pct{
-      font-weight:900;
-      font-size:12px;
+      font-weight:800;
       color: var(--navy);
-      min-width: 48px;
+      font-size:12px;
+      min-width: 70px;
       text-align:right;
     }
 
     /* Layout */
     .grid{
+      margin-top:12px;
       display:grid;
       grid-template-columns: 300px 1fr;
-      gap: var(--g);
-      margin-top: 14px;
-    }
-    @media (max-width: 1020px){
-      .grid{grid-template-columns: 1fr}
+      gap:12px;
+      height: calc(100% - 86px);
+      min-height: 620px;
     }
 
     /* Sidebar */
-    .sidebar{
+    .side{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.86);
+      border-radius: var(--r);
+      background: rgba(255,255,255,.82);
       backdrop-filter: blur(10px);
-      border-radius: var(--r2);
       box-shadow: var(--shadow2);
       overflow:hidden;
-    }
-    .sideHead{
-      padding:14px;
-      border-bottom:1px solid var(--line);
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-    }
-    .sideHead b{font-size:13px; letter-spacing:.2px; color:var(--navy)}
-    .pill{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(58,173,187,.28);
-      background: rgba(58,173,187,.10);
-      color: var(--navy);
-      font-weight: 900;
-      white-space:nowrap;
-    }
-    .nav{
-      padding:10px;
       display:flex;
       flex-direction:column;
-      gap:8px;
+      min-height: 0;
     }
-    .navItem{
-      width:100%;
-      text-align:left;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(16,24,40,.08);
-      background:#fff;
-      cursor:pointer;
-      box-shadow: 0 8px 18px rgba(11,28,45,.06);
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
-    }
-    .navItem b{font-size:13px; color:var(--navy); display:block}
-    .navItem small{font-size:12px; color:var(--muted); display:block; margin-top:2px}
-    .navItem.active{
-      border-color: rgba(58,173,187,.35);
-      box-shadow: 0 12px 24px rgba(58,173,187,.18);
-      outline: 2px solid rgba(58,173,187,.16);
-    }
-    .navItem .tag{
-      flex:0 0 auto;
-      font-size:11px;
-      padding:6px 8px;
-      border-radius:999px;
-      border:1px solid rgba(251,201,9,.40);
-      background: rgba(251,201,9,.12);
-      color: var(--navy);
-      font-weight: 1000;
-      white-space:nowrap;
-      min-width: 34px;
-      text-align:center;
-    }
-
-    /* Slide */
-    .slide{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.86);
-      backdrop-filter: blur(10px);
-      border-radius: var(--r2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .slideHead{
-      padding:16px 16px 12px 16px;
+    .sideHeader{
+      padding:14px 14px 10px 14px;
       border-bottom:1px solid var(--line);
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.75));
     }
-    .slideHead h1{
-      margin:0;
-      font-size:18px;
-      letter-spacing:.2px;
-      color: var(--navy);
+    .sideHeader h3{margin:0; font-size:14px; letter-spacing:.2px}
+    .sideHeader p{margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.3}
+
+    .lessonList{
+      padding:10px;
+      overflow:auto;
+      min-height: 0;
     }
-    .slideHead p{
-      margin:6px 0 0 0;
-      font-size:13px;
-      color: var(--muted);
-      max-width: 90ch;
+    .lessonBtn{
+      width:100%;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      text-align:left;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid transparent;
+      background: transparent;
+      cursor:pointer;
+      transition: background .15s ease, border .15s ease, transform .05s ease;
+      color: var(--ink);
+    }
+    .lessonBtn:active{transform: translateY(1px)}
+    .lessonBtn:hover{
+      background: rgba(15,23,42,.04);
+      border-color: rgba(15,23,42,.08);
+    }
+    .lessonBtn.active{
+      background: #fff;
+      border-color: rgba(15,23,42,.10);
+      box-shadow: 0 10px 22px rgba(2,8,23,.08);
     }
     .badge{
-      display:inline-flex;
-      gap:8px;
+      width:28px; height:28px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,.10);
+      background: var(--accent);
+      display:grid; place-items:center;
+      color:#0b1017;
+      font-weight:900;
+      font-size:12px;
+      flex:0 0 auto;
+    }
+    .lessonMeta{flex:1}
+    .lessonTitle{font-weight:900; font-size:13px; line-height:1.2}
+    .lessonSub{margin-top:3px; font-size:12px; color:var(--muted); line-height:1.25}
+    .lessonFoot{
+      margin-top:auto;
+      padding:12px;
+      border-top:1px solid var(--line);
+      background: rgba(255,255,255,.7);
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .mini{
+      flex:1;
+      min-width: 120px;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow: 0 10px 22px rgba(2,8,23,.08);
+    }
+    .mini .k{font-size:11px; color:var(--muted)}
+    .mini .v{margin-top:4px; font-weight:900}
+
+    /* Main */
+    .main{
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 0;
+    }
+    .mainHeader{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+    }
+    .titleBlock{min-width:0}
+    .h1{
+      margin:0;
+      font-size:15px;
+      font-weight:950;
+      letter-spacing:.2px;
+      display:flex;
       align-items:center;
-      padding:8px 12px;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      font-size:11px;
+      padding:5px 8px;
       border-radius:999px;
-      border:1px solid rgba(58,173,187,.28);
-      background: rgba(58,173,187,.10);
-      color: var(--navy);
-      font-weight: 1000;
-      font-size: 12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .desc{
+      margin:6px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.25;
+    }
+    .controls{
+      display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      border-radius: 14px;
+      padding:10px 12px;
+      font-weight:900;
+      font-size:12px;
+      color: var(--ink);
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow: 0 10px 22px rgba(2,8,23,.08);
+      display:inline-flex; align-items:center; gap:8px;
+      transition: transform .05s ease, background .15s ease;
+    }
+    .btn:hover{background: rgba(15,23,42,.03)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      background: var(--accent);
+      border-color: rgba(15,23,42,.12);
+      color: #0b1017;
+    }
+    .btn.ghost{
+      background: transparent;
+      box-shadow:none;
+    }
+
+    .stage{
+      padding:12px;
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap:12px;
+      min-height:0;
+      flex:1;
+    }
+
+    .billCard, .noteCard{
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      background:#fff;
+      box-shadow: 0 12px 28px rgba(2,8,23,.08);
+      min-height:0;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .cardHead{
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.82));
+    }
+    .cardHead .left{
+      display:flex; align-items:center; gap:10px;
+      min-width:0;
+    }
+    .tag{
+      font-size:11px;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color: var(--muted);
+      background:#fff;
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .cardHead h4{
+      margin:0;
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:.2px;
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .hint{
+      font-size:11px;
+      color: var(--muted);
       white-space:nowrap;
     }
 
-    .twoCol{
-      padding:16px;
-      display:grid;
-      grid-template-columns: 1.15fr .95fr;
-      gap: var(--g);
-      align-items:start;
+    .billFrame{
+      padding:10px;
+      overflow:auto;
+      min-height:0;
+      background: #fff;
     }
-    @media (max-width: 1020px){
-      .twoCol{grid-template-columns: 1fr}
-    }
-
-    /* Bill image panel */
-    .imgCard{
-      border-radius: var(--r);
-      overflow:hidden;
-      border:1px solid var(--line);
-      background:#fff;
-      box-shadow: var(--shadow2);
-      position: relative;
-    }
-    .imgTools{
-      position:absolute;
-      top:10px; left:10px;
-      display:flex; gap:8px;
-      z-index: 5;
-    }
-    .chip{
-      border:1px solid rgba(255,255,255,.25);
-      background: rgba(11,28,45,.78);
-      color:#fff;
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight: 950;
-      cursor:pointer;
-      user-select:none;
-      backdrop-filter: blur(8px);
-    }
-    .chip:active{transform: translateY(1px)}
-    .imgCard img{
+    .billImg{
       width:100%;
       height:auto;
       display:block;
+      border-radius: 14px;
+      border:1px solid rgba(15,23,42,.10);
+      background: #fff;
     }
 
-    /* Callouts (right side) */
-    .panel{
+    .notes{
+      padding:12px;
+      overflow:auto;
+      min-height:0;
       display:flex;
       flex-direction:column;
-      gap: 12px;
+      gap:10px;
     }
-    .card{
-      border-radius: var(--r);
-      border:1px solid var(--line);
-      background:#fff;
-      box-shadow: var(--shadow2);
-      padding: 14px;
+    .startHere{
+      border-radius: 16px;
+      border:1px solid rgba(15,23,42,.10);
+      background:
+        radial-gradient(600px 240px at 20% 0%, rgba(251,201,9,.18), transparent 55%),
+        radial-gradient(520px 240px at 100% 0%, rgba(0,194,255,.12), transparent 55%),
+        #fff;
+      padding:10px 12px;
+      box-shadow: 0 10px 22px rgba(2,8,23,.08);
     }
-    .card h3{
-      margin:0 0 10px 0;
-      font-size: 12px;
+    .startHere .sh{
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+    }
+    .startHere .sh strong{
+      font-size:12px;
       letter-spacing:.2px;
-      color: var(--navy);
-      text-transform: uppercase;
     }
-    .numList{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    .startHere .sh .mark{
+      font-size:11px;
+      padding:5px 8px;
+      border-radius:999px;
+      background: rgba(11,16,23,.06);
+      border:1px solid rgba(15,23,42,.10);
+      color: var(--muted);
+      font-weight:800;
     }
-    .numItem{
-      display:grid;
-      grid-template-columns: 34px 1fr;
-      gap:10px;
-      align-items:flex-start;
-      padding:10px 10px;
-      border-radius: 14px;
-      border:1px solid rgba(16,24,40,.08);
-      background: linear-gradient(180deg, #fff, #fff);
+    .startHere p{
+      margin:8px 0 0;
+      font-size:12px;
+      color: var(--muted);
+      line-height:1.35;
     }
-    .bubble{
-      width:34px; height:34px;
-      border-radius: 12px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight: 1000;
-      color: var(--navy);
-      border:1px solid rgba(58,173,187,.30);
-      background: linear-gradient(135deg, rgba(58,173,187,.18), rgba(251,201,9,.16));
-      box-shadow: 0 8px 16px rgba(11,28,45,.08);
+
+    .callout{
+      border-radius: 16px;
+      border:1px solid rgba(15,23,42,.10);
+      background:#fff;
+      box-shadow: 0 10px 22px rgba(2,8,23,.08);
+      padding:10px 12px;
+    }
+    .calloutHead{
+      display:flex; align-items:flex-start; gap:10px;
+    }
+    .num{
+      width:28px; height:28px;
+      border-radius: 11px;
+      background: var(--accent);
+      border:1px solid rgba(15,23,42,.12);
+      display:grid; place-items:center;
+      font-weight:950;
+      color:#0b1017;
       flex:0 0 auto;
     }
-    .numItem b{
-      display:block;
-      font-size: 13px;
-      color: var(--navy);
-      letter-spacing:.1px;
-      margin-bottom: 4px;
+    .calloutHead .txt{flex:1; min-width:0}
+    .calloutHead .txt .k{
+      font-weight:950; font-size:12px; letter-spacing:.2px;
     }
-    .numItem p{
-      margin:0;
-      font-size: 12.8px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-    .tip{
-      margin-top: 10px;
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(251,201,9,.30);
-      background: rgba(251,201,9,.10);
-      color: var(--navy);
-      font-weight: 900;
-      font-size: 12px;
-      line-height: 1.35;
-    }
-
-    .navBar{
-      padding:12px 16px 16px 16px;
-      border-top: 1px solid var(--line);
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      background: rgba(255,255,255,.72);
-    }
-    .counter{
+    .calloutHead .txt .v{
+      margin-top:4px;
       font-size:12px;
+      color: var(--muted);
+      line-height:1.35;
+    }
+    .calloutFoot{
+      margin-top:10px;
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .chip2{
+      font-size:11px;
+      padding:6px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(15,23,42,.10);
+      background: rgba(11,16,23,.03);
       color: var(--muted);
       font-weight:800;
     }
 
     /* Quiz */
-    .quizGrid{
-      padding:16px;
+    .quizWrap{
+      display:none;
+      padding:12px;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.78);
+    }
+    .quizTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .quizTop h3{margin:0; font-size:14px; font-weight:950}
+    .quizTop p{margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.35; max-width: 820px}
+    .qGrid{
       display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
     }
     .q{
-      border-radius: var(--r);
-      border:1px solid var(--line);
+      border:1px solid rgba(15,23,42,.10);
+      border-radius: 16px;
       background:#fff;
-      box-shadow: var(--shadow2);
-      padding: 14px;
+      box-shadow: 0 10px 22px rgba(2,8,23,.08);
+      padding:10px 12px;
     }
-    .q h4{
+    .q .qt{
+      font-weight:950;
+      font-size:12px;
+      letter-spacing:.2px;
       margin:0 0 8px 0;
-      font-size: 14px;
-      color: var(--navy);
     }
-    .choices{
-      display:flex;
-      flex-direction:column;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .choice{
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      padding:10px 10px;
-      border-radius: 14px;
-      border:1px solid rgba(16,24,40,.10);
-      background: #fff;
+    .opt{
+      display:flex; gap:8px; align-items:flex-start;
+      padding:8px 8px;
+      border-radius: 12px;
+      border:1px solid rgba(15,23,42,.08);
+      background: rgba(11,16,23,.02);
+      margin-bottom:8px;
       cursor:pointer;
       user-select:none;
     }
-    .choice input{margin-top: 2px}
-    .choice span{
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.35;
+    .opt:hover{background: rgba(11,16,23,.035)}
+    .opt input{margin-top:2px}
+    .quizActions{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      margin-top: 10px;
     }
-    .result{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:14px;
-      border-radius: var(--r2);
-      border:1px solid rgba(58,173,187,.30);
-      background: rgba(58,173,187,.10);
-      color: var(--navy);
-      font-weight: 1000;
+    .scoreBox{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+    .scoreChip{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(15,23,42,.10);
+      background:#fff;
+      font-weight:950;
+      box-shadow: 0 10px 22px rgba(2,8,23,.08);
     }
     .ok{
-      border-color: rgba(52,199,89,.35);
-      background: rgba(52,199,89,.10);
+      color: #0b1017;
+      background: linear-gradient(135deg, rgba(155,234,59,.45), rgba(0,194,255,.25));
+      border-color: rgba(15,23,42,.12);
     }
     .bad{
-      border-color: rgba(255,59,48,.25);
-      background: rgba(255,59,48,.08);
+      color: #0b1017;
+      background: linear-gradient(135deg, rgba(251,201,9,.42), rgba(255,59,48,.10));
+      border-color: rgba(15,23,42,.12);
     }
 
-    /* Focus mode */
-    .focus .sidebar{display:none}
-    .focus .grid{grid-template-columns: 1fr}
+    /* Responsive */
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr; height:auto; min-height: unset;}
+      .side{order:2}
+      .main{order:1; min-height: 720px;}
+    }
+    @media (max-width: 860px){
+      .stage{grid-template-columns: 1fr; }
+      .billFrame{max-height: 48vh;}
+      .qGrid{grid-template-columns: 1fr;}
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <!-- Use your repo logo filename here. In your screenshot you have Logo.png -->
-        <img src="Logo.png" alt="LOS logo">
-        <div class="t">
-          <b>LOS • Bill Reading Training</b>
-          <span>1 slide per bill page • bill left • numbered callouts right • top → bottom</span>
-        </div>
-      </div>
-
-      <div class="progress" title="Quiz completion">
-        <div class="bar"><div id="barFill"></div></div>
-        <div class="pct" id="pct">0%</div>
-      </div>
-
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end">
-        <button class="btn ghost" id="toggleFocus">Focus</button>
-        <button class="btn" id="openImgBtn">Open Bill</button>
-        <button class="btn" id="prevBtn">Back</button>
-        <button class="btn primary" id="nextBtn">Next</button>
+  <div class="topbar">
+    <div class="brand">
+      <!-- Your repo has Logo.png; keep that filename -->
+      <img src="Logo.png" alt="LOS logo" onerror="this.style.display='none'">
+      <div>
+        <div class="t1">LOS • SCE Bill Reading Training</div>
+        <div class="t2">4 lessons • bill-first notes • quick quiz to certify completion</div>
       </div>
     </div>
 
-    <div class="grid" id="grid">
-      <!-- Sidebar -->
-      <aside class="sidebar" id="sidebar">
-        <div class="sideHead">
-          <b>Slides</b>
-          <span class="pill" id="pill">—</span>
-        </div>
-        <div class="nav" id="nav"></div>
-      </aside>
+    <div class="progressWrap">
+      <span class="chip"><span class="dot"></span> Completion</span>
+      <div class="bar"><i id="progressBar"></i></div>
+      <div class="pct" id="progressPct">0% Complete</div>
+    </div>
 
-      <!-- Slide -->
-      <main class="slide" id="slide">
-        <div class="slideHead">
-          <div>
-            <h1 id="title">—</h1>
-            <p id="subtitle">—</p>
-          </div>
-          <div class="badge" id="badge">—</div>
-        </div>
-
-        <!-- Slide body (bill + callouts) -->
-        <div class="twoCol" id="slideBody">
-          <section class="imgCard">
-            <div class="imgTools">
-              <div class="chip" id="openNew">Open</div>
-            </div>
-            <img id="billImg" src="" alt="Bill image">
-          </section>
-
-          <section class="panel">
-            <div class="card">
-              <h3>Numbered callouts (read top → bottom)</h3>
-              <ul class="numList" id="callouts"></ul>
-              <div class="tip" id="tip">—</div>
-            </div>
-          </section>
-        </div>
-
-        <!-- Quiz body -->
-        <div class="quizGrid" id="quizBody" style="display:none;">
-          <div class="result bad" id="quizResult">
-            <div>Quiz: <span id="quizScore">0 / 0</span></div>
-            <div id="quizPct">0% complete</div>
-          </div>
-          <div id="questions"></div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
-            <button class="btn" id="resetQuiz">Reset Quiz</button>
-            <button class="btn primary" id="gradeQuiz">Grade Quiz</button>
-          </div>
-        </div>
-
-        <div class="navBar">
-          <div class="counter" id="counter">—</div>
-          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end">
-            <button class="btn" id="jumpQuiz">Jump to Quiz</button>
-            <button class="btn primary" id="jumpSlides">Back to Slides</button>
-          </div>
-        </div>
-      </main>
+    <div class="chip" id="statusChip">
+      <span class="dot"></span>
+      <span id="statusText">Slides: 0/8 • Quiz: Not started</span>
     </div>
   </div>
 
+  <div class="grid">
+    <!-- Sidebar -->
+    <aside class="side">
+      <div class="sideHeader">
+        <h3>Lessons</h3>
+        <p>Each slide shows the bill on the left and the “what matters” notes on the right, top-to-bottom.</p>
+      </div>
+
+      <div class="lessonList" id="lessonList"></div>
+
+      <div class="lessonFoot">
+        <div class="mini">
+          <div class="k">Current slide</div>
+          <div class="v" id="miniSlide">—</div>
+        </div>
+        <div class="mini">
+          <div class="k">Rep goal</div>
+          <div class="v">Book consult</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="mainHeader">
+        <div class="titleBlock">
+          <div class="h1" id="slideTitle">
+            <span>—</span>
+            <span class="pill" id="slidePill">—</span>
+          </div>
+          <div class="desc" id="slideDesc">—</div>
+        </div>
+        <div class="controls">
+          <button class="btn ghost" id="btnQuiz" title="Jump to quiz">Quiz</button>
+          <button class="btn" id="btnPrev" title="Previous slide">← Prev</button>
+          <button class="btn primary" id="btnNext" title="Next slide">Next →</button>
+        </div>
+      </div>
+
+      <div class="stage">
+        <!-- Bill -->
+        <section class="billCard">
+          <div class="cardHead">
+            <div class="left">
+              <span class="tag" id="billTag">Bill</span>
+              <h4 id="billHead">—</h4>
+            </div>
+            <div class="hint">Pinch/zoom if needed</div>
+          </div>
+          <div class="billFrame" id="billFrame">
+            <img class="billImg" id="billImg" alt="Bill page" />
+          </div>
+        </section>
+
+        <!-- Notes -->
+        <section class="noteCard">
+          <div class="cardHead">
+            <div class="left">
+              <span class="tag">Notes</span>
+              <h4>What to say (top → bottom)</h4>
+            </div>
+            <div class="hint" id="noteHint">Numbered callouts</div>
+          </div>
+          <div class="notes" id="notes"></div>
+        </section>
+      </div>
+
+      <!-- Quiz (hidden until opened) -->
+      <div class="quizWrap" id="quizWrap">
+        <div class="quizTop">
+          <div>
+            <h3>Quick Knowledge Check</h3>
+            <p>
+              This confirms the rep understands why homeowners can still see an SCE bill (true-up, TOU, tiers, non-bypassable charges, credits, and billing period timing).
+              Score <b>100%</b> to show “Complete.”
+            </p>
+          </div>
+          <div class="scoreBox">
+            <span class="scoreChip" id="quizScoreChip">Score: —</span>
+            <span class="scoreChip" id="quizResultChip">Result: —</span>
+          </div>
+        </div>
+
+        <div class="qGrid" id="qGrid"></div>
+
+        <div class="quizActions">
+          <button class="btn" id="btnBackToSlides">← Back to slides</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="btn" id="btnResetQuiz">Reset</button>
+            <button class="btn primary" id="btnGrade">Grade Quiz</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
   <script>
-    /*
-      =========================
-      IMPORTANT: IMAGE FILENAMES
-      =========================
-      Use the EXACT filenames that exist in your GitHub repo root (or put them in /assets and update paths).
-      From your screenshot you already have:
-        - Scebill.jpeg
-        - Add-on-bill2.jpeg
-        - Add-on-bill3.jpeg
-        - Yucaipa2.jpg
-        - Yucaipa3.jpg
-        - Logo.png
-      You will also need to upload (or rename to match) these:
-        - Yucaipa4.jpg        (if you want the Yucaipa page 4 slide)
-        - Add-on-bill5.jpeg   (if you want the add-on page 5 slide)
-        - Tiered-DCARE.jpg    (tiered bill image)
-        - NEM3.jpg            (enhanced NEM 3.0 scan)
-    */
+    /*************************************************************
+     * IMAGE FILES (your repo)
+     * -----------------------------------------------------------
+     * Your screenshot shows these names in GitHub:
+     * - Add-on-page1.jpeg
+     * - Addonpage2.jpeg
+     * - Add-on-bill3.jpg
+     * - Yucaipapage1.jpeg
+     * - Yucaipapage2.jpeg
+     * - Yucaipa3.jpg (or Yucaipa3.jpeg in some uploads)
+     * - Dcaretiersbill.jpeg
+     * - Nem3bill.jpg
+     * - Logo.png
+     *
+     * We use a fallback list per slide so minor extension changes
+     * won’t break the page.
+     *************************************************************/
+    function setImgWithFallback(imgEl, candidates){
+      let i = 0;
+      const tryNext = () => {
+        if(i >= candidates.length){
+          imgEl.alt = "Image not found. Check filename in repo.";
+          imgEl.style.opacity = .55;
+          imgEl.style.filter = "grayscale(1)";
+          return;
+        }
+        imgEl.src = candidates[i++];
+      };
+      imgEl.onerror = tryNext;
+      tryNext();
+    }
 
-    // =========================
-    // SLIDES (1 slide per bill page)
-    // =========================
+    // Slides: 4 lessons total:
+    // 1) Add-on bill (solar) = 3 pages
+    // 2) Yucaipa (no solar, TOU) = 3 pages
+    // 3) Tiered D-CARE = 1 page
+    // 4) NEM 3.0 (solar + battery, low bill) = 1 page
     const slides = [
+      // -------------------- Lesson 1: Add-on solar (Victor Barba)
       {
-        id:"addon-p1",
-        badge:"ADD-ON • Page 1",
-        title:"Add-On Bill — Annual / True-Up Summary (Page 1)",
-        subtitle:"Teach the rep where the annual number lives and why monthly can be misleading.",
-        img:"Scebill.jpeg", // <-- change if your add-on page 1 is named differently
-        tip:"Rep goal: Point to the annual/settlement timing first, then explain why a customer can still owe with solar.",
-        callouts:[
-          {t:"Year-to-date charges (annual running total)", d:"This is the ‘big’ number that matters for the true-up. Customers often focus on the small monthly line and miss the annual total."},
-          {t:"Billing month position (e.g., month 11 of 12)", d:"This tells you how close they are to settlement/true-up. The closer to month 12, the more urgent it is to review usage + credits."},
-          {t:"Credit balance vs new charges (monthly snapshot)", d:"A credit on this page does NOT mean the year is safe. It just means this month netted out—true-up is still coming."},
-          {t:"NEM / annual billing explanation box", d:"Use simple language: ‘They track credits during the year, then settle the remaining balance at the end of the 12-month cycle.’"},
-          {t:"Annual bill / settled at end of billing period", d:"This is the customer pain point: the end-of-year bill is where any mismatch becomes real money."}
+        lessonId: "addon",
+        lessonName: "Add-On Bill (Solar / NEM)",
+        pill: "Lesson 1 • Add-On (Solar)",
+        title: "Add-On Solar Bill — Page 1 (Account summary + annual bill)",
+        desc: "Teach the rep to set expectations: a monthly statement can show a small amount due, while the annual settlement (true-up) is what creates the “surprise bill.”",
+        billHead: "Account Summary + Annual Bill (True-Up context)",
+        billTag: "Add-On • Pg 1",
+        img: ["Add-on-page1.jpeg","Add-on-page1.jpg","Addonpage1.jpeg","Scebill.jpeg","Scebill.jpg"],
+        startHere: {
+          title: "Start here (top of page)",
+          mark: "Set the frame",
+          body: "Before explaining numbers, confirm: this customer has solar and is on Net Energy Metering. The bill is a running total that settles at the end of the 12-month period."
+        },
+        callouts: [
+          {
+            k: "Year-to-date charges (running total)",
+            v: "Point out the year-to-date number. This is the “metered truth” across the whole billing cycle — not just this month. If credits don’t cover it by month 12, a true-up bill hits.",
+            tags: ["Pain driver", "True-up"]
+          },
+          {
+            k: "Billing month (e.g., month 11 of 12)",
+            v: "Highlight the billing month. If they’re late in the cycle, a small monthly ‘due’ can still turn into a large true-up soon.",
+            tags: ["Timing", "Expectation"]
+          },
+          {
+            k: "Monthly amount due ≠ final settlement",
+            v: "Explain that the monthly line is often minimums/adjustments while the annual settlement is where NEM charges finalize. This is why ‘I have solar’ doesn’t automatically mean ‘no bill.’",
+            tags: ["Objection handler"]
+          },
+          {
+            k: "Credit balance & why it can disappear",
+            v: "If there’s a credit, it can be eaten by later high-usage months (AC/EV/holidays) or TOU periods. Solar makes credits at one time; the home may spend energy at a more expensive time.",
+            tags: ["TOU mismatch", "Lifestyle change"]
+          },
+          {
+            k: "Rep close (book consult)",
+            v: "Transition: ‘Let’s do a 15-minute audit — we’ll check usage timing, whether the system is offsetting correctly, and if a battery would eliminate the expensive evening import.’",
+            tags: ["Appointment"]
+          }
+        ]
+      },
+      {
+        lessonId: "addon",
+        lessonName: "Add-On Bill (Solar / NEM)",
+        pill: "Lesson 1 • Add-On (Solar)",
+        title: "Add-On Solar Bill — Page 2 (TOU + usage + charges)",
+        desc: "This page explains why solar customers still pay: expensive TOU windows, imports when the sun is down, and non-bypassable charges.",
+        billHead: "TOU Windows + Usage Breakdown + New Charges",
+        billTag: "Add-On • Pg 3",
+        img: ["Addonpage2.jpeg","Add-on-bill2.jpeg","Add-on-bill2.jpg","Yucaipa2.jpg","Yucaipa2.jpeg"], // fallback
+        startHere: {
+          title: "Start here (TOU table)",
+          mark: "Cost varies by time",
+          body: "Show the TOU periods first. If the home uses power during peak (evenings), solar alone can’t fully protect them unless they shift usage or add storage."
+        },
+        callouts: [
+          {
+            k: "TOU periods (peak vs off-peak)",
+            v: "Explain the simple rule: power is most expensive when everyone is home (often evenings). Solar produces mid-day — that’s a different bucket.",
+            tags: ["Pain driver", "Peak pricing"]
+          },
+          {
+            k: "Consumption vs net generation",
+            v: "Walk the ‘Consumption’ numbers first, then ‘Net Generation.’ If net generation is low during peak, they’ll import from SCE.",
+            tags: ["Imports", "Why bills happen"]
+          },
+          {
+            k: "Total usage this month",
+            v: "If monthly usage spikes (seasonal AC, new EV, guests), it can wipe out credits. Ask: ‘Anything change in the last 6–12 months?’",
+            tags: ["Discovery question"]
+          },
+          {
+            k: "Details of new charges",
+            v: "Remember: not all charges are offset equally. Delivery / certain fixed charges and NBCs can still apply even with solar.",
+            tags: ["NBCs", "Fixed charges"]
+          },
+          {
+            k: "Rep close (book consult)",
+            v: "‘Next step is a bill breakdown consult — we’ll map usage to TOU windows and show the best fix: usage shift, add panels, or battery to cover peak.’",
+            tags: ["Appointment"]
+          }
+        ]
+      },
+      {
+        lessonId: "addon",
+        lessonName: "Add-On Bill (Solar / NEM)",
+        pill: "Lesson 1 • Add-On (Solar)",
+        title: "Add-On Solar Bill — Page 3 (tracked charges + net consumption)",
+        desc: "This page is where ‘hidden’ pain shows up: tracked delivery/generation and the net consumption/generation summary box.",
+        billHead: "Tracked Charges + Net Consumption/Generation Summary",
+        billTag: "Add-On • Pg 5",
+        img: ["Add-on-bill3.jpg","Add-on-bill3.jpeg","Add-on-bill3.png","Add-on-bill3.jpg"],
+        startHere: {
+          title: "Start here (net summary box)",
+          mark: "The ‘why’ box",
+          body: "Use the summary box to explain what’s accumulating and why the annual bill can still be large even if some months look fine."
+        },
+        callouts: [
+          {
+            k: "Net consumption / generation summary",
+            v: "If year-to-date charges are rising, it means imports are winning over exports (often due to peak timing or higher usage).",
+            tags: ["Pain driver", "True-up"]
+          },
+          {
+            k: "Delivery vs generation tracked charges",
+            v: "Point out delivery and generation sections. Even when energy is ‘netted,’ delivery / program charges can remain and stack up.",
+            tags: ["Structure", "NBCs"]
+          },
+          {
+            k: "Rate Identification Number (RIN)",
+            v: "Optional: show the RIN as a quick proof you’re reading the bill correctly and can verify the customer’s rate plan and device eligibility.",
+            tags: ["Credibility"]
+          },
+          {
+            k: "What to propose",
+            v: "If peak imports drive YTD up: storage fixes the timing mismatch. If total usage is high: resize system or add usage controls. That’s the consult.",
+            tags: ["Battery", "Resize"]
+          }
         ]
       },
 
+      // -------------------- Lesson 2: Yucaipa (no solar, TOU, past due)
       {
-        id:"addon-p3",
-        badge:"ADD-ON • Page 3",
-        title:"Add-On Bill — TOU + Usage + Fees (Page 3)",
-        subtitle:"Teach the rep how TOU timing + unavoidable fees create a remaining bill even with solar.",
-        img:"Add-on-bill3.jpeg",
-        tip:"Rep goal: Connect ‘when they use power’ + ‘fees that don’t go away’ to explain the remaining bill.",
-        callouts:[
-          {t:"Time-of-Use schedule (identify expensive window)", d:"Call out the peak window (often 4–9pm). Solar produces less there, so grid imports are usually highest and most expensive."},
-          {t:"Past/current usage by TOU period", d:"Scan which bucket is biggest (off/mid/peak). If evening/peak is high, that’s usually the bill driver."},
-          {t:"Net generation/export (are they building credits?)", d:"If export is low, credits won’t offset imports. This happens with added loads (EVs, pool, HVAC) or undersized systems."},
-          {t:"Daily average usage trend (this year vs last)", d:"Usage creep is the silent killer. If the bars are trending up, the solar size might no longer match the home."},
-          {t:"Details of new charges (Delivery + NBCs + taxes)", d:"Delivery and non-bypassable charges are common ‘still owe’ reasons. Reps should say: ‘Some charges remain even with solar.’"}
+        lessonId: "yucaipa",
+        lessonName: "Yucaipa (No Solar • TOU • Past Due)",
+        pill: "Lesson 2 • Yucaipa (No Solar)",
+        title: "Yucaipa Bill — Page 1 (amount due + past due + TOU)",
+        desc: "Train the rep to identify immediate pain: amount due, past due status, and TOU windows. This is a high-urgency appointment.",
+        billHead: "Amount Due + Past Due + Account Summary",
+        billTag: "Yucaipa • Pg 1",
+        img: ["Yucaipapage1.jpeg","Yucaipapage1.jpg","Yucaipapage1.png"],
+        startHere: {
+          title: "Start here (Amount Due)",
+          mark: "Urgency",
+          body: "Start with the amount due and past due message. This is where the customer feels pain and is most open to a consult."
+        },
+        callouts: [
+          {
+            k: "Amount due (top right)",
+            v: "Anchor the conversation: ‘This is what’s hitting your bank account right now.’ Confirm due date and whether it’s recurring.",
+            tags: ["Pain driver", "Urgency"]
+          },
+          {
+            k: "Past due / disconnection risk",
+            v: "If the bill calls out a past due balance, it’s a ‘help now’ situation. Ask permission to do a quick plan to prevent future spikes.",
+            tags: ["High intent"]
+          },
+          {
+            k: "Account summary breakdown",
+            v: "Explain: previous balance + payments + new charges. This helps them see the pattern (not a one-time event).",
+            tags: ["Clarity"]
+          },
+          {
+            k: "TOU cost periods",
+            v: "Set the TOU rule: evenings are expensive. If they can’t avoid that window, the best fix is producing/storing energy.",
+            tags: ["TOU"]
+          },
+          {
+            k: "Rep close (book consult)",
+            v: "‘Let’s do a free consult and build a plan that replaces this bill with a predictable payment — and protects you from rate increases.’",
+            tags: ["Appointment"]
+          }
+        ]
+      },
+      {
+        lessonId: "yucaipa",
+        lessonName: "Yucaipa (No Solar • TOU • Past Due)",
+        pill: "Lesson 2 • Yucaipa (No Solar)",
+        title: "Yucaipa Bill — Page 2 (usage by period + daily average + charges)",
+        desc: "This page shows how usage and TOU pricing create the bill. It’s the ‘why’ behind the amount due.",
+        billHead: "Usage Bars + Avg Cost + Total Cost + Usage Trend",
+        billTag: "Yucaipa • Pg 3",
+        img: ["Yucaipapage2.jpeg","Yucaipapage2.jpg","Yucaipa2.jpg","Yucaipa2.jpeg"],
+        startHere: {
+          title: "Start here (Usage bars)",
+          mark: "Explain the math",
+          body: "Show each TOU bucket (on-peak/mid/off/super off). More usage in expensive periods = higher total cost."
+        },
+        callouts: [
+          {
+            k: "Usage buckets (on-peak vs off-peak)",
+            v: "Ask: ‘Do you run AC, laundry, cooking, or EV charging during peak?’ Peak usage is the fastest way to inflate bills.",
+            tags: ["Discovery", "TOU"]
+          },
+          {
+            k: "Avg cost vs total cost",
+            v: "Teach reps to separate ‘rate’ from ‘spend.’ The customer feels total dollars; the rate explains why it’s happening.",
+            tags: ["Clarity"]
+          },
+          {
+            k: "Total electricity used this month (kWh)",
+            v: "High kWh means either lifestyle change or inefficient home. This sets up solar + battery + efficiency upgrades.",
+            tags: ["Pain driver"]
+          },
+          {
+            k: "Daily average chart",
+            v: "If the chart trends up, the customer’s bill will keep rising even if rates stayed flat (they don’t). Perfect consult setup.",
+            tags: ["Trend"]
+          },
+          {
+            k: "Details of new charges",
+            v: "Explain the categories (delivery, generation, programs). Even if we reduce energy cost, the structure matters.",
+            tags: ["Structure"]
+          }
+        ]
+      },
+      {
+        lessonId: "yucaipa",
+        lessonName: "Yucaipa (No Solar • TOU • Past Due)",
+        pill: "Lesson 2 • Yucaipa (No Solar)",
+        title: "Yucaipa Bill — Page 3 (continued charges + what to ignore)",
+        desc: "Teach reps what’s important vs noise. Focus on totals, charge categories, and how SCE stacks fees.",
+        billHead: "Continued Charges + Subtotals",
+        billTag: "Yucaipa • Pg 4",
+        img: ["Yucaipa3.jpg","Yucaipa3.jpeg","Yucaipa3.png"],
+        startHere: {
+          title: "Start here (Subtotals)",
+          mark: "Don’t get lost",
+          body: "Reps should not read every line. Teach them to identify the sections and confirm how the total is formed."
+        },
+        callouts: [
+          {
+            k: "Continued charges = same story",
+            v: "This page usually continues delivery/generation items. The point is: multiple line items stack into the total.",
+            tags: ["Clarity"]
+          },
+          {
+            k: "Look for fixed & program fees",
+            v: "Even if usage goes down, some fees remain. That’s why customers want a predictable plan.",
+            tags: ["Pain driver"]
+          },
+          {
+            k: "What to ignore (for the consult)",
+            v: "RIN/QR codes and informational blurbs are not the pitch. Focus on totals, usage, TOU timing, and the category split.",
+            tags: ["Rep discipline"]
+          }
         ]
       },
 
+      // -------------------- Lesson 3: Tiered D-CARE
       {
-        id:"addon-p5",
-        badge:"ADD-ON • Page 5",
-        title:"Add-On Bill — Tracked Charges / YTD Detail (Page 5)",
-        subtitle:"Teach the rep how SCE tracks consumption/generation totals and why it can still settle to a balance.",
-        img:"54554574-345C-4150-9FA6-EBDDF036C667.jpeg", // <-- If this file name is different in your repo, change it.
-        tip:"Rep goal: Use this page to prove the math—‘tracked totals’ explain the year-to-date result.",
-        callouts:[
-          {t:"Tracked delivery charges by TOU bucket", d:"These show how much energy cost is being assigned into each TOU period—timing drives the price."},
-          {t:"Tracked generation charges by TOU bucket", d:"This shows what the utility charges to generate power. Even with solar, imported kWh still triggers these."},
-          {t:"Energy charge total (current month)", d:"This is the actual cost for the billing period—use it to connect usage → charges."},
-          {t:"Net consumption/generation info box", d:"This is your ‘proof section’—it summarizes YTD energy charges and current month totals."},
-          {t:"Year-to-date kWh + year-to-date charges", d:"This is the clearest ‘why’ behind the true-up number—more total imported usage = higher settlement."}
+        lessonId: "tiers",
+        lessonName: "D-CARE Tiered Bill (No Solar)",
+        pill: "Lesson 3 • Tiered (D-CARE)",
+        title: "Tiered Bill — D-CARE (Tier 1 vs Tier 2 pricing)",
+        desc: "This is the easiest ‘aha’: the more they use, the higher the price per kWh. The bill punishes high usage with Tier 2 rates.",
+        billHead: "Tiered Pricing Summary",
+        billTag: "Tiered • Pg 1",
+        img: ["Dcaretiersbill.jpeg","Dcaretiersbill.jpg","Dcaretiersbill.png"],
+        startHere: {
+          title: "Start here (Tier box)",
+          mark: "Simple story",
+          body: "Show Tier 1 vs Tier 2. Their usage fell into Tier 2, so their average cost per kWh is higher."
+        },
+        callouts: [
+          {
+            k: "Total usage and baseline",
+            v: "Explain baseline: SCE gives a cheaper Tier 1 amount, then Tier 2 is the penalty zone. Most high-usage homes live in Tier 2.",
+            tags: ["Pain driver"]
+          },
+          {
+            k: "Tier 1 vs Tier 2 kWh",
+            v: "Point to the kWh split. Ask: ‘Do you know what changed to push you into Tier 2?’ AC, EVs, pool pumps, space heaters, etc.",
+            tags: ["Discovery"]
+          },
+          {
+            k: "Price per kWh jumps in Tier 2",
+            v: "Use the tier price boxes to show why the bill feels unfair: the marginal kWh is expensive.",
+            tags: ["Aha moment"]
+          },
+          {
+            k: "Rep close (book consult)",
+            v: "‘We’ll size the system to pull you out of Tier 2 and stabilize your monthly spend.’",
+            tags: ["Appointment"]
+          }
         ]
       },
 
+      // -------------------- Lesson 4: NEM 3.0 (solar + battery, low bill)
       {
-        id:"yucaipa-p1",
-        badge:"YUCAIPA • Page 1",
-        title:"Yucaipa TOU Bill — Amount Due / Past Due + TOU (Page 1)",
-        subtitle:"Teach the rep to separate ‘past due’ from ‘new charges’ and still read TOU correctly.",
-        img:"Yucaipa2.jpg",
-        tip:"Rep goal: Don’t blame solar here—first clarify what portion is old balance vs new charges.",
-        callouts:[
-          {t:"Amount due vs past due", d:"If past due exists, the total due is not purely ‘this month’. Explain: ‘Part is previous balance, part is new charges.’"},
-          {t:"Account summary breakdown", d:"Read line-by-line: previous balance, payments received, past due amount, new charges, late fee (if any)."},
-          {t:"Why customers feel surprised", d:"They see a large amount due and assume solar failed—reframe to ‘billing structure + timing + usage’."},
-          {t:"TOU schedule summary", d:"Identify peak vs off-peak windows. Tell the customer: ‘Even with solar, peak imports are expensive.’"},
-          {t:"Payment stub vs bill logic", d:"Make sure the rep doesn’t use the payment stub to explain usage—use the bill sections above."}
+        lessonId: "nem3",
+        lessonName: "NEM 3.0 (Solar + Battery) • Low Bill",
+        pill: "Lesson 4 • NEM 3.0",
+        title: "NEM 3.0 — Solar + Battery (example: ~$28 total)",
+        desc: "Show the rep how to explain a low bill: exports + credits + storage reduce peak imports. Also teach: credits and charges still exist.",
+        billHead: "Usage + Credits/Charges + Total",
+        billTag: "NEM 3.0 • Pg 3",
+        img: ["Nem3bill.jpg","Nem3bill.jpeg","Nem3bill.png"],
+        startHere: {
+          title: "Start here (Total + credits)",
+          mark: "Proof it works",
+          body: "Use this as a ‘success example’: even with charges, credits and load-shifting can keep the total low."
+        },
+        callouts: [
+          {
+            k: "Energy charges vs other credits/charges",
+            v: "Teach reps to point out: energy charges are real, but credits offset them. That’s the goal — create credits when prices are high.",
+            tags: ["NEM concept"]
+          },
+          {
+            k: "Usage vs exported generation",
+            v: "If exported generation is healthy, they earn credits. With a battery, they can also avoid importing during peak.",
+            tags: ["Battery timing"]
+          },
+          {
+            k: "Daily average chart (trend)",
+            v: "If daily usage is controlled, the system stays ahead. If usage rises, totals rise even with solar — that’s why we audit.",
+            tags: ["Control"]
+          },
+          {
+            k: "Delivery / program fees still exist",
+            v: "Set expectations: ‘Even great systems can have small bills because some charges remain.’ This prevents future confusion.",
+            tags: ["Expectation"]
+          }
         ]
-      },
-
-      {
-        id:"yucaipa-p3",
-        badge:"YUCAIPA • Page 3",
-        title:"Yucaipa TOU Bill — Usage by TOU + Cost Breakdown (Page 3)",
-        subtitle:"Teach the rep how the bill assigns kWh into TOU buckets and converts it into dollars.",
-        img:"Yucaipa3.jpg",
-        tip:"Rep goal: Show the customer the most expensive bucket first, then explain how their usage pattern creates cost.",
-        callouts:[
-          {t:"Usage bars by TOU (kWh)", d:"Which bucket is biggest? On-peak and mid-peak cost more; a smaller kWh can still be a bigger dollar total."},
-          {t:"Average cost per bucket", d:"This is the rate signal. Highlight: peak is higher. This is why shifting usage matters."},
-          {t:"Total cost column", d:"This is the pain column. Even if off-peak is biggest, peak can still add up quickly."},
-          {t:"Daily usage trend chart", d:"If trend is climbing, the home outgrew the system or added loads."},
-          {t:"Details of new charges summary", d:"Use it to explain delivery vs generation components + the unavoidable line items (program charges, wildfire, etc.)."}
-        ]
-      },
-
-      {
-        id:"yucaipa-p4",
-        badge:"YUCAIPA • Page 4",
-        title:"Yucaipa TOU Bill — Detailed Charges Continued (Page 4)",
-        subtitle:"Teach the rep how to read the line items without getting lost (and what actually matters).",
-        img:"E808EF5B-CFAA-4900-82AA-3EDA7F11A1F2.jpeg", // <-- change to your repo filename for Yucaipa page 4
-        tip:"Rep goal: Don’t read every line—summarize: ‘seasonal rates + fixed recovery + taxes = the total.’",
-        callouts:[
-          {t:"Energy charges split by season + TOU", d:"This shows how winter vs summer pricing affects totals. Reps should say: ‘Rates change by season and time.’"},
-          {t:"Other charges/credits (fixed recovery)", d:"Explain as utility recovery programs; it’s a real line item that can’t be offset by solar credits."},
-          {t:"Subtotal + state tax", d:"These lines confirm the math: charges add up to the monthly total."},
-          {t:"RIN section (Rate Identification Number)", d:"Not needed for the customer decision—rep should know to skip it unless asked."},
-          {t:"‘Things you should know’ section", d:"Usually educational/administrative—don’t spend time here in a first appointment set."}
-        ]
-      },
-
-      {
-        id:"tiered-dcare",
-        badge:"TIERS • D-CARE",
-        title:"Tiered (D-CARE) Bill — Baseline vs Tier 2 Pain (Page)",
-        subtitle:"Teach the rep that the pain here is NOT TOU—it’s total usage pushing into Tier 2 pricing.",
-        img:"39500740-8F03-4EA0-963C-A8980F50A563.jpeg", // <-- change to your repo filename for the tiered bill
-        tip:"Rep goal: Explain Tier 1 vs Tier 2 simply: ‘The more you use, the more expensive each kWh becomes.’",
-        callouts:[
-          {t:"Rate plan: D-CARE (tiered structure)", d:"Set context: this is not a TOU explanation—this is tier escalation and baseline limits."},
-          {t:"Delivery charges split by Tier 1 and Tier 2", d:"This shows how much kWh fell within baseline vs over baseline. Over baseline drives cost."},
-          {t:"Generation charges split by Tier 1 and Tier 2", d:"Even the generation side escalates with tier. More kWh in Tier 2 = higher overall bill."},
-          {t:"Total usage + tier allocation box", d:"This is the easiest explanation section: total kWh and how much landed in Tier 2."},
-          {t:"Average $/kWh shown for tiers", d:"Use this as the ‘why it’s expensive’ proof: Tier 2 $/kWh is higher."}
-        ]
-      },
-
-      {
-        id:"nem3",
-        badge:"NEM 3.0",
-        title:"NEM 3.0 (Solar + Battery) — Why You Still See a Bill (Page 3)",
-        subtitle:"Teach the rep how to explain imports vs exports and why export value doesn’t always offset peak imports.",
-        img:"AC3C10DA-B4AD-4456-B35C-3376F7459D1E.jpeg", // <-- change to your repo filename for the enhanced NEM 3.0 image (ex: NEM3.jpg)
-        tip:"Rep goal: Keep it simple: ‘What you buy from the grid’ vs ‘what you send back’ are valued differently by time.",
-        callouts:[
-          {t:"Usage by TOU bucket (kWh)", d:"Show which bucket is being used. Under NEM 3.0, timing matters a lot more for value."},
-          {t:"Avg cost vs total cost", d:"Even a small peak bucket can cost more. This is where customers feel the ‘surprise’."},
-          {t:"Imported vs exported totals", d:"Point out: exported kWh can be higher, but that doesn’t guarantee the bill is zero—value is time-based."},
-          {t:"Daily average: consumption vs export generation", d:"If consumption grows while export stays flat, the system no longer matches the home."},
-          {t:"Details of new charges (delivery/program items)", d:"Even with solar+battery, certain charges remain. Reps should set expectations and then book the consult to model it accurately."}
-        ]
-      },
-
-      // Quiz slide (auto)
-      { id:"quiz", isQuiz:true, badge:"QUIZ", title:"Quick Knowledge Check", subtitle:"Answer these to confirm you can teach the bill correctly. Score 100% to complete.", img:"" }
+      }
     ];
 
-    // =========================
-    // QUIZ (small test at end)
-    // =========================
-    // Keep it simple: 6 questions. 100% only if all correct.
+    // Build lesson list (4 lessons) with slide counts
+    const lessons = (() => {
+      const map = new Map();
+      slides.forEach((s, idx) => {
+        if(!map.has(s.lessonId)){
+          map.set(s.lessonId, { id:s.lessonId, name:s.lessonName, slideIdxs:[] });
+        }
+        map.get(s.lessonId).slideIdxs.push(idx);
+      });
+      return Array.from(map.values());
+    })();
+
+    const lessonListEl = document.getElementById("lessonList");
+    const billImg = document.getElementById("billImg");
+    const billHead = document.getElementById("billHead");
+    const billTag = document.getElementById("billTag");
+    const slideTitle = document.getElementById("slideTitle");
+    const slidePill = document.getElementById("slidePill");
+    const slideDesc = document.getElementById("slideDesc");
+    const notesEl = document.getElementById("notes");
+    const noteHint = document.getElementById("noteHint");
+    const miniSlide = document.getElementById("miniSlide");
+    const progressBar = document.getElementById("progressBar");
+    const progressPct = document.getElementById("progressPct");
+    const statusText = document.getElementById("statusText");
+
+    const quizWrap = document.getElementById("quizWrap");
+    const qGrid = document.getElementById("qGrid");
+    const quizScoreChip = document.getElementById("quizScoreChip");
+    const quizResultChip = document.getElementById("quizResultChip");
+
+    const btnPrev = document.getElementById("btnPrev");
+    const btnNext = document.getElementById("btnNext");
+    const btnQuiz = document.getElementById("btnQuiz");
+    const btnBackToSlides = document.getElementById("btnBackToSlides");
+    const btnGrade = document.getElementById("btnGrade");
+    const btnResetQuiz = document.getElementById("btnResetQuiz");
+
+    // State
+    let currentSlide = 0;
+    let visited = new Set(); // slide indexes visited
+    let quizScore = null; // percent
+
+    // Sidebar render
+    function renderLessons(){
+      lessonListEl.innerHTML = "";
+      lessons.forEach((L, i) => {
+        const count = L.slideIdxs.length;
+        const btn = document.createElement("button");
+        btn.className = "lessonBtn";
+        btn.type = "button";
+        btn.dataset.lessonId = L.id;
+        btn.innerHTML = `
+          <div class="badge">${i+1}</div>
+          <div class="lessonMeta">
+            <div class="lessonTitle">${L.name}</div>
+            <div class="lessonSub">${count} slide${count>1?"s":""}</div>
+          </div>
+        `;
+        btn.addEventListener("click", () => {
+          showSlide(L.slideIdxs[0], true);
+        });
+        lessonListEl.appendChild(btn);
+      });
+    }
+
+    function setActiveLesson(){
+      const s = slides[currentSlide];
+      document.querySelectorAll(".lessonBtn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lessonId === s.lessonId);
+      });
+    }
+
+    // Notes render
+    function renderNotes(s){
+      notesEl.innerHTML = "";
+
+      const start = document.createElement("div");
+      start.className = "startHere";
+      start.innerHTML = `
+        <div class="sh">
+          <strong>${s.startHere?.title || "Start here"}</strong>
+          <span class="mark">${s.startHere?.mark || "Guide"}</span>
+        </div>
+        <p>${s.startHere?.body || ""}</p>
+      `;
+      notesEl.appendChild(start);
+
+      s.callouts.forEach((c, idx) => {
+        const card = document.createElement("div");
+        card.className = "callout";
+        card.innerHTML = `
+          <div class="calloutHead">
+            <div class="num">${idx+1}</div>
+            <div class="txt">
+              <div class="k">${c.k}</div>
+              <div class="v">${c.v}</div>
+            </div>
+          </div>
+          <div class="calloutFoot">
+            ${(c.tags||[]).map(t => `<span class="chip2">${t}</span>`).join("")}
+          </div>
+        `;
+        notesEl.appendChild(card);
+      });
+
+      noteHint.textContent = `${s.callouts.length} callouts`;
+    }
+
+    function showSlide(index, scrollTop){
+      currentSlide = Math.max(0, Math.min(slides.length-1, index));
+      const s = slides[currentSlide];
+
+      // mark visited
+      visited.add(currentSlide);
+
+      // update header
+      slideTitle.querySelector("span").textContent = s.title;
+      slidePill.textContent = s.pill;
+      slideDesc.textContent = s.desc;
+
+      billHead.textContent = s.billHead;
+      billTag.textContent = s.billTag;
+
+      // image with fallback
+      setImgWithFallback(billImg, s.img);
+
+      // notes
+      renderNotes(s);
+
+      // sidebar highlight
+      setActiveLesson();
+
+      // mini
+      miniSlide.textContent = `${currentSlide+1} / ${slides.length}`;
+
+      // buttons
+      btnPrev.disabled = (currentSlide === 0);
+      btnNext.textContent = (currentSlide === slides.length-1) ? "Finish → Quiz" : "Next →";
+
+      // optionally scroll containers to top
+      if(scrollTop){
+        document.getElementById("billFrame").scrollTop = 0;
+        notesEl.scrollTop = 0;
+      }
+
+      // hide quiz if showing slides
+      if(quizWrap.style.display === "block"){
+        quizWrap.style.display = "none";
+      }
+
+      updateProgress();
+    }
+
+    // Completion logic:
+    // - Slides viewed contributes up to 60%
+    // - Quiz contributes up to 40%
+    // - BUT only show 100% if quiz is 100% AND all slides viewed.
+    function computeCompletion(){
+      const slidesPct = Math.round((visited.size / slides.length) * 60);
+      const quizPct = (quizScore == null) ? 0 : Math.round((quizScore/100) * 40);
+      let total = slidesPct + quizPct;
+
+      // enforce: 100 only if perfect quiz + all slides visited
+      const perfect = (quizScore === 100) && (visited.size === slides.length);
+      if(perfect) total = 100;
+
+      // cap
+      total = Math.max(0, Math.min(100, total));
+      return total;
+    }
+
+    function updateProgress(){
+      const pct = computeCompletion();
+      progressBar.style.width = pct + "%";
+      progressPct.textContent = pct + "% Complete";
+
+      const quizLabel = (quizScore == null) ? "Not started" : (quizScore + "%");
+      statusText.textContent = `Slides: ${visited.size}/${slides.length} • Quiz: ${quizLabel}`;
+    }
+
+    // Controls
+    btnPrev.addEventListener("click", () => showSlide(currentSlide - 1, true));
+    btnNext.addEventListener("click", () => {
+      if(currentSlide === slides.length - 1){
+        openQuiz();
+      }else{
+        showSlide(currentSlide + 1, true);
+      }
+    });
+    btnQuiz.addEventListener("click", openQuiz);
+    btnBackToSlides.addEventListener("click", () => {
+      quizWrap.style.display = "none";
+      // keep current slide visible
+      updateProgress();
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    // Keyboard (desktop)
+    window.addEventListener("keydown", (e) => {
+      if(quizWrap.style.display === "block") return;
+      if(e.key === "ArrowLeft") btnPrev.click();
+      if(e.key === "ArrowRight") btnNext.click();
+    });
+
+    /*************************************************************
+     * QUIZ
+     *************************************************************/
     const quiz = [
       {
-        q:"On an annual/true-up style bill, which number should the rep point to FIRST to show the real annual risk?",
-        choices:[
-          "The payment stub amount",
-          "The year-to-date charges / annual running total",
-          "Only the credit balance line",
-          "The utility phone number"
+        q: "What is the most common reason a solar customer still gets an SCE bill near the end of the year?",
+        a: [
+          "Solar panels stop working in winter",
+          "True-up: year-to-date charges weren’t fully offset by credits",
+          "SCE bills twice for the same month",
+          "The customer must pay the whole year at once no matter what"
         ],
-        a:1
+        correct: 1
       },
       {
-        q:"In TOU bills, what is the fastest way to explain why customers still owe with solar?",
-        choices:[
-          "Rates are always the same all day",
-          "Most expensive usage happens in peak hours when solar produces less",
-          "Solar should erase every utility fee",
-          "The bill is random"
+        q: "On a TOU plan, which statement is most accurate?",
+        a: [
+          "All kWh cost the same price 24/7",
+          "Peak periods are usually cheaper because solar is producing",
+          "Using power during peak is more expensive and can drive bills up",
+          "TOU only matters if you have a battery"
         ],
-        a:1
+        correct: 2
       },
       {
-        q:"What are ‘non-bypassable’ / program-type charges best explained as?",
-        choices:[
-          "Charges that remain even with solar credits",
-          "A mistake that should be removed",
-          "Only applicable if you have no solar",
-          "A discount"
+        q: "On the bill, the “Amount due” is best described as:",
+        a: [
+          "The annual true-up total",
+          "What is due right now for this statement (may not equal the annual settlement)",
+          "The same as year-to-date charges",
+          "Always zero if the customer has solar"
         ],
-        a:0
+        correct: 1
       },
       {
-        q:"On a tiered (D-CARE) bill, the main pain driver is usually:",
-        choices:[
-          "Peak window 4–9pm",
-          "Total kWh pushing into Tier 2 pricing",
-          "Export credits by hour",
-          "Battery discharge schedule"
+        q: "Tiered rates (Tier 1 vs Tier 2) primarily mean:",
+        a: [
+          "Your kWh price increases as you use more and move into Tier 2",
+          "SCE charges more only on weekends",
+          "Solar credits disappear after 30 days",
+          "The customer can pick any price they want"
         ],
-        a:1
+        correct: 0
       },
       {
-        q:"Under NEM 3.0, a customer can export more kWh than they import and still see a bill because:",
-        choices:[
-          "Exports and imports are valued differently by time",
-          "Exports are never counted",
-          "Imports are always free",
-          "TOU does not exist"
+        q: "If a customer has solar but still imports during peak, the best explanation is:",
+        a: [
+          "Solar always produces most at night",
+          "Their usage is happening when solar isn’t producing (timing mismatch)",
+          "SCE blocks solar power from working",
+          "Credits can only be used on Sundays"
         ],
-        a:0
+        correct: 1
       },
       {
-        q:"When a bill shows ‘past due’ plus ‘new charges’, the rep should:",
-        choices:[
-          "Treat the entire amount as this month’s usage",
-          "Separate past due from new charges before explaining solar/usage",
-          "Skip the account summary",
-          "Only talk about the QR code"
+        q: "What should a rep focus on (instead of reading every line item)?",
+        a: [
+          "Totals, usage, TOU windows, and the category split (delivery/generation/credits)",
+          "Only the QR code",
+          "Only the mailing address",
+          "Only the font size"
         ],
-        a:1
+        correct: 0
+      },
+      {
+        q: "A battery helps most because it:",
+        a: [
+          "Makes the bill print faster",
+          "Shifts solar energy to cover expensive evening/peak usage",
+          "Raises Tier 2 prices",
+          "Eliminates all fixed fees forever"
+        ],
+        correct: 1
+      },
+      {
+        q: "To book a consult, the strongest transition is:",
+        a: [
+          "“This bill is confusing, good luck.”",
+          "“Let’s do a quick audit of usage timing, credits, and rate plan so you know exactly why this bill is happening.”",
+          "“Ignore the bill and it will go away.”",
+          "“You must buy a battery today.”"
+        ],
+        correct: 1
       }
     ];
 
-    // =========================
-    // APP
-    // =========================
-    const nav = document.getElementById('nav');
-    const pill = document.getElementById('pill');
-    const title = document.getElementById('title');
-    const subtitle = document.getElementById('subtitle');
-    const badge = document.getElementById('badge');
-    const billImg = document.getElementById('billImg');
-    const calloutsEl = document.getElementById('callouts');
-    const tipEl = document.getElementById('tip');
-    const counter = document.getElementById('counter');
-
-    const slideBody = document.getElementById('slideBody');
-    const quizBody = document.getElementById('quizBody');
-    const openNew = document.getElementById('openNew');
-    const openImgBtn = document.getElementById('openImgBtn');
-
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    const jumpQuiz = document.getElementById('jumpQuiz');
-    const jumpSlides = document.getElementById('jumpSlides');
-
-    const toggleFocus = document.getElementById('toggleFocus');
-    const wrap = document.body;
-
-    const barFill = document.getElementById('barFill');
-    const pct = document.getElementById('pct');
-
-    const questionsEl = document.getElementById('questions');
-    const gradeQuizBtn = document.getElementById('gradeQuiz');
-    const resetQuizBtn = document.getElementById('resetQuiz');
-    const quizResult = document.getElementById('quizResult');
-    const quizScore = document.getElementById('quizScore');
-    const quizPct = document.getElementById('quizPct');
-
-    let idx = 0;
-
-    function el(tag, cls){
-      const e = document.createElement(tag);
-      if(cls) e.className = cls;
-      return e;
+    function openQuiz(){
+      quizWrap.style.display = "block";
+      window.scrollTo({top: document.body.scrollHeight, behavior:"smooth"});
+      renderQuiz();
+      updateProgress();
     }
 
-    function renderNav(){
-      nav.innerHTML = '';
-      slides.forEach((s, i) => {
-        const b = el('button','navItem' + (i === idx ? ' active' : ''));
-        const label = s.isQuiz ? "Quiz" : s.badge;
-        const sub = s.isQuiz ? "Score 100% complete" : s.title;
-        b.innerHTML = `
-          <div>
-            <b>${label}</b>
-            <small>${sub}</small>
-          </div>
-          <div class="tag">${i+1}</div>
-        `;
-        b.addEventListener('click', () => go(i));
-        nav.appendChild(b);
-      });
-      pill.textContent = `${slides.length} total`;
-    }
-
-    function renderCallouts(items){
-      calloutsEl.innerHTML = '';
-      items.forEach((c, i) => {
-        const li = el('li','numItem');
-        li.innerHTML = `
-          <div class="bubble">${i+1}</div>
-          <div>
-            <b>${c.t}</b>
-            <p>${c.d}</p>
-          </div>
-        `;
-        calloutsEl.appendChild(li);
-      });
-    }
-
-    function go(i){
-      idx = Math.max(0, Math.min(slides.length - 1, i));
-      const s = slides[idx];
-
-      // update nav active
-      Array.from(document.querySelectorAll('.navItem')).forEach((n, ii) => {
-        n.classList.toggle('active', ii === idx);
-      });
-
-      // toggle slide vs quiz
-      if(s.isQuiz){
-        slideBody.style.display = 'none';
-        quizBody.style.display = '';
-        openImgBtn.disabled = true;
-        openNew.style.pointerEvents = 'none';
-        openNew.style.opacity = .5;
-
-        title.textContent = s.title;
-        subtitle.textContent = s.subtitle;
-        badge.textContent = s.badge;
-
-        counter.textContent = `Slide ${idx+1} of ${slides.length}`;
-        window.scrollTo({top:0, behavior:'smooth'});
-        return;
-      }
-
-      slideBody.style.display = '';
-      quizBody.style.display = 'none';
-      openImgBtn.disabled = false;
-      openNew.style.pointerEvents = '';
-      openNew.style.opacity = 1;
-
-      title.textContent = s.title;
-      subtitle.textContent = s.subtitle;
-      badge.textContent = s.badge;
-
-      billImg.src = s.img;
-      billImg.alt = s.title;
-
-      renderCallouts(s.callouts || []);
-      tipEl.textContent = s.tip || '';
-
-      counter.textContent = `Slide ${idx+1} of ${slides.length}`;
-      window.scrollTo({top:0, behavior:'smooth'});
-    }
-
-    function next(){ go(idx + 1); }
-    function prev(){ go(idx - 1); }
-
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-
-    // open bill in new tab
-    function openBill(){
-      const s = slides[idx];
-      if(!s || s.isQuiz) return;
-      window.open(s.img, '_blank');
-    }
-    openNew.addEventListener('click', openBill);
-    openImgBtn.addEventListener('click', openBill);
-
-    // Focus mode
-    toggleFocus.addEventListener('click', () => {
-      wrap.classList.toggle('focus');
-      toggleFocus.textContent = wrap.classList.contains('focus') ? 'Unfocus' : 'Focus';
-    });
-
-    // Jump buttons
-    jumpQuiz.addEventListener('click', () => go(slides.findIndex(s => s.isQuiz)));
-    jumpSlides.addEventListener('click', () => go(0));
-
-    // Swipe for mobile
-    let startX = null;
-    document.addEventListener('touchstart', (e) => startX = e.changedTouches[0].clientX, {passive:true});
-    document.addEventListener('touchend', (e) => {
-      if(startX == null) return;
-      const dx = e.changedTouches[0].clientX - startX;
-      startX = null;
-      if(Math.abs(dx) < 70) return;
-      if(dx < 0) next(); else prev();
-    }, {passive:true});
-
-    // Keyboard
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'ArrowRight') next();
-      if(e.key === 'ArrowLeft') prev();
-    });
-
-    // =========================
-    // Quiz rendering + grading
-    // =========================
     function renderQuiz(){
-      questionsEl.innerHTML = '';
-      quiz.forEach((item, qi) => {
-        const card = el('div','q');
-        const h = el('h4');
-        h.textContent = `${qi+1}. ${item.q}`;
-        card.appendChild(h);
-
-        const choices = el('div','choices');
-        item.choices.forEach((c, ci) => {
-          const lab = el('label','choice');
-          lab.innerHTML = `
-            <input type="radio" name="q${qi}" value="${ci}">
-            <span>${c}</span>
-          `;
-          choices.appendChild(lab);
-        });
-
-        card.appendChild(choices);
-        questionsEl.appendChild(card);
+      qGrid.innerHTML = "";
+      quiz.forEach((item, i) => {
+        const card = document.createElement("div");
+        card.className = "q";
+        card.innerHTML = `
+          <p class="qt">${i+1}. ${item.q}</p>
+          ${item.a.map((opt, j) => `
+            <label class="opt">
+              <input type="radio" name="q${i}" value="${j}">
+              <span>${opt}</span>
+            </label>
+          `).join("")}
+        `;
+        qGrid.appendChild(card);
       });
 
-      setCompletion(0);
-      quizResult.classList.remove('ok');
-      quizResult.classList.add('bad');
-      quizScore.textContent = `0 / ${quiz.length}`;
-      quizPct.textContent = `0% complete`;
-    }
-
-    function getQuizAnswers(){
-      const picked = [];
-      for(let i=0;i<quiz.length;i++){
-        const sel = document.querySelector(`input[name="q${i}"]:checked`);
-        picked.push(sel ? Number(sel.value) : null);
-      }
-      return picked;
+      quizScoreChip.textContent = "Score: —";
+      quizResultChip.textContent = "Result: —";
+      quizResultChip.classList.remove("ok","bad");
     }
 
     function gradeQuiz(){
-      const picked = getQuizAnswers();
       let correct = 0;
-      for(let i=0;i<quiz.length;i++){
-        if(picked[i] === quiz[i].a) correct++;
-      }
-      const percent = Math.round((correct/quiz.length)*100);
-      quizScore.textContent = `${correct} / ${quiz.length}`;
-      quizPct.textContent = `${percent}% complete`;
+      let answered = 0;
 
-      if(percent === 100){
-        quizResult.classList.add('ok');
-        quizResult.classList.remove('bad');
-      }else{
-        quizResult.classList.remove('ok');
-        quizResult.classList.add('bad');
+      quiz.forEach((item, i) => {
+        const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+        if(chosen){
+          answered++;
+          if(Number(chosen.value) === item.correct) correct++;
+        }
+      });
+
+      const pct = Math.round((correct / quiz.length) * 100);
+      quizScore = pct;
+
+      quizScoreChip.textContent = `Score: ${correct}/${quiz.length} (${pct}%)`;
+
+      if(answered < quiz.length){
+        quizResultChip.textContent = `Result: Answer all questions (${answered}/${quiz.length})`;
+        quizResultChip.classList.remove("ok");
+        quizResultChip.classList.add("bad");
+      } else if(pct === 100){
+        quizResultChip.textContent = "Result: ✅ Certified (100% Complete)";
+        quizResultChip.classList.remove("bad");
+        quizResultChip.classList.add("ok");
+      } else {
+        quizResultChip.textContent = `Result: Needs review (goal: 100%)`;
+        quizResultChip.classList.remove("ok");
+        quizResultChip.classList.add("bad");
       }
 
-      setCompletion(percent);
-      window.scrollTo({top:0, behavior:'smooth'});
+      updateProgress();
     }
 
     function resetQuiz(){
+      quizScore = null;
       renderQuiz();
-      const radios = document.querySelectorAll('input[type="radio"]');
-      radios.forEach(r => r.checked = false);
-      setCompletion(0);
+      updateProgress();
     }
 
-    function setCompletion(percent){
-      barFill.style.width = `${percent}%`;
-      pct.textContent = `${percent}%`;
-    }
+    btnGrade.addEventListener("click", gradeQuiz);
+    btnResetQuiz.addEventListener("click", resetQuiz);
 
-    gradeQuizBtn.addEventListener('click', gradeQuiz);
-    resetQuizBtn.addEventListener('click', resetQuiz);
+    /*************************************************************
+     * INIT
+     *************************************************************/
+    renderLessons();
+    showSlide(0, true);
 
-    // Init
-    renderNav();
-    renderQuiz();
-    go(0);
-
-    // Disable Back on first
-    function updateButtons(){
-      prevBtn.disabled = idx === 0;
-      nextBtn.disabled = idx === slides.length - 1;
-    }
-    const _go = go;
-    go = function(i){ _go(i); updateButtons(); };
-    updateButtons();
+    // Helpful: auto-mark slide as visited when image loads (already done on showSlide)
   </script>
 </body>
 </html>
